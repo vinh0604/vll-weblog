@@ -8,4 +8,8 @@ class Util {
 		// $CI->load->view('welcome_message');
 		return true;
     }
+    public function connect() {
+    	$CI = & get_instance();
+    	$CI->load->database();
+    }
 }
