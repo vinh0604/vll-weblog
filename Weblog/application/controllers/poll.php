@@ -54,15 +54,26 @@ class Poll extends CI_Controller {
 	{
 		session_start();
 		$this->load->library('util');
+		$this->load->library('form_validation');
+		$this->lang->load('form_validation','vietnamese');
 		
 		if($this->util->checkLogin()==false) {
 			return;
 		}
 		$mataikhoan = 1;
-		$data['bar'] = $this->load->view('bar_view',null,true);
-		$data['sidemenu'] = $this->load->view('sidemenu_view',null,true);
 		
-		
-		$this->util->connect();
+		$this->form_validation->set_rules('cauhoi','Câu hỏi','required');
+		$this->form_validation->set_rules('dapan[]','Các đáp án','required');
+		if ($this->form_validation->run() == FALSE)
+		{
+			$data['bar'] = $this->load->view('bar_view',null,true);
+			$data['sidemenu'] = $this->load->view('sidemenu_view',null,true);
+			$this->load->view('addpoll_view',$data);
+		}
+		else 
+		{
+			$this->util->connect();
+			$this->index();
+		}
 	}
 }

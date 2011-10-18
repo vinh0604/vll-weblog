@@ -37,6 +37,7 @@
 				border-radius: 6px;
 				-moz-border-radius: 6px;
 				-webkit-border-radius: 6px;
+				opacity: 0.75;
 			}
 			.greenPopup .formErrorContent {background:#33be40;}
 			
@@ -46,6 +47,7 @@
 				width:15px;
 				margin:-2px 0 0 13px;
 				z-index:5001;
+				opacity:0.75;
 			}
 			.formError .formErrorArrowBottom{top:0;margin:-6px;}
 			
