@@ -34,4 +34,35 @@ class Poll extends CI_Controller {
 		$data['polls'] = $this->Poll_model->getBinhchons($mataikhoan);
 		$this->load->view('poll_view',$data);
 	}
+	
+	public function addnew() 
+	{
+		session_start();
+		$this->load->library('util');
+		
+		if($this->util->checkLogin()==false) {
+			return;
+		}
+
+		$data['bar'] = $this->load->view('bar_view',null,true);
+		$data['sidemenu'] = $this->load->view('sidemenu_view',null,true);
+		
+		$this->load->view('addpoll_view',$data);
+	}
+	
+	public function submitadd()
+	{
+		session_start();
+		$this->load->library('util');
+		
+		if($this->util->checkLogin()==false) {
+			return;
+		}
+		$mataikhoan = 1;
+		$data['bar'] = $this->load->view('bar_view',null,true);
+		$data['sidemenu'] = $this->load->view('sidemenu_view',null,true);
+		
+		
+		$this->util->connect();
+	}
 }

@@ -1,5 +1,3 @@
-<?php
-?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -41,6 +39,9 @@
 <?=$bar?>
 <div id="main-content">
 <?=$sidemenu?>
+<script type="text/javascript">
+	$('#sidemenu #poll').addClass('current-top');
+</script>
 <div id="content">
 	<div id="content-head">
     	<h1>Blog Title</h1>
