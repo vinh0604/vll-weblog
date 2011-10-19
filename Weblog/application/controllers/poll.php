@@ -73,6 +73,50 @@ class Poll extends CI_Controller {
 		else 
 		{
 			$this->util->connect();
+			$poll['cauhoi']=$this->input->post('cauhoi');
+			if($this->input->post('trangthai')=='on')
+			{
+				$poll['trangthai']=1;
+			}
+			else 
+			{
+				$poll['trangthai']=0;
+			}
+			$poll['dapans']=$this->input->post('dapan');
+			$this->load->model('Poll_model');
+			if ($this->Poll_model->addBinhchon($mataikhoan,$poll)==false) 
+			{
+				show_error("Rất tiếc! Có lỗi đã xảy ra!");
+			}
+			else 
+			{
+				$this->index();
+			}
+		}
+	}
+	
+	public function delete()
+	{
+		session_start();
+		$this->load->library('util');
+		
+		if($this->util->checkLogin()==false) {
+			return;
+		}
+		$mataikhoan = 1;
+		
+		$mabinhchon = 0;
+		if(isset($_POST['mabinhchon'])) {
+			$mabinhchon = intval($_POST['mabinhchon']);
+		}
+		$this->util->connect();
+		$this->load->model('Poll_model');
+		if ($this->Poll_model->deleteBinhchon($mataikhoan,$mabinhchon)==false) 
+		{
+			show_error("Rất tiếc! Có lỗi đã xảy ra!");
+		}
+		else 
+		{
 			$this->index();
 		}
 	}

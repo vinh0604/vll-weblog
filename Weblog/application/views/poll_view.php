@@ -17,10 +17,10 @@
 			"bJQueryUI": true,
 			"sPaginationType": "full_numbers",
 			"aoColumns": [{"bSortable": false},
-			              null,
-			              null,
-			              null,
-			              {"bSearchable": false, "bSortable": false}]
+			              {"sWidth" :"100px"},
+			              {"bSearchable": false,"sWidth" :"150px"},
+			              {"sWidth" :"100px"},
+			              {"bSearchable": false, "bSortable": false, "sWidth" :"150px"}]
 		});
 		$('.editBtn').hover(function(){
 			$(this).attr('src','<?=base_url()?>images/edit_hover.png');
