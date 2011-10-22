@@ -9,9 +9,9 @@ class Poll_model extends CI_Model {
     
     function getBinhchons($mataikhoan) {
     	//$this->load->database();
-    	$sql = "select bc.mabinhchon, cauhoi, DATE_FORMAT(ngaytao,'%e/%m/%Y') as ngaytao, trangthai, count(soluotchon) as luottraloi ".
-    		   "from binhchon bc, dapan da ".
-    		   "where bc.mabinhchon=da.mabinhchon and mataikhoan=$mataikhoan ".
+    	$sql = "select bc.mabinhchon, cauhoi, DATE_FORMAT(ngaytao,'%e/%m/%Y') as ngaytao, trangthai, sum(soluotchon) as luottraloi ".
+    		   "from binhchon bc left join dapan da ".
+    		   "on bc.mabinhchon=da.mabinhchon and mataikhoan=$mataikhoan ".
     		   "group by bc.mabinhchon, cauhoi, ngaytao, trangthai";
     	return $this->db->query($sql)->result_array();
     }
@@ -53,6 +53,53 @@ class Poll_model extends CI_Model {
     		return false;
     	}
     	return true;
+    }
+    
+    function getBinhchon($mabinhchon) 
+    {
+    	$result = array();
+    	$result['mabinhchon'] = $mabinhchon;
+    	
+    	$poll = $this->db->get_where('binhchon',array("mabinhchon"=>$mabinhchon))->row(0);
+    	$result['cauhoi'] = $poll->CAUHOI;
+    	$result['trangthai'] = $poll->TRANGTHAI;
+    	
+    	$answers = $this->db->get_where('dapan',array("mabinhchon"=>$mabinhchon))->result_array();
+    	$result['dapans'] = $answers;
+    	return $result;
+    }
+    
+    function updateBinhchon($mataikhoan,$mabinhchon,$poll)
+    {
+    	if($this->checkBinhchon($mataikhoan, $mabinhchon) == 0) 
+    	{
+    		return false;
+    	}
+    	$sql = "update binhchon set cauhoi=?, trangthai=? ".
+    		   "where mabinhchon=?";
+    	if(!$this->db->query($sql,array($poll['cauhoi'],$poll['trangthai'],$mabinhchon)))
+    	{
+    		return false;
+    	}
+    	if($poll['trangthai']==1) 
+    	{
+    		$this->updateTrangthai($mabinhchon);
+    	}
+    	foreach($poll['dapans'] as $dapan) 
+    	{
+    		$sql = "insert into dapan(mabinhchon,dapan,soluotchon) ".
+    			   "values(?,?,0)";
+    		$this->db->query($sql,array($mabinhchon,$dapan));
+    	}
+    	$dapanxoa = $poll['dapanxoa'];
+    	$sql = "delete from dapan where madapan in $dapanxoa and mabinhchon=?";
+    	$this->db->query($sql,array($mabinhchon));
+    	return true;
+    }
+    
+    function checkBinhchon($mataikhoan,$mabinhchon)
+    {
+    	return $this->db->get_where('binhchon',array("mabinhchon"=>$mabinhchon,"mataikhoan"=>$mataikhoan))->num_rows();	
     }
     
     function updateTrangthai($mabinhchon)
