@@ -154,3 +154,16 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     padding: 8px 10px;  
 	color: #464646;                 
 }
+.widget-bar {
+	background-color: #DFDFDF;
+    background-image: -moz-linear-gradient(center top , #ECECEC, #DFDFDF);
+	background: -webkit-gradient(linear, left top, left bottom, from(#ECECEC), to(#DFDFDF));
+	border-color: #b4b4b4;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 1px 0 #FFFFFF inset;
+	border-style: solid;
+    border-width: 1px;
+	display: inline-block;
+    min-height: 18px;
+    padding-left: 3px;
+}
