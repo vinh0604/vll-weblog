@@ -51,9 +51,9 @@
         <li id="poll" class="topmenu">
             <div class="topmenu-wrap">
                 <div class="menu-img">
-                    <a href="#"><br/></a>
+                    <a href="<?=base_url()?>index.php/poll"><br/></a>
                 </div>
-                <a href="#">Bình chọn</a>
+                <a href="<?=base_url()?>index.php/poll">Bình chọn</a>
             </div>
         </li>
         <li id="persona" class="topmenu has-sub">
@@ -68,7 +68,7 @@
             	<ul>
                 	<li id="persona-tmpl"><a href="#">Giao diện</a></li>
                     <li id="persona-hdr"><a href="#">Header</a></li>
-                    <li id="persona-bgrd"><a href="#">Ảnh nền</a></li>
+                    <li id="persona-bgrd"><a href="<?=base_url()?>index.php/background">Ảnh nền</a></li>
                     <li id="persona-menu"><a href="#">Menu</a></li>
                     <li id="persona-avt"><a href="#">Avatar</a></li>
                 </ul>
