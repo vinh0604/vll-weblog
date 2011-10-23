@@ -33,28 +33,38 @@
             <tr>
             	<th>Ảnh nền hiện tại</th>
                 <td>
-                	<div id="background-image" style="background-image: <?if($anhnen!=null):?>url('<?=base_url()?>images/background/'<?=$anhnen?>);<?endif;?>
+                	<div id="background-image" style="background-image: <?php if($anhnen!=null):?>url('<?=base_url()?>images/<?php if($ispreview) {echo 'temporary';} else {echo 'background';}?>/<?=$anhnen?>');<?php endif;?>
     background-position: left top;
     background-repeat: repeat;background-size: 50% auto;">
                     </div>
                 </td>
             </tr>
+            <?php if($ispreview==false):?>
             <tr>
             	<th></th>
                 <td>
                 	<form action="<?=base_url()?>index.php/background/delete" method="post">
-                    	<input type="button" class="a-button" value="Xóa ảnh nền hiện tại"/>
+                    	<input type="submit" class="a-button" value="Xóa ảnh nền hiện tại"/>
                     </form>
                 </td>
             </tr>
+            <?php endif;?>
             <tr>
+            	<?php if($ispreview==false):?>
             	<th>Tải ảnh lên</th>
                 <td>
-                	<form action="<?=base_url()?>index.php/background/upload" method="post" enctype=enctype="multipart/form-data">
-                    	<input type="file" value="Duyệt..."/>
+                	<form action="<?=base_url()?>index.php/background/upload" method="post" enctype="multipart/form-data">
+                    	<input name="imagefile" type="file" value="Duyệt..."/>
                         <input type="submit" class="a-button" value="Tải lên" style="padding: 1px 10px;"/>
                     </form>
                 </td>
+                <?php else :?>
+                <td>
+                	<form action="<?=base_url()?>index.php/background/submit" method="post">
+                        <input type="submit" class="content-submit" value="Lưu Thay Đổi" style="padding: 1px 10px;"/>
+                    </form>
+                </td>
+                <?php endif;?>
             </tr>
             </tbody>
         </table>
