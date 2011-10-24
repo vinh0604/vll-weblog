@@ -156,7 +156,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 	color: #464646;                 
 }
 /*Long mới thêm:*/
-body form .input {
+.frm_login .input {
     background: none repeat scroll 0 0 #FBFBFB;
     border: 1px solid #E5E5E5;
     box-shadow: 1px 1px 2px rgba(200, 200, 200, 0.2) inset;
@@ -170,11 +170,11 @@ body form .input {
     padding: 3px;
     width: 97%;
 }
-input {
+.frm_login input {
     color: #555555;
 }
 
-form {
+.frm_login {
     background: none repeat scroll 0 0 #FFFFFF;
     border: 1px solid #E5E5E5;
     border-radius: 3px 3px 3px 3px;
@@ -199,20 +199,20 @@ form {
     border: 1px solid #CCCCCC;
     color: #EEEEEE !important;
 }
-#login form p {
+div#login form p {
     margin-bottom: 0;
 }
-label {
+.frm_login label {
     color: #777777;
     font-size: 18px;
 }
-form .submit-right, .alignright {
+.frm_login .submit-right, .alignright {
     float: right;
 }
-form .submit-left, .alignleft {
+.frm_login .submit-left, .alignleft {
     float: left;
 }
-form p {
+.frm_login p {
     margin-bottom: 24px;
 }
 .widget-bar {
