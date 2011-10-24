@@ -1,3 +1,4 @@
+@charset "utf-8";
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
     background: none repeat scroll 0 0 transparent;
     border: 0 none;
@@ -153,6 +154,66 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
     margin-bottom: 9px;
     padding: 8px 10px;  
 	color: #464646;                 
+}
+/*Long mới thêm:*/
+body form .input {
+    background: none repeat scroll 0 0 #FBFBFB;
+    border: 1px solid #E5E5E5;
+    box-shadow: 1px 1px 2px rgba(200, 200, 200, 0.2) inset;
+    font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",sans-serif;
+    font-size: 24px;
+    font-weight: 200;
+    margin-bottom: 16px;
+    margin-right: 6px;
+    margin-top: 2px;
+    outline: medium none;
+    padding: 3px;
+    width: 97%;
+}
+input {
+    color: #555555;
+}
+
+form {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #E5E5E5;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 4px 10px -1px rgba(200, 200, 200, 0.7);
+    font-weight: normal;
+    margin-left: 8px;
+    padding: 26px 24px 46px;
+}
+.button-primary {
+    background-color: #CCCCCC;
+    border: 1px solid;
+    border-radius: 11px 11px 11px 11px;
+    cursor: pointer;
+    font-family: sans-serif;
+    font-size: 13px;
+    margin-top: -2px;
+    padding: 3px 10px;
+    text-decoration: none;
+}
+.button-primary:hover {
+    background: none repeat scroll 0 0 #DDDDDD !important;
+    border: 1px solid #CCCCCC;
+    color: #EEEEEE !important;
+}
+#login form p {
+    margin-bottom: 0;
+}
+label {
+    color: #777777;
+    font-size: 18px;
+}
+form .submit-right, .alignright {
+    float: right;
+}
+form .submit-left, .alignleft {
+    float: left;
+}
+form p {
+    margin-bottom: 24px;
 }
 .widget-bar {
 	background-color: #DFDFDF;

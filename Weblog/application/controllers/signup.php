@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Sample extends CI_Controller {
+class Signup extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -25,13 +25,15 @@ class Sample extends CI_Controller {
 		if($this->util->checkLogin()==false) {
 			return;
 		}
+		$mataikhoan = 1;
 		
-		$data['bar'] = $this->load->view('bar_view',null,true);
-		$data['sidemenu'] = $this->load->view('sidemenu_view',null,true);
-		$data['mataikhoan'] = $_SESSION['mataikhoan'];
-		$data['name'] = $_SESSION['tendangnhap'];
-		$data['blogtitle'] = $_SESSION['blogtitle'];
 		
-		$this->load->view('sample_view',$data);
+		$this->util->connect();
+		//$this->load->model('Poll_model');
+		//$data['polls'] = $this->Poll_model->getBinhchons($mataikhoan);
+		$this->load->view('signup_view',$data);
+		//$this->load->view('captcha');
 	}
+	
+	
 }

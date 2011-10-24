@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Sample extends CI_Controller {
+class Login extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -21,17 +21,25 @@ class Sample extends CI_Controller {
 	{
 		session_start();
 		$this->load->library('util');
-		
-		if($this->util->checkLogin()==false) {
-			return;
+		if(!isset($_SESSION['mataikhoan'])){
+			if($this->input->post(username)){
+				$u = $this->input->post(username);
+				$has_pw = $this->input->post(password);
+				$pw = sha1($has_pw);
+				$this->load->model('Login_model');
+				$this->Login_model->verifyUser($u,$pw);
+				if(isset($_SESSION['mataikhoan'])){
+					redirect(base_url().'index.php/sample');
+				}else{
+					$data['error'] = $_SESSION['error'];
+					$data['username'] = $u;
+				}
+			}
+			$this->load->view('login_view', $data);
+		}else{
+			redirect(base_url().'index.php/sample');		
 		}
-		
-		$data['bar'] = $this->load->view('bar_view',null,true);
-		$data['sidemenu'] = $this->load->view('sidemenu_view',null,true);
-		$data['mataikhoan'] = $_SESSION['mataikhoan'];
-		$data['name'] = $_SESSION['tendangnhap'];
-		$data['blogtitle'] = $_SESSION['blogtitle'];
-		
-		$this->load->view('sample_view',$data);
 	}
+	
+	
 }

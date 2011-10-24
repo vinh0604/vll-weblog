@@ -10,8 +10,8 @@
 						"alertTextCheckboxe":"* Tùy chọn bắt buộc"},
 					"length":{
 						"regex":"none",
-						"alertText":"*Giữa ",
-						"alertText2":" và ",
+						"alertText":"*Độ dài từ ",
+						"alertText2":" đến ",
 						"alertText3": " ký tự cho phép"},
 					"maxCheckbox":{
 						"regex":"none",
