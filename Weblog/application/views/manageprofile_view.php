@@ -1,6 +1,6 @@
 ﻿<html>
 <head>
-<meta content="text/html; charset=utf-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <link href="<?=$base_url()?>css/admin-bar.css" type="text/css" rel="stylesheet" />
 <link href="<?=$base_url()?>css/admin-menu.css" type="text/css" rel="stylesheet" />
 <link href="<?=$base_url()?>css/admin.css" type="text/css" rel="stylesheet" />
@@ -26,7 +26,7 @@
 			}
 			else
 			{
-				window.location = 'ManageProfile.html';
+				window.location = '<?=$base_url()?>manageprofile.php';
 			}
 			count++;
 		})
