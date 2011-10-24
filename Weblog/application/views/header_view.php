@@ -30,8 +30,13 @@
 <script type="text/javascript" src="<?=base_url()?>js/jquery.min.js"></script>
 <script type="text/javascript" src="<?=base_url()?>js/jquery.wheelcolorpicker.min.js"></script>
 <script type="text/javascript">
+function preSubmit(){
+	$('#tieude').val($('#blog-title').val());
+	$('#mota').val($('#blog-desc').val());
+	$('#mauchu').val($('#color').val());
+}
 $(function() {
-	$('#color').wheelColorPicker({dir: 'images'});
+	$('#color').wheelColorPicker({dir: '<?=base_url()?>images'});
 }); 
 $(document).ready(function(){
 	$('#blog-title').keyup(function(){
@@ -78,15 +83,15 @@ $(document).ready(function(){
             	<th>Header hiện tại</th>
                 <td>
                 	<div id="heading" style="<?php if($nenheader!=null):?>background: url('<?=base_url()?>images/header/<?=$nenheader?>') repeat-x 0 100px;<?php endif;?>">
-                    	<h1 id="title" style="color:#<?=$mauchu?>;"><?=tieude?></h1>
-                        <div id="desc" style="color:#<?=$mauchu?>;"><?=mota?></div>
+                    	<h1 id="title" style="color:#<?=$mauchu?>;"><?=$tieude?></h1>
+                        <div id="desc" style="color:#<?=$mauchu?>;"><?=$mota?></div>
                     </div>
                 </td>
             </tr>
             <tr>
             	<th></th>
                 <td>
-                	<form action="<?=base_url()?>index.php/header/removebgrd" method="post">
+                	<form action="<?=base_url()?>index.php/header/removeimage" method="post">
                     	<input type="submit" class="a-button" value="Không Sử Dụng Ảnh Nền"/>
                     </form>
                 </td>
@@ -109,7 +114,12 @@ $(document).ready(function(){
             </tr>
             </tbody>
         </table>
-        <input type="button" class="content-submit" value="Lưu Thay Đổi" style="float:left;margin:20px 10px"/>
+        <form action="<?=base_url()?>index.php/header/submit" method="post">
+        <input type="hidden" name="mauchu" id="mauchu" value="<?=$mauchu?>"/>
+        <input type="hidden" name="tieude" id="tieude" value="<?=$tieude?>"/>
+        <input type="hidden" name="mota" id="mota" value="<?=$mota?>"/>
+        <input type="submit" class="content-submit" value="Lưu Thay Đổi" style="float:left;margin:20px 10px" onclick="preSubmit()"/>
+        </form>
     </div>
 </div>
 </div>
