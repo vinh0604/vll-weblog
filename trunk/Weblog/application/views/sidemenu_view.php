@@ -67,7 +67,7 @@
             <div class="submenu">
             	<ul>
                 	<li id="persona-tmpl"><a href="#">Giao diện</a></li>
-                    <li id="persona-hdr"><a href="#">Header</a></li>
+                    <li id="persona-hdr"><a href="<?=base_url()?>index.php/header">Header</a></li>
                     <li id="persona-bgrd"><a href="<?=base_url()?>index.php/background">Ảnh nền</a></li>
                     <li id="persona-menu"><a href="#">Menu</a></li>
                     <li id="persona-avt"><a href="<?=base_url()?>index.php/avatar">Avatar</a></li>
