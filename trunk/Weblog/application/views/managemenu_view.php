@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-<meta content="text/html; charset=utf-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <link href="<?=base_url()?>css/admin-bar.css" type="text/css" rel="stylesheet" />
 <link href="<?=base_url()?>css/admin-menu.css" type="text/css" rel="stylesheet" />
 <link href="<?=base_url()?>css/admin.css" type="text/css" rel="stylesheet" />
@@ -75,7 +75,7 @@
                                 <td class="center"><?=$menu['TENMENU']?></td>
                                 <td class="center"><?=$menu['TRANGTHAI']?></td>
                                 <td class="center">
-                                    <a href="<?=base_url()?>index.php/menu/insertmenu" title="Sửa Chuyên Mục"><img class="editBtn" src="<?=base_url()?>images/edit.png" height="32" width="32"></a>
+                                    <a href="<?=base_url()?>index.php/menu/changemenu" title="Sửa Chuyên Mục"><img class="editBtn" src="<?=base_url()?>images/edit.png" height="32" width="32"></a>
                                     <input class="delBtn" type="image" src="<?=base_url()?>images/trash.png" height="32" width="32" title="Xóa Chuyên Mục"/>
                                 </td>
                             </tr>    
