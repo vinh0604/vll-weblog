@@ -70,7 +70,7 @@
                     <li id="persona-hdr"><a href="#">Header</a></li>
                     <li id="persona-bgrd"><a href="<?=base_url()?>index.php/background">Ảnh nền</a></li>
                     <li id="persona-menu"><a href="#">Menu</a></li>
-                    <li id="persona-avt"><a href="#">Avatar</a></li>
+                    <li id="persona-avt"><a href="<?=base_url()?>index.php/avatar">Avatar</a></li>
                 </ul>
             </div>
         </li>

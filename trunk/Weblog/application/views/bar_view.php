@@ -10,7 +10,7 @@
 						<a href="#">Visit my blog</a>
 					</li>
 					<li class="menu-item-random-post blog-member">
-						<a href="#">Log out</a>
+						<a href="<?=base_url()?>index.php/logout">Log out</a>
 					</li>
 				</ul>
 			</li>

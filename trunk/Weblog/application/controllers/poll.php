@@ -90,7 +90,7 @@ class Poll extends CI_Controller {
 			}
 			else 
 			{
-				$this->index();
+				redirect(base_url('index.php/poll'));
 			}
 		}
 	}
@@ -117,7 +117,7 @@ class Poll extends CI_Controller {
 		}
 		else 
 		{
-			$this->index();
+			redirect(base_url('index.php/poll'));
 		}
 	}
 	
@@ -189,7 +189,7 @@ class Poll extends CI_Controller {
 			}
 			else 
 			{
-				$this->index();
+				redirect(base_url('index.php/poll'));
 			}
 		}
 	}
