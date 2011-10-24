@@ -31,5 +31,11 @@ class Login_model extends CI_Model {
 		}
     }
 	
+	function addCategory($u){
+		$this->load->database();
+        $sql = "insert into chuyenmuc(mataikhoan, tenchuyenmuc, mota) values(?, 'Không có chuyên mục', 'Không có chuyên mục')";
+        $query = $this->db->query($sql,array($u));
+	}
+	
 }
 ?>

@@ -29,7 +29,7 @@
 	<center>
 		<div class="widget-box" style="width:600px; padding-top:20px; margin-top:60px" align="left">
 			<h1 class="widget-title" align="center" style="font-size:20px; font-weight:bold">Đăng ký</h1>
-			<form action="" id="signupform" method="post">
+			<form action="" id="signupform" method="post" class="frm_login">
 				<table border="1" width="550px" style="border-spacing:10px" bordercolor="#C0C0C0">
 					<tr height="30px">
 						<td>Tên truy nhập:</td>

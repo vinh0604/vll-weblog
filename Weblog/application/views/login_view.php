@@ -45,7 +45,7 @@
 			<div id="anh" align="center"><img src="<?=base_url()?>images/1318862576_secure-server-px-png.png" width="40px" height="40px" /></div>
 			<div id="login">
 		
-				<form id="loginform" method="post" action="<?=base_url()?>index.php/login" name="loginform">
+				<form id="loginform" class="frm_login" method="post" action="<?=base_url()?>index.php/login" name="loginform">
 				<p>
 					<label>
 						Tên đăng nhập

@@ -7,29 +7,32 @@ class Comment_model extends CI_Model {
         parent::__construct();
     }
     
+	function getChuyenmuc($mataikhoan) {
+    	//$this->load->database();
+    	$sql = "select machuyenmuc, tenchuyenmuc from chuyenmuc where mataikhoan = $mataikhoan";
+    	return $this->db->query($sql)->result_array();
+    }
+	
     function getBinhluan() {
     	//$this->load->database();
-    	$sql = "select bl.mabinhluan, bl.noidung, bl.hoten, bv.noidung, DATE_FORMAT(bl.ngaydang,'%e/%m/%Y') as ngaydang ".
-    		   "from binhchon bc, baiviet bv ".
-    		   "where bc.mabaiviet=bv.mabaiviet ".
+    	$sql = "select bl.mabinhluan as mabl, bl.noidung as noidung, bl.hoten as hoten, bv.tuade as tuade, DATE_FORMAT(bl.ngaydang,'%e/%m/%Y') as ngaydang ".
+    		   "from binhluan bl, baiviet bv ".
+    		   "where bl.mabaiviet=bv.mabaiviet ";
+    	return $this->db->query($sql)->result_array();
+    }
+	
+	function get1Binhluan($mabl) {
+    	$this->load->database();
+    	$sql = "select noidung from binhluan where mabinhluan = $mabl";
     	return $this->db->query($sql)->result_array();
     }
     
 
     function deleteBinhluan($mabinhluan)
     {
-    	$result = $this->db->get_where('binhluan',array("mabinhluan"=>$mabinhluan))->num_rows();
-    	if ($result == 0) {
-    		return false;
-    	}
-    	$sql = "delete from binhluan where mabinhluan = ?";
-    	$this->db->query($sql,array($mabinhluan));
-    	if ($this->db->query($sql,array($mabinhluan))==false)
-    	{
-    		return false;
-    	}
-    	return true;
+		$this->load->database();
+    	$sql = "delete from binhluan where mabinhluan = $mabinhluan";
+    	return $this->db->query($sql);
     }
     
-
 }

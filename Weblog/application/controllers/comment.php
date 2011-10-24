@@ -30,8 +30,28 @@ class Comment extends CI_Controller {
 		$data['sidemenu'] = $this->load->view('sidemenu_view',null,true);
 		
 		$this->util->connect();
-		//$this->load->model('Poll_model');
-		//$data['polls'] = $this->Poll_model->getBinhchons($mataikhoan);
+		$this->load->model('Comment_model');
+		//$data['chuyenmucs'] = $this->Comment_model->getChuyenmuc($mataikhoan);
+		
+		$data['binhluan'] = $this->Comment_model->getBinhluan();
 		$this->load->view('comment_view',$data);
+		
+	}
+	
+	public function getOneComment($mabl){
+		$this->load->model('Comment_model');
+		$data['bar'] = $this->load->view('bar_view',null,true);
+		$data['sidemenu'] = $this->load->view('sidemenu_view',null,true);
+	
+		$data['binhluan_1'] = $this->Comment_model->get1Binhluan($mabl);
+
+		$this->load->view('view_comment_view',$data);
+	}
+	
+	public function deleteComment($mabl){
+		$this->load->model('Comment_model');
+			
+		$this->Comment_model->deleteBinhluan($mabl);
+		redirect(base_url()."index.php/comment");
 	}
 }
