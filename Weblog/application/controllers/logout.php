@@ -21,10 +21,12 @@ class Logout extends CI_Controller {
 	{
 		session_start();
 		$this->load->model('Logout_model');
-		$this->Logout_model->logout();
+		$matk = $_SESSION['mataikhoan'];
+		$this->Logout_model->logout($matk);
 		session_destroy();
-		redirect(base_url().'index.php/login');
-
+		$data['error'] = 'Bạn vừa đăng xuất!';
+		$this->load->view('login_view', $data);	
+			
 	}
 	
 	

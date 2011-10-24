@@ -35,7 +35,7 @@ class Login extends CI_Controller {
 					$data['username'] = $u;
 				}
 			}
-			$this->load->view('login_view', $data);
+			$this->load->view('login_view', $data);	
 		}else{
 			redirect(base_url().'index.php/sample');		
 		}
