@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Background extends CI_Controller {
+class Avatar extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -31,16 +31,16 @@ class Background extends CI_Controller {
 		$data['ispreview']=$flag;
 		
 		$this->util->connect();
-		$this->load->model('Background_model');
+		$this->load->model('Avatar_model');
 		if($flag)
 		{
-			$data['anhnen'] =  $this->Background_model->getAnhnentam($mataikhoan);
+			$data['avatar'] =  $this->Avatar_model->getAvatartam($mataikhoan);
 		}
 		else 
 		{
-			$data['anhnen'] =  $this->Background_model->getAnhnen($mataikhoan);
+			$data['avatar'] =  $this->Avatar_model->getAvatar($mataikhoan);
 		}
-		$this->load->view('background_view',$data);
+		$this->load->view('avatar_view',$data);
 	}
 	
 	public function delete()
@@ -54,12 +54,12 @@ class Background extends CI_Controller {
 		$mataikhoan = 1;
 		
 		$this->util->connect();
-		$this->load->model('Background_model');
-		if ($this->Background_model->deleteAnhnen($mataikhoan)==false)
+		$this->load->model('Avatar_model');
+		if ($this->Avatar_model->deleteAvatar($mataikhoan)==false)
 		{
 			show_error('Rất tiếc! Có lỗi xảy ra!');
 		}
-		redirect(base_url('index.php/background'));
+		redirect(base_url('index.php/avatar'));
 	}
 	
 	public function upload()
@@ -76,7 +76,7 @@ class Background extends CI_Controller {
 		$config['allowed_types'] = 'gif|jpg|png|jpge';
 		$config['max_size']	= '1024';
 		$config['overwrite']  = TRUE;
-		$config['file_name'] = 'anhnen'.$mataikhoan;
+		$config['file_name'] = 'avatar'.$mataikhoan;
 
 		$this->load->library('upload', $config);
 		if ( ! $this->upload->do_upload('imagefile'))
@@ -87,8 +87,8 @@ class Background extends CI_Controller {
 		{
 			$data = $this->upload->data();
 			$this->util->connect();
-			$this->load->model('Background_model');
-			if ($this->Background_model->updateAnhnentam($mataikhoan,$data['file_name'])==false)
+			$this->load->model('Avatar_model');
+			if ($this->Avatar_model->updateAvatartam($mataikhoan,$data['file_name'])==false)
 			{
 				show_error('Rất tiếc! Có lỗi xảy ra!');
 			}
@@ -107,13 +107,13 @@ class Background extends CI_Controller {
 		$mataikhoan = 1;
 		
 		$this->util->connect();
-		$this->load->model('Background_model');
-		$anhnen = $this->Background_model->getAnhnentam($mataikhoan);
-		copy('./images/temporary/'.$anhnen, './images/background/'.$anhnen);
-		if ($this->Background_model->updateAnhnen($mataikhoan,$anhnen)==false)
+		$this->load->model('Avatar_model');
+		$avatar = $this->Avatar_model->getAvatartam($mataikhoan);
+		copy('./images/temporary/'.$avatar, './images/avatar/'.$avatar);
+		if ($this->Avatar_model->updateAvatar($mataikhoan,$avatar)==false)
 		{
 			show_error('Rất tiếc! Có lỗi xảy ra!');
 		}
-		redirect(base_url('index.php/background'));
+		redirect(base_url('index.php/avatar'));
 	}
 }
