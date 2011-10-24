@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Sample extends CI_Controller {
+class Logout extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -20,18 +20,12 @@ class Sample extends CI_Controller {
 	public function index()
 	{
 		session_start();
-		$this->load->library('util');
-		
-		if($this->util->checkLogin()==false) {
-			return;
-		}
-		
-		$data['bar'] = $this->load->view('bar_view',null,true);
-		$data['sidemenu'] = $this->load->view('sidemenu_view',null,true);
-		$data['mataikhoan'] = $_SESSION['mataikhoan'];
-		$data['name'] = $_SESSION['tendangnhap'];
-		$data['blogtitle'] = $_SESSION['blogtitle'];
-		
-		$this->load->view('sample_view',$data);
+		$this->load->model('Logout_model');
+		$this->Logout_model->logout();
+		session_destroy();
+		redirect(base_url().'index.php/login');
+
 	}
+	
+	
 }

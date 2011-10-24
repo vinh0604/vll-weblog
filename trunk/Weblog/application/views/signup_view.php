@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="<?=base_url()?>css/admin-bar.css" type="text/css" rel="stylesheet" />
+<link href="<?=base_url()?>css/admin-menu.css" type="text/css" rel="stylesheet" />
+<link href="<?=base_url()?>css/admin.css" type="text/css" rel="stylesheet" />
+<link href="<?=base_url()?>css/validationEngine.jquery.css" type="text/css" rel="stylesheet"/>
+<link href="<?=base_url()?>css/smoothness/jquery-ui-1.8.16.custom.css"  type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="<?=base_url()?>js/jquery.min.js"></script>
+<script type="text/javascript" src="<?=base_url()?>js/jquery.validationEngine.js"></script>
+<script type="text/javascript" src="<?=base_url()?>js/jquery.validationEngine-vi.js"></script>
+<script type="text/javascript" src="<?=base_url()?>js/jquery-ui-1.8.16.custom.min.js"></script>
+
+<script type="text/javascript">
+	function setFocus()
+	{
+		document.getElementById("account").focus();
+	}
+	$(document).ready(function(){
+		$('#signupform').validationEngine();
+		$('#sn').datepicker({dateFormat:'dd/mm/yy', changeMonth:true, changeYear:true});
+	});
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+<body onLoad="setFocus()">
+<div id="content-body">
+	<center>
+		<div class="widget-box" style="width:600px; padding-top:20px; margin-top:60px" align="left">
+			<h1 class="widget-title" align="center" style="font-size:20px; font-weight:bold">Đăng ký</h1>
+			<form action="" id="signupform" method="post">
+				<table border="1" width="550px" style="border-spacing:10px" bordercolor="#C0C0C0">
+					<tr height="30px">
+						<td>Tên truy nhập:</td>
+						<td width="300px"><input type="text" name="account" class="validate[required,custom[noSpecialCaracters]]" id="account" style="height:25px; width:200px"><b style="color:#FF0000">(*)</b></td>
+					</tr>
+					<tr>
+						<td>Mật khẩu:</td>
+						<td><input type="password" style="height:25px; width:200px" name="password" id="password" class="validate[required]"><b style="color:#FF0000">(*)</b></td>
+					</tr>
+					<tr>
+						<td>Xác nhận mật khẩu:</td>
+						<td><input type="password" name="verify_password" style="height:25px; width:200px" id="verify_password" class="validate[required, custom[equals[password]]]"><b style="color:#FF0000">(*)</b></td>
+					</tr>
+					<tr>
+						<td>Địa chỉ E-mail:</td>
+						<td><input type="text" name="email" id="email" style="height:25px; width:200px" class="validate[required,custom[email]]"><b style="color:#FF0000">(*)</b></td>
+					</tr>
+					<tr>
+						<td>Tên:</td>
+						<td><input type="text" name="name" style="height:25px; width:200px"></td>
+					</tr>
+					<tr>
+						<td>Sinh nhật (Ngày/Tháng/Năm):</td>
+						<td><input type="text" name="sn" style="height:25px; width:200px" id="sn" class="validate[required,custom[date]]"><b style="color:#FF0000">(*)</b></td>
+					</tr>
+					<tr>
+						<td>Xác nhận:</td>
+						<td>
+							<img src="<?=base_url()?>application/views/captcha.php" alt="captcha"/><br /><br />
+							<input type="text" name="security_code" style="height:25px; width:200px"/><br />
+						</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td><input type="submit" class="a-button" name="submit" value="Đăng ký tài khoản"></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</center>
+</div>
+
+</body>
+</html>
