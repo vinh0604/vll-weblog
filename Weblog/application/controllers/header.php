@@ -84,7 +84,15 @@ class Header extends CI_Controller {
 			$data = $this->upload->data();
 			$this->util->connect();
 			$this->load->model('Header_model');
-			$this->index(true);
+			if($this->Header_model->updateNenheadertam($mataikhoan,$data['file_name'])==false)
+			{
+				show_error('Rất tiếc! Có lỗi xảy ra!');
+				return;
+			}
+			$data['bar'] = $this->load->view('bar_view',null,true);
+			$data['sidemenu'] = $this->load->view('sidemenu_view',null,true);
+			
+			$this->load->view('headercrop_view',$data);
 		}
 	}
 	
@@ -117,5 +125,55 @@ class Header extends CI_Controller {
 		{
 			redirect(base_url('index.php/header'));
 		}
+	}
+	
+	public function crop()
+	{
+		session_start();
+		$this->load->library('util');
+		
+		if($this->util->checkLogin()==false) {
+			return;
+		}
+		$mataikhoan = 1;
+		
+		$this->util->connect();
+		$this->load->model('Header_model');
+		$nenheader = $this->Header_model->getNenheadertam($mataikhoan);
+		$config['image_library'] = 'gd2';
+        $config['source_image'] = './images/temporary/'.$nenheader;
+        $config['new_image'] = './images/header';
+        $config['maintain_ratio'] = TRUE;
+        $config['master_dim'] = 'width';
+		$config['width'] = 980;
+		$config['height'] = 980;
+		$this->load->library('image_lib', $config); 
+		if (!$this->image_lib->resize())
+		{
+	    	show_error($this->image_lib->display_errors());
+	    	return;
+		}
+		
+		$this->image_lib->clear();
+		$config['image_library'] = 'gd2';
+        $config['source_image'] = './images/header/'.$nenheader;
+        $config['new_image'] = './images/header';
+        $config['maintain_ratio'] = FALSE;
+        $config['x_axis'] = $this->input->post('x1');
+        $config['y_axis'] = $this->input->post('y1');
+        $config['width'] = intval($this->input->post('x2')) - intval($this->input->post('x1'));
+        $config['height'] = intval($this->input->post('y2')) - intval($this->input->post('y1'));
+        $this->image_lib->initialize($config);
+		if (!$this->image_lib->crop())
+		{
+	    	show_error($this->image_lib->display_errors());
+	    	return;
+		}
+		if($this->Header_model->updateNenheader($mataikhoan,$nenheader)==false)
+		{
+			show_error('Rất tiếc! Có lỗi xảy ra!');
+			return;
+		}
+		redirect(base_url('index.php/header'));
 	}
 }

@@ -58,6 +58,7 @@ class Background extends CI_Controller {
 		if ($this->Background_model->deleteAnhnen($mataikhoan)==false)
 		{
 			show_error('Rất tiếc! Có lỗi xảy ra!');
+			return;
 		}
 		redirect(base_url('index.php/background'));
 	}
@@ -91,6 +92,7 @@ class Background extends CI_Controller {
 			if ($this->Background_model->updateAnhnentam($mataikhoan,$data['file_name'])==false)
 			{
 				show_error('Rất tiếc! Có lỗi xảy ra!');
+				return;
 			}
 			$this->index(true);
 		}
@@ -113,6 +115,7 @@ class Background extends CI_Controller {
 		if ($this->Background_model->updateAnhnen($mataikhoan,$anhnen)==false)
 		{
 			show_error('Rất tiếc! Có lỗi xảy ra!');
+			return;
 		}
 		redirect(base_url('index.php/background'));
 	}
