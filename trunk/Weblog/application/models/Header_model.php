@@ -25,4 +25,23 @@ class Header_model extends CI_Model {
     	$sql = "update canhanhoa set tieude=?,mota=?,mauchu=? where mataikhoan=?";
     	return $this->db->query($sql,array($persona['tieude'],$persona['mota'],$persona['mauchu'],$mataikhoan));
     }
+    
+    function updateNenheadertam($mataikhoan,$link)
+    {
+    	$sql = "update bangtam set nenheader=? where mataikhoan=?";
+    	return $result = $this->db->query($sql,array($link,$mataikhoan));
+    }
+    
+	function getNenheadertam($mataikhoan)
+    {
+    	$this->db->select('nenheader');
+    	$result = $this->db->get_where('bangtam',array('mataikhoan'=>$mataikhoan))->row(0);
+    	return $result->nenheader;
+    }
+    
+	function updateNenheader($mataikhoan,$link)
+    {
+    	$sql = "update canhanhoa set nenheader=? where mataikhoan=?";
+    	return $result = $this->db->query($sql,array($link,$mataikhoan));
+    }
 }

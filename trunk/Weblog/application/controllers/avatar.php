@@ -58,6 +58,7 @@ class Avatar extends CI_Controller {
 		if ($this->Avatar_model->deleteAvatar($mataikhoan)==false)
 		{
 			show_error('Rất tiếc! Có lỗi xảy ra!');
+			return;
 		}
 		redirect(base_url('index.php/avatar'));
 	}
@@ -91,6 +92,7 @@ class Avatar extends CI_Controller {
 			if ($this->Avatar_model->updateAvatartam($mataikhoan,$data['file_name'])==false)
 			{
 				show_error('Rất tiếc! Có lỗi xảy ra!');
+				return;
 			}
 			$this->index(true);
 		}
@@ -113,6 +115,7 @@ class Avatar extends CI_Controller {
 		if ($this->Avatar_model->updateAvatar($mataikhoan,$avatar)==false)
 		{
 			show_error('Rất tiếc! Có lỗi xảy ra!');
+			return;
 		}
 		redirect(base_url('index.php/avatar'));
 	}
