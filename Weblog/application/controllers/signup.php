@@ -27,13 +27,40 @@ class Signup extends CI_Controller {
 		}
 		$mataikhoan = 1;
 		
-		
+		$this->output->enable_profiler(TRUE);
 		$this->util->connect();
-		//$this->load->model('Poll_model');
-		//$data['polls'] = $this->Poll_model->getBinhchons($mataikhoan);
+		
+		if($this->input->post(account)){
+			$acc = $this->input->post(account);
+			$pw = $this->input->post(password);
+			$ve_pw = $this->input->post(verify_password);
+			$ema = $this->input->post(email);
+			$add = $this->input->post(address);
+			$pho = $this->input->post(phone_no);
+			$nam = $this->input->post(name);
+			$sn = $this->input->post(sn);
+			
+			$this->load->model("Signup_model");
+			$this->Signup_model->addAccount($acc, $pw, $ve_pw, $ema, $add, $pho, $nam, $sn);
+			$data['alert'] = $_SESSION['alert'];
+			
+		}
 		$this->load->view('signup_view',$data);
 		//$this->load->view('captcha');
 	}
 	
-	
+	public function checkUser{
+		//session_start();
+		//$this->load->library('util');
+		
+		//if($this->util->checkLogin()==false) {
+		//	return;
+		//}
+		//$acc = $_POST['name'];
+		
+		//$this->load->model("Signup_model");
+		//$data['alert_2'] = $this->Signup_model->checkUser($acc);
+		
+		//$this->load->view('signup_view',$data);
+	}
 }
