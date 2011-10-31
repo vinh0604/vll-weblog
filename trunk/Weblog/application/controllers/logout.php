@@ -20,13 +20,15 @@ class Logout extends CI_Controller {
 	public function index()
 	{
 		session_start();
-		$this->load->model('Logout_model');
-		$matk = $_SESSION['mataikhoan'];
-		$this->Logout_model->logout($matk);
-		session_destroy();
-		$data['error'] = 'Bạn vừa đăng xuất!';
-		$this->load->view('login_view', $data);	
-			
+		if(isset($_SESSION['mataikhoan'])){
+			$this->load->model('Logout_model');
+			$matk = $_SESSION['mataikhoan'];
+			$this->Logout_model->logout($matk);
+			session_destroy();
+			$data['error'] = 'Bạn vừa đăng xuất!';
+
+		}
+		$this->load->view('login_view', $data);				
 	}
 	
 	
