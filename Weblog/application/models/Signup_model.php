@@ -13,26 +13,30 @@ class Signup_model extends CI_Model {
         $query = $this->db->query($sql,array($acc));
 		if($query->num_rows()>0){
 			$_SESSION['alert'] = 'Xin lỗi, đã có người sử dụng tài khoản này!';
+			return false;
 		}else{
 			if($pw == $ve_pw){
-				$sql = "insert into taikhoan(tendangnhap, matkhau, email, ngaysinh, hoten, diachi, luotxem) values(?, ?, ?, ?, ?, ?, 0)";
-				$query = $this->db->query($sql,array($acc, sha1($pw), $ema, date($sn), $nam, $add));
-				if($this->db->affected_rows() == 1){
-					$sql = "insert into canhanhoa(magiaodien, mataikhoan, avatar, tieude, mauchu, sobai, sodong) values(1, (select mataikhoan from taikhoan where tendangnhap = $acc), ?, ?, ?, 0, 0)";
-					$this->db->query($sql,array('default.png', 'Blog Title', '6c5c46'));
-					$sql = "insert into bangtam(mataikhoan) values(select mataikhoan from taikhoan where tendangnhap = $acc)";
-					$this->db->query($sql);
-					$sql = "insert into chuyenmuc(mataikhoan, tenchuyenmuc, mota) values((select mataikhoan from taikhoan where tendangnhap = $acc), ?, ?)";
-					$this->db->query($sql, array('Không có chuyên mục', 'Không có chuyên mục');
-				}
+				$sql = "insert into taikhoan(tendangnhap, matkhau, email, ngaysinh, hoten, diachi, luotxem) values(?, ?, ?, str_to_date(?,'%d/%m/%YY'), ?, ?, 0)";
+				$query = $this->db->query($sql,array($acc, sha1($pw), $ema, $sn, $nam, $add));
+				$sql = "select mataikhoan from taikhoan where tendangnhap = ?";
+				$query = $this->db->query($sql,array($acc));
+				$mataikhoan = $query->row(0)->mataikhoan;
+				$sql = "insert into canhanhoa(magiaodien, mataikhoan, avatar, tieude, mota, mauchu, sobai, sodong) values(1, ?, ?, ?, ?, ?, 10, -1)";
+				$this->db->query($sql,array($mataikhoan, 'default.png', 'Blog Title', 'Just Another Blog', '6c5c46'));
+				$sql = "insert into bangtam(mataikhoan, luunhap, tuade, tuade_trang, noidung_trang) values(?,'','','','')";
+				$this->db->query($sql, array($mataikhoan));
+				$sql = "insert into chuyenmuc(mataikhoan, tenchuyenmuc, mota) values(?, ?, ?)";
+				$this->db->query($sql, array($mataikhoan,'Không có chuyên mục', 'Không có chuyên mục'));
+				return true;
 			}else{
 				$_SESSION['alert'] = "Mật khẩu phải trùng nhau!";
+				return false;
 			}
 		}
     }
 	
 	function checkUser($acc){
-		//$this->load->database();
+		$this->load->database();
 		$sql = "select * from taikhoan where tendangnhap = ?";
         $query = $this->db->query($sql,array($acc));
 		if($query->num_rows()>0){
