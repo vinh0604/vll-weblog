@@ -21,6 +21,7 @@ class Login extends CI_Controller {
 	{
 		session_start();
 		$this->load->library('util');
+		//$this->output->enable_profiler(TRUE);
 		if(!isset($_SESSION['mataikhoan'])){
 			if($this->input->post(username)){
 				$u = $this->input->post(username);
