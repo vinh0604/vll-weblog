@@ -59,9 +59,10 @@ class Signup extends CI_Controller {
 			return;
 		}
 		$acc = $_POST['name'];
-		
-		$this->load->model("Signup_model");
-		echo $this->Signup_model->checkUser($acc);
-		
+		if($acc != ""){
+			$this->load->model("Signup_model");
+			echo $this->Signup_model->checkUser($acc);
+		}
 	}
+	
 }
