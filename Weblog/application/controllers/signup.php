@@ -27,7 +27,7 @@ class Signup extends CI_Controller {
 		}
 		$mataikhoan = 1;
 		
-		$this->output->enable_profiler(TRUE);
+		//$this->output->enable_profiler(TRUE);
 		$this->util->connect();
 		
 		if($this->input->post(account)){
@@ -41,7 +41,9 @@ class Signup extends CI_Controller {
 			$sn = $this->input->post(sn);
 			
 			$this->load->model("Signup_model");
-			$this->Signup_model->addAccount($acc, $pw, $ve_pw, $ema, $add, $pho, $nam, $sn);
+			if($this->Signup_model->addAccount($acc, $pw, $ve_pw, $ema, $add, $pho, $nam, $sn)){
+				redirect(base_url().'index.php/login');
+			}
 			$data['alert'] = $_SESSION['alert'];
 			
 		}
@@ -49,18 +51,17 @@ class Signup extends CI_Controller {
 		//$this->load->view('captcha');
 	}
 	
-	public function checkUser{
-		//session_start();
-		//$this->load->library('util');
+	public function checkUser(){
+		session_start();
+		$this->load->library('util');
 		
-		//if($this->util->checkLogin()==false) {
-		//	return;
-		//}
-		//$acc = $_POST['name'];
+		if($this->util->checkLogin()==false) {
+			return;
+		}
+		$acc = $_POST['name'];
 		
-		//$this->load->model("Signup_model");
-		//$data['alert_2'] = $this->Signup_model->checkUser($acc);
+		$this->load->model("Signup_model");
+		echo $this->Signup_model->checkUser($acc);
 		
-		//$this->load->view('signup_view',$data);
 	}
 }
