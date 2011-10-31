@@ -27,7 +27,7 @@
 		$('#sn').datepicker({dateFormat:'dd/mm/yy', changeMonth:true, changeYear:true});
 		$('#account').blur(function(){
 			var acc = $(this).val();
-			alert(acc);
+			//alert(acc);
 			$.post("<?=base_url()?>index.php/signup/checkUser", { name: acc},
 			   function(data) {
 				 //alert("Data Loaded: " + data);
@@ -48,7 +48,7 @@
 				<table border="1" width="550px" style="border-spacing:10px" bordercolor="#C0C0C0">
 					<tr height="30px">
 						<td>Tên truy nhập:</td>
-						<td width="300px"><input type="text" name="account" class="validate[required,custom[noSpecialCaracters]]" id="account" style="height:25px; width:200px"><b style="color:#FF0000">(*)</b><div id="alert"><?=$alert?></div><div id="alert_2"><?=$alert_2?></div></td>
+						<td width="300px"><input type="text" name="account" class="validate[required,custom[noSpecialCaracters]]" id="account" style="height:25px; width:200px"><b style="color:#FF0000">(*)<div id="alert"><?=$alert?></div><div id="alert_2"><?=$alert_2?></div></b></td>
 					</tr>
 					<tr>
 						<td>Mật khẩu:</td>
