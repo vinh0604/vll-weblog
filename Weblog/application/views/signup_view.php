@@ -40,6 +40,7 @@
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 <body onLoad="setFocus()">
+
 <div id="content-body">
 	<center>
 		<div class="widget-box" style="width:600px; padding-top:20px; margin-top:60px" align="left">
@@ -48,7 +49,7 @@
 				<table border="1" width="550px" style="border-spacing:10px" bordercolor="#C0C0C0">
 					<tr height="30px">
 						<td>Tên truy nhập:</td>
-						<td width="300px"><input type="text" name="account" class="validate[required,custom[noSpecialCaracters]]" id="account" style="height:25px; width:200px"><b style="color:#FF0000">(*)<div id="alert"><?=$alert?></div><div id="alert_2"><?=$alert_2?></div></b></td>
+						<td width="300px"><input type="text" name="account" class="validate[required,custom[noSpecialCaracters]]" id="account" style="height:25px; width:200px"><b style="color:#FF0000">(*)<div id="alert"><?=$alert?></div></b><div id="alert_2"><?=$alert_2?></div></td>
 					</tr>
 					<tr>
 						<td>Mật khẩu:</td>
