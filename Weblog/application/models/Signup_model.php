@@ -38,11 +38,11 @@ class Signup_model extends CI_Model {
 	function checkUser($acc){
 		$this->load->database();
 		$sql = "select * from taikhoan where tendangnhap = ?";
-        $query = $this->db->query($sql,array($acc));
+		$query = $this->db->query($sql,array($acc));
 		if($query->num_rows()>0){
-			$thongbao = "Tài khoản đã có người sử dụng";
+			$thongbao = "<span style='color:red'><img src='".base_url()."images/cross_x.png'>&nbsp;Tài khoản đã có người sử dụng</span>";
 		}else{
-			$thongbao = "Bạn có thể dùng tài khoản này";
+			$thongbao = "<span style='color:green'><img src='".base_url()."images/check.png'>&nbsp;Bạn có thể dùng tài khoản này<span>";
 		}
 		return $thongbao;
 	}
