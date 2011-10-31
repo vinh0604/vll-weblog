@@ -62,6 +62,8 @@ class Signup extends CI_Controller {
 		if($acc != ""){
 			$this->load->model("Signup_model");
 			echo $this->Signup_model->checkUser($acc);
+		}else{
+			echo "Không được để trống tên truy nhập";
 		}
 	}
 	
