@@ -20,11 +20,13 @@
 <script type="text/javascript">
 	$('#sidemenu #poll').addClass('current-top');
 </script>
+
 <div id="content">
 	<div id="content-head">
     	<h1>Blog Title</h1>
     </div>
     <div id="content-body">
+	<form action="<?=base_url()?>index.php/post/addPost" method="post">
     	<table style="width:100%" border="0" cellspacing="10" cellpadding="2">
 			<tr>
 				<td width="78%">
@@ -39,7 +41,7 @@
 					<input type="text" style="width:100%; height:50px; margin-bottom:10px; font-size:20px; font-family:'Times New Roman', Times, serif; background-color:#CCCCCC; color:#666666" value="Điền tiêu đề bài viết..." name="title" onFocus="if(this.value=='Điền tiêu đề bài viết...'){this.value=''}; this.style.backgroundColor='#fffda8';" onBlur="this.style.backgroundColor='#CCCCCC';if(this.value==''){this.value='Điền tiêu đề bài viết...'};" >
 				
 					<textarea cols="100" id="editor1" name="editor1" rows="10"></textarea>
-					<div id="notice" style="color:#FF0000; text-shadow: 5px 5px 5px #FF00FF;"></div>
+					
 					<script type="text/javascript">
 						var flag = true;
 						var timer_start = false;
@@ -51,12 +53,15 @@
 					//]]>
 						CKEDITOR.instances.editor1.on('instanceReady',function(e){
 							this.document.on("keyup", function() {
+								//alert(CKEDITOR.instances.editor1.getData());
 								if(timer_start == false) {
 									timer_start = true;
 									timer = setInterval(function(){
-										$('#notice').text('Saving...');
+										//alert(CKEDITOR.instances.editor1.getData()+timer_start);
+										//$('#notice').text('Saving...');//Hàm này cũng ko chạy đc!
+										//alert(CKEDITOR.instances.editor1.getData()+timer_start);//Đến đây là hết chạy!
 										$.ajax({type:'post',
-												url:'save.php',
+												url:'/*?=base_url()?>index.php/post/autoSave',
 												data :{data:CKEDITOR.instances.editor1.getData()},
 												dataType: 'text',
 												success: function(data){
@@ -66,6 +71,7 @@
 													},1000);								
 												}
 											});
+										
 										if(flag) {
 											flag=false;
 										} else {
@@ -78,6 +84,7 @@
 							})
 						})
 					</script>
+					<div id="notice" style="color:#FF0000; text-shadow: 5px 5px 5px #FF00FF;"></div>
 				</td>
 				<td valign="top">
 					<div class="widget-box">
@@ -97,9 +104,11 @@
 						</div>
 						<div class="widget-body">
 							<select name="category" style="margin-bottom:10px; height:25px; font-size:16px">
-								<option value="Uncategorized">Uncategorized</option>
-								<option value="Categorize 1">Categorize 1</option>
-								<option value="Categorize 2">Categorize 2</option>
+								<?php
+									foreach($chuyenmuc as $cat):
+										echo "<option value='$cat[machuyenmuc]'>".$cat['tenchuyenmuc']."</option>";
+									endforeach;
+								?>
 							</select>						
 							<ul type="disc"><a href="" style="color:#0000FF">Thêm category</a></ul>
 						</div>
@@ -110,13 +119,14 @@
 						</div>
 						<div class="widget-body">
 							<input type="text" size="40px" style="height:30px; background:#CCCCCC" name="tag">
-							<input type="button" class="a-button" name="them_tag"  value="&nbsp;Thêm&nbsp;" style="margin-top:5px">
+							<!--<input type="button" class="a-button" name="them_tag"  value="&nbsp;Thêm&nbsp;" style="margin-top:5px">-->
 						</div>
 					</div>
 				</td>
 			</tr>
 			
 		</table>
+	</form>
     </div>
 </div>
 </div>
