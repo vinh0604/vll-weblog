@@ -80,7 +80,7 @@
     		<form action="" method="get" name="my_form">
 				<div class="widget-title"><span style="font-style:italic">Chào mừng blog owner!</span></div>
 				<hr>
-				Các bài bình luận được quản lý ở đây!
+				<b><h2>Quản lý bình luận</h2></b>
 				<hr>
 			<table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
 				<thead>
