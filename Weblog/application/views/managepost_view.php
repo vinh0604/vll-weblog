@@ -12,6 +12,11 @@
 <script type="text/javascript" src="<?=base_url()?>js/jquery.min.js"></script>
 <script type="text/javascript" src="<?=base_url()?>js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
+	function in(){
+		alert(document.getElementById("bai").value);
+	}
+</script>
+<script type="text/javascript">
 	$(document).ready(function(){
 		$('#example').dataTable( {
 			"bJQueryUI": true,
@@ -19,7 +24,7 @@
 			"aoColumns": [{"bSearchable": false, "bSortable": false},
 						  null,
 			              null,
-			              null,
+			              {"bSearchable": false},
 			              {"bSortable": false},
 			              null,
 			              {"bSearchable": false, "bSortable": false}]
@@ -35,7 +40,25 @@
 		}, function(){
 			$(this).attr('src','<?=base_url()?>images/trash.png');
 		});
+
+		$('#bai').change(function(){
+			var bai = ($(this).attr('value'));
+			alert(bai);
+			$.post("<?=base_url()?>index.php/post",{bai:$(this).attr('value')},function(data){
+				
+			});
+		});
 	})
+</script>
+<script type="text/javascript">
+	function show_confirm(){
+		var conf = confirm("Bạn thật sự muốn xóa?");
+		if(conf == true){
+			return true;
+		}else{
+			return false;
+		}
+	}
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 <body>
@@ -50,11 +73,11 @@
     	<h1>Blog Title</h1>
     </div>
     <div id="content-body">
-		<form action="" method="get">
+		<form name="post_form" action="" method="get">
 			<span style="font-style:italic">Chào mừng blog owner!</span>
 			<hr>
 			<h2><a href="" style="background-color:#CCCCCC; font-size:14px; font-style:normal; text-decoration:none">Viết bài mới</a></h2>
-			Xem theo bài viết:&nbsp;<select name="bai" id="bai" onChange="">
+			Xem theo bài viết:&nbsp;<select name="bai" id="bai">
 				<option value='0'>Tất cả</option>
 				<option value="1">Đã đăng</option>
 				<option value="2">Nháp</option>
@@ -63,9 +86,11 @@
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			Xem theo chuyên mục:&nbsp;<select name="muc" id="muc" onChange="">
 				<option value='0'>Xem tất cả các chuyên mục</option>
-				<option value="1">Uncategorized</option>
-				<option value="2">Category 1</option>
-				<option value="3">Category 3</option>
+				<?php
+					foreach($chuyenmuc as $cat):
+						echo "<option value='$cat[machuyenmuc]'>".$cat['tenchuyenmuc']."</option>";
+					endforeach;
+				?>
 			</select>
 			<hr>
 			<table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
@@ -73,7 +98,7 @@
 					<tr>
 						<th width="8%">Số thứ tự</th>
 						<th>Tựa đề</th>
-						<th>Tác giả</th>
+						<th>Nội dung</th>
 						<th>Chuyên mục</th>
 						<th>Thẻ</th>
 						<th>Ngày đăng</th>
@@ -81,56 +106,33 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr class="gradeU">
-						<td>1</td>
-						<td>Hello world!</td>
-						<td>Vinh</td>
-						<td>Uncategoried</td>
-						<td>hello, world</td>
-						<td class="center">20/08/2011</td>
-						<td class="center">
-							<a href="" title="Modify post"><img class="editBtn" src="<?=base_url()?>images/edit.png" height="32" width="32"></a>
-							<input class="delBtn" type="image" src="<?=base_url()?>images/trash.png" height="32" width="32" title="Delete post"/>
-						</td>
-					</tr>
-					<tr class="gradeU">
-						<td>2</td>
-						<td>The last words of a Samurai!</td>
-						<td>Vinh</td>
-						<td>Literature</td>
-						<td>swordman, samurai</td>
-						<td class="center">30/08/2011</td>
-						<td class="center">
-							<a href="" title="Modify post"><img class="editBtn" src="<?=base_url()?>images/edit.png" height="32" width="32"></a>
-							<input class="delBtn" type="image" src="<?=base_url()?>images/trash.png" height="32" width="32" title="Delete post"/>
-						</td>
-					</tr>
-					<tr class="gradeU">
-						<td>3</td>
-						<td>Plotting chart using jQuery</td>
-						<td>Lộc</td>
-						<td>Programming</td>
-						<td>jquery, chart</td>
-						<td class="center">15/09/2011</td>
-						<td class="center">
-							<a href="" title="Modify post"><img class="editBtn" src="<?=base_url()?>images/edit.png" height="32" width="32"></a>
-							<input class="delBtn" type="image" src="<?=base_url()?>images/trash.png" height="32" width="32" title="Delete post"/>
-						</td>
-					</tr>
-					<tr class="gradeU">
-						<td>4</td>
-						<td>Winter is coming</td>
-						<td>Long</td>
-						<td>Film</td>
-						<td>winter, king, series</td>
-						<td class="center">03/08/2011</td>
-						<td class="center">
-							<a href="" title="Modify post"><img class="editBtn" src="<?=base_url()?>images/edit.png" height="32" width="32"></a>
-							<input class="delBtn" type="image" src="<?=base_url()?>images/trash.png" height="32" width="32" title="Delete post"/>
-						</td>
-					</tr>
+
+					<?php
+						for($i=0; $i<count($baiviet); $i++){
+							$noi_dung =  $baiviet[$i]['noidung'];
+							if(strlen($noi_dung)>=65){
+								$tom_tat = substr($noi_dung, 0, 65);
+								$index = strrpos($tom_tat, " " );
+								$tom_tat = substr($tom_tat, 0, $index+1)."...";
+							}else{
+								$tom_tat = $noi_dung;
+							}
+							
+							$link_xoa = base_url()."index.php/post/deletePost/".$baiviet[$i]['mabaiviet'];
+	
+							echo"<tr class='gradeU'>";
+								echo"<td align='center'>".($i+1)."</td>";
+								echo"<td>".$baiviet[$i]['tuade']."</td>";
+								echo"<td>".$tom_tat."</td>";
+								echo"<td>".$baiviet[$i]['chuyenmuc']."</td>";
+								echo"<td>".$tag[$baiviet[$i]['mabaiviet']]."</td>";
+								echo"<td class='center'>".$baiviet[$i]['ngaydang']."</td>";
+								echo"<td class='center'><a href='$link_sua' title='View comment'><img class='editBtn' src='".base_url()."images/edit.png' height='32' width='32' ></a><a href='$link_xoa' title='Delete comment' onclick='return show_confirm();'><img class='delBtn' src='".base_url()."images/trash.png' height='32' width='32' ></a></td>";
+							echo"</tr>";
+						}
+					?>
 				</tbody>
-			</table>
+			</table>		
 		</form>
     </div>
 </div>

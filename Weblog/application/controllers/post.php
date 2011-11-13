@@ -28,21 +28,14 @@ class Post extends CI_Controller {
 		$mataikhoan = 1;
 		$data['bar'] = $this->load->view('bar_view',null,true);
 		$data['sidemenu'] = $this->load->view('sidemenu_view',null,true);
+		$bai = $_POST['bai'];
 		
 		$this->util->connect();
 		$this->load->model('Post_model');
 		$data['chuyenmuc'] = $this->Post_model->getChuyenmuc($mataikhoan);
+		$data['baiviet'] = $this->Post_model->getPost($mataikhoan);
+		$data['tag'] = $this->Post_model->getPostByTag($mataikhoan,$bai);
 		$this->load->view('managepost_view',$data);
-	}
-	
-	public function viewPost(){
-		$mataikhoan = 1;
-		$bai = $_POST['bai'];
-		$muc = $_POST['muc'];
-		$this->load->model('Post_model');
-		
-		echo $this->Post_model->getPost($bai, $muc, $mataikhoan);
-		//$this->load->view('post_view',$data);
 	}
 	
 	public function addPost()
@@ -81,6 +74,16 @@ class Post extends CI_Controller {
 		}
 	}
 	
+	public function deletePost($mabv){
+		$this->load->model('Post_model');
+			
+		if($this->Post_model->deleteBaiviet($mabv) == false){
+			show_error("Rất tiếc! Có lỗi đã xảy ra!");
+		}else{
+			redirect(base_url()."index.php/post");
+		}
+	}
+	
 	public function autoSave()
 	{
 		session_start();
@@ -90,12 +93,18 @@ class Post extends CI_Controller {
 			return;
 		}
 		$mataikhoan = 1;
-		$dulieu = $_POST['dulieu'];
 
 		$this->util->connect();
-		$this->output->enable_profiler(TRUE);
-		$this->load->model('Post_model');
-		$this->Post_model->autoSave($dulieu,$mataikhoan);
+		//$dulieu = $_POST['dulieu'];
+		//$this->output->enable_profiler(TRUE);
+		//$this->load->model('Post_model');
+		//echo $this->Post_model->autoSave($dulieu,$mataikhoan);
+		if($this->input->post(dulieu)){
+			$title = $this->input->post(title);
+			$content = $this->input->post(editor1);
+
+			$this->Post_model->autoSave($content,$mataikhoan);
+		}
 
 	}
 	
@@ -113,8 +122,6 @@ class Post extends CI_Controller {
 		$data['sidemenu'] = $this->load->view('sidemenu_view',null,true);
 		
 		$this->util->connect();
-		//$this->load->model('Poll_model');
-		//$data['polls'] = $this->Poll_model->getBinhchons($mataikhoan);
 		$this->load->view('addquickpost_view',$data);
 	}
 	
@@ -131,8 +138,6 @@ class Post extends CI_Controller {
 		$data['sidemenu'] = $this->load->view('sidemenu_view',null,true);
 		
 		$this->util->connect();
-		//$this->load->model('Poll_model');
-		//$data['polls'] = $this->Poll_model->getBinhchons($mataikhoan);
 		$this->load->view('editpost_view',$data);
 	}
 	

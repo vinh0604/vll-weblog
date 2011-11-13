@@ -13,16 +13,41 @@ class Post_model extends CI_Model {
     	return $this->db->query($sql)->result_array();
     }
 	
-    function getPost($bai, $muc, $mataikhoan) {
+    function getPost($mataikhoan) {
     	$this->load->database();
-    	$sql = "select bv.tuade as tuade, bv.noidung as noidung, cm.tenchuyenmuc as chuyenmuc, t.tentag as the, DATE_FORMAT(bv.ngaydang,'%e/%m/%Y') as ngaydang from baiviet bv, chuyenmuc cm, tag t, tag_baiviet tb where bv.machuyenmuc = cm.machuyenmuc and bv.mabaiviet = tb.mabaiviet and tb.matag = t.matag and bv.mataikhoan = $mataikhoan";
+    	$sql = "SELECT bv.mabaiviet, bv.tuade AS tuade, bv.noidung AS noidung, cm.tenchuyenmuc AS chuyenmuc, DATE_FORMAT( bv.ngaydang, '%e/%m/%Y' ) AS ngaydang
+				FROM baiviet bv, chuyenmuc cm
+				WHERE bv.machuyenmuc = cm.machuyenmuc
+				AND bv.mataikhoan = $mataikhoan";
     	return $this->db->query($sql)->result_array();
     }
 	
-	function autoSave($dulieu,$mataikhoan){
+	function getPostByTag($mataikhoan){
+		$sql = "SELECT bv.mabaiviet
+				FROM baiviet bv
+				WHERE bv.mataikhoan = $mataikhoan";
+    	$mabv = $this->db->query($sql)->result_array();
+		
+		foreach($mabv as $mabv):
+			$sql = "select t.tentag from tag t, tag_baiviet tb, baiviet bv where t.matag = tb.matag and bv.mabaiviet = tb.mabaiviet and bv.mabaiviet = $mabv[mabaiviet]";
+			$tag = $this->db->query($sql)->result_array();
+			$chuoi_tag = "";
+			foreach($tag as $the):
+				$chuoi_tag .= ", ".$the['tentag'];
+			endforeach;
+			
+			$chuoi_tag = substr($chuoi_tag,1);
+			$chuoi_tag_bv[$mabv['mabaiviet']] = $chuoi_tag;
+		endforeach;
+		
+		return $chuoi_tag_bv;
+	}
 
+	function autoSave($dulieu,$mataikhoan){
+		
 		$sql = "update bangtam set NOIDUNG_TRANG = ? where  MATAIKHOAN = ?";
 		$this->db->query($sql, array($dulieu,$mataikhoan));
+		
 	}
 	
 	function addNewPost($mataikhoan,$title,$content,$category,$tag){
@@ -78,4 +103,19 @@ class Post_model extends CI_Model {
 		}
 				
 	}
+	
+	function deleteBaiviet($mabaiviet)
+    {
+		$this->load->database();
+		$sql = "delete from binhluan where mabaiviet = ?";
+    	$this->db->query($sql,array($mabaiviet));
+		$sql = "delete from tag_baiviet where mabaiviet = ?";
+		$this->db->query($sql,array($mabaiviet));
+    	$sql = "delete from baiviet where mabaiviet = ?";
+    	if ($this->db->query($sql,array($mabaiviet))==false)
+    	{
+    		return false;
+    	}
+    	return true;
+    }
 }

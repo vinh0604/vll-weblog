@@ -78,7 +78,7 @@
 						</div>
 						<div class="widget-body">
 							<input type="text" size="40px" style="height:30px; background:#CCCCCC" name="tag">
-							<input type="button" class="a-button" name="sua_tag"  value="&nbsp;&nbsp;Sửa&nbsp;&nbsp;" style="margin-top:5px">
+							<!--<input type="button" class="a-button" name="sua_tag"  value="&nbsp;&nbsp;Sửa&nbsp;&nbsp;" style="margin-top:5px">-->
 						</div>
 					</div>
 				</td>
