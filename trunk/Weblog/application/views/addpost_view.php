@@ -59,8 +59,9 @@
 									timer = setInterval(function(){
 										//alert(CKEDITOR.instances.editor1.getData()+timer_start);
 										//$('#notice').text('Saving...');//Hàm này cũng ko chạy đc!
-										//alert(CKEDITOR.instances.editor1.getData()+timer_start);//Đến đây là hết chạy!
-										$.ajax({type:'post',
+										var dulieu = CKEDITOR.instances.editor1.getData();
+										//alert(dulieu);//Đến đây là hết chạy!
+										/*$.ajax({type:'post',
 												url:'/*?=base_url()?>index.php/post/autoSave',
 												data :{data:CKEDITOR.instances.editor1.getData()},
 												dataType: 'text',
@@ -70,8 +71,11 @@
 														$('#notice').text('');
 													},1000);								
 												}
-											});
-										
+											});*/
+										$.post("<?=base_url()?>index.php/post/autoSave",{dulieu:dulieu},function(data){
+											//$("#notice").html(data);
+											alert("Da luu");
+										});
 										if(flag) {
 											flag=false;
 										} else {
@@ -84,7 +88,7 @@
 							})
 						})
 					</script>
-					<div id="notice" style="color:#FF0000; text-shadow: 5px 5px 5px #FF00FF;"></div>
+					<div id="notice" style="color:#FF0000; text-shadow: 5px 5px 5px #FF00FF;">Long</div>
 				</td>
 				<td valign="top">
 					<div class="widget-box">
