@@ -35,24 +35,26 @@
     <div id="content-body">
     <h2 class="title">Quản Lý Trang</h2>
     <div class="widget-box" id="them">
-    	<form action="<?=base_url()?>/index.php/page/submitinsert" method="post">
-    	<h3 class="widget-title">Thêm Trang</h3>
+    	<?php foreach($trangs as $trang):?>
+    	<form action="<?=base_url()?>/index.php/page/submitedit/<?=$trang['MATRANG']?>" method="post">
+    	<h3 class="widget-title">Sửa Trang</h3>
         <div id="wrapper-Them">
         	<h4 class="title">Tiêu Đề:</h4>
             <div align="right" >
-                    <input type="text" name="tieude" id="tieude" placeholder="Nhập tiêu đề..."/>
+                    <input type="text" name="tieude" id="tieude" placeholder="Nhập tiêu đề..." value="<?=$trang['TIEUDE']?>"/>
             </div>
             <h4 class="title">Tác giả:</h4>
             <div align="right" >
-                    <input type="text" name="tacgia" id="tacgia" placeholder="Nhập tên tác giả..."/>
+                    <input type="text" name="tacgia" id="tacgia" placeholder="Nhập tên tác giả..." value="<?=$trang['TACGIA']?>"/>
             </div>
             <h4 class="title">Nội Dung:</h4>
             <div align="right">
-                    <textarea name="noidung" id="noidung" rows="10" placeholder="Nôi dung..."></textarea>
+                    <textarea name="noidung" id="noidung" rows="10" placeholder="Nôi dung..."><?=$trang['NOIDUNG']?></textarea>
             </div>
             <div align="center">
-					<input type="submit" class="content-submit" id="btnThem" value="Thêm Trang"/>
+					<input type="submit" class="content-submit" id="btnThem" value="Sửa Trang"/>
             </div>
+        <? endforeach;?>
         </div>
         </form>
     </div>
