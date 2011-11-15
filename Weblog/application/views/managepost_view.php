@@ -42,11 +42,14 @@
 		});
 
 		$('#bai').change(function(){
+			
 			var bai = ($(this).attr('value'));
-			alert(bai);
-			$.post("<?=base_url()?>index.php/post",{bai:$(this).attr('value')},function(data){
-				
+			//alert(bai);
+			$.post("<?=base_url()?>index.php/post/post_ajax",{bai:bai},function(data){
+				//alert(data);
+				$('#noi_dung').html(data);
 			});
+			
 		});
 	})
 </script>
@@ -82,17 +85,18 @@
 				<option value="1">Đã đăng</option>
 				<option value="2">Nháp</option>
 			</select>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			Xem theo chuyên mục:&nbsp;<select name="muc" id="muc" onChange="">
 				<option value='0'>Xem tất cả các chuyên mục</option>
-				<?php
+				<?php /*?><?php
 					foreach($chuyenmuc as $cat):
 						echo "<option value='$cat[machuyenmuc]'>".$cat['tenchuyenmuc']."</option>";
 					endforeach;
-				?>
-			</select>
+				?><?php */?>
+			</select>-->
 			<hr>
+         	<div id="noi_dung">
 			<table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
 				<thead>
 					<tr>
@@ -105,7 +109,7 @@
 						<th>Thao tác</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="noidung_ajax">
 
 					<?php
 						for($i=0; $i<count($baiviet); $i++){
@@ -117,7 +121,7 @@
 							}else{
 								$tom_tat = $noi_dung;
 							}
-							
+							$link_sua = base_url()."index.php/post/editPost/".$baiviet[$i]['mabaiviet'];
 							$link_xoa = base_url()."index.php/post/deletePost/".$baiviet[$i]['mabaiviet'];
 	
 							echo"<tr class='gradeU'>";
@@ -132,7 +136,8 @@
 						}
 					?>
 				</tbody>
-			</table>		
+			</table>
+            </div>		
 		</form>
     </div>
 </div>

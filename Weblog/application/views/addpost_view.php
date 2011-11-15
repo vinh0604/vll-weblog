@@ -38,7 +38,7 @@
 			</tr>
 			<tr>
 				<td>
-					<input type="text" style="width:100%; height:50px; margin-bottom:10px; font-size:20px; font-family:'Times New Roman', Times, serif; background-color:#CCCCCC; color:#666666" value="Điền tiêu đề bài viết..." name="title" onFocus="if(this.value=='Điền tiêu đề bài viết...'){this.value=''}; this.style.backgroundColor='#fffda8';" onBlur="this.style.backgroundColor='#CCCCCC';if(this.value==''){this.value='Điền tiêu đề bài viết...'};" >
+					<input type="text" style="width:100%; height:50px; margin-bottom:10px; font-size:20px; font-family:'Times New Roman', Times, serif; background-color:#CCCCCC; color:#666666" value="Điền tiêu đề bài viết..." name="title" id="title" onFocus="if(this.value=='Điền tiêu đề bài viết...'){this.value=''}; this.style.backgroundColor='#fffda8';" onBlur="this.style.backgroundColor='#CCCCCC';if(this.value==''){this.value='Điền tiêu đề bài viết...'};" >
 				
 					<textarea cols="100" id="editor1" name="editor1" rows="10"></textarea>
 					
@@ -53,13 +53,14 @@
 					//]]>
 						CKEDITOR.instances.editor1.on('instanceReady',function(e){
 							this.document.on("keyup", function() {
+								
 								if(timer_start == false) {
 									timer_start = true;
 									timer = setInterval(function(){
 										$('#notice').text('Saving...');
 										$.ajax({type:'post',
 												url:'<?=base_url()?>index.php/post/autoSave',
-												data :{data:CKEDITOR.instances.editor1.getData()},
+												data :{data:CKEDITOR.instances.editor1.getData(),title:document.getElementById('title').value},
 												dataType: 'text',
 												success: function(data){
 													$('#notice').text('Saved');
@@ -80,7 +81,7 @@
 							})
 						})
 					</script>
-					<div id="notice" style="color:#FF0000; text-shadow: 5px 5px 5px #FF00FF;">Long</div>
+					<div id="notice" style="color:#FF0000; text-shadow: 5px 5px 5px #FF00FF;"></div>
 				</td>
 				<td valign="top">
 					<div class="widget-box">

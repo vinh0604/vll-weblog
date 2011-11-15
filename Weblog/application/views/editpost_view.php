@@ -36,9 +36,9 @@
 			  </tr>
 			  <tr>
 				<td>
-					<input type="text" style="width:100%; height:50px; margin-bottom:10px; font-size:20px; background-color:#CCCCCC; color:#666666" value="Điền tiêu đề bài viết..." name="title" onFocus="if(this.value=='Điền tiêu đề bài viết...'){this.value=''}; this.style.backgroundColor='#fffda8';" onBlur="this.style.backgroundColor='#CCCCCC';if(this.value==''){this.value='Điền tiêu đề bài viết...'};" >
+					<input type="text" style="width:100%; height:50px; margin-bottom:10px; font-size:20px; font-family:'Times New Roman', Times, serif; background-color:#CCCCCC; color:#666666" value="<?=$baiviet[0]['tuade']?>" name="title" onFocus="if(this.value=='Điền tiêu đề bài viết...'){this.value=''}; this.style.backgroundColor='#fffda8';" onBlur="this.style.backgroundColor='#CCCCCC';if(this.value==''){this.value='Điền tiêu đề bài viết...'};" >
 	
-					<textarea cols="100" id="editor1" name="editor1" rows="10"></textarea>
+					<textarea cols="100" id="editor1" name="editor1" rows="10"><?=$baiviet[0]['noidung']?></textarea>
 					<script type="text/javascript">
 					//<![CDATA[
 						// Replace the <textarea id="editor1"> with an CKEditor instance.
@@ -65,9 +65,11 @@
 						</div>
 						<div class="widget-body">
 							<select name="category" style="margin-bottom:10px; height:25px; font-size:16px">
-								<option value="Uncategorized">Uncategorized</option>
-								<option value="Categorize 1">Categorize 1</option>
-								<option value="Categorize 2">Categorize 2</option>
+								<?php
+									foreach($chuyenmuc as $cat):
+										echo "<option value='$cat[machuyenmuc]'>".$cat['tenchuyenmuc']."</option>";
+									endforeach;
+								?>
 							</select>						
 							<ul type="disc"><a href="" style="color:#0000FF">Thêm category</a></ul>
 						</div>
@@ -77,7 +79,7 @@
 							<h3>Tags</h3>
 						</div>
 						<div class="widget-body">
-							<input type="text" size="40px" style="height:30px; background:#CCCCCC" name="tag">
+							<input type="text" size="40px" style="height:30px; background:#CCCCCC; font-family:'Times New Roman', Times, serif; font-size:16px " name="tag" value="<?=$tag[$baiviet[0]['mabaiviet']]?>">
 							<!--<input type="button" class="a-button" name="sua_tag"  value="&nbsp;&nbsp;Sửa&nbsp;&nbsp;" style="margin-top:5px">-->
 						</div>
 					</div>
