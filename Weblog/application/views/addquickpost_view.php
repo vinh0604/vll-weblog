@@ -9,6 +9,7 @@
 <link rel="stylesheet" type="text/css" href="<?=base_url()?>css/demo_page.css" />
 <link rel="stylesheet" type="text/css" href="<?=base_url()?>css/demo_table_jui.css" />
 <link rel="stylesheet" type="text/css" href="<?=base_url()?>css/smoothness/jquery-ui-1.8.16.custom.css" />
+<script type="text/javascript" src="<?=base_url()?>js/jquery.min.js"></script>
 <script type="text/javascript" src="<?=base_url()?>js/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="<?=base_url()?>ckfinder/ckfinder.js"></script>
 

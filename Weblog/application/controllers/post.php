@@ -99,10 +99,10 @@ class Post extends CI_Controller {
 		//$this->output->enable_profiler(TRUE);
 		//$this->load->model('Post_model');
 		//echo $this->Post_model->autoSave($dulieu,$mataikhoan);
-		if($this->input->post(dulieu)){
+		if($this->input->post('data')){
 			$title = $this->input->post(title);
-			$content = $this->input->post(editor1);
-
+			$content = $this->input->post('data');
+			$this->load->model('Post_model');
 			$this->Post_model->autoSave($content,$mataikhoan);
 		}
 
