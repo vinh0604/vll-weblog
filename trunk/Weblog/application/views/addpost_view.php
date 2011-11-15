@@ -9,9 +9,9 @@
 <link rel="stylesheet" type="text/css" href="<?=base_url()?>css/demo_page.css" />
 <link rel="stylesheet" type="text/css" href="<?=base_url()?>css/demo_table_jui.css" />
 <link rel="stylesheet" type="text/css" href="<?=base_url()?>css/smoothness/jquery-ui-1.8.16.custom.css" />
+<script type="text/javascript" src="<?=base_url()?>js/jquery.min.js"></script>
 <script type="text/javascript" src="<?=base_url()?>js/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="<?=base_url()?>ckfinder/ckfinder.js"></script>
-
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 <body>
 <?=$bar?>
@@ -53,16 +53,12 @@
 					//]]>
 						CKEDITOR.instances.editor1.on('instanceReady',function(e){
 							this.document.on("keyup", function() {
-								//alert(CKEDITOR.instances.editor1.getData());
 								if(timer_start == false) {
 									timer_start = true;
 									timer = setInterval(function(){
-										//alert(CKEDITOR.instances.editor1.getData()+timer_start);
-										//$('#notice').text('Saving...');//Hàm này cũng ko chạy đc!
-										var dulieu = CKEDITOR.instances.editor1.getData();
-										//alert(dulieu);//Đến đây là hết chạy!
-										/*$.ajax({type:'post',
-												url:'/*?=base_url()?>index.php/post/autoSave',
+										$('#notice').text('Saving...');
+										$.ajax({type:'post',
+												url:'<?=base_url()?>index.php/post/autoSave',
 												data :{data:CKEDITOR.instances.editor1.getData()},
 												dataType: 'text',
 												success: function(data){
@@ -71,11 +67,7 @@
 														$('#notice').text('');
 													},1000);								
 												}
-											});*/
-										$.post("<?=base_url()?>index.php/post/autoSave",{dulieu:dulieu},function(data){
-											//$("#notice").html(data);
-											alert("Da luu");
-										});
+											});
 										if(flag) {
 											flag=false;
 										} else {
