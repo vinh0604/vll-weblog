@@ -28,16 +28,39 @@ class Post extends CI_Controller {
 		$mataikhoan = 1;
 		$data['bar'] = $this->load->view('bar_view',null,true);
 		$data['sidemenu'] = $this->load->view('sidemenu_view',null,true);
+				
+		$this->util->connect();
+		$this->load->model('Post_model');
+		//$data['chuyenmuc'] = $this->Post_model->getChuyenmuc($mataikhoan);
+
+		$data['baiviet'] = $this->Post_model->getPost($mataikhoan);
+		$data['tag'] = $this->Post_model->getPostByTag($mataikhoan);
+		$this->load->view('managepost_view',$data);
+		
+	}
+	
+	public function post_ajax()
+	{
+		session_start();
+		$this->load->library('util');
+		
+		if($this->util->checkLogin()==false) {
+			return;
+		}
+		$mataikhoan = 1;
+		$data['bar'] = $this->load->view('bar_view',null,true);
+		$data['sidemenu'] = $this->load->view('sidemenu_view',null,true);
+
 		$bai = $_POST['bai'];
 		
 		$this->util->connect();
 		$this->load->model('Post_model');
-		$data['chuyenmuc'] = $this->Post_model->getChuyenmuc($mataikhoan);
-		$data['baiviet'] = $this->Post_model->getPost($mataikhoan);
-		$data['tag'] = $this->Post_model->getPostByTag($mataikhoan,$bai);
-		$this->load->view('managepost_view',$data);
+		$data['baiviet'] = $this->Post_model->getPost_ajax($mataikhoan,$bai);
+		$data['tag'] = $this->Post_model->getPostByTag_ajax($mataikhoan,$bai);
+		
+		$this->load->view("post_ajax",$data);
 	}
-	
+		
 	public function addPost()
 	{
 		session_start();
@@ -55,7 +78,7 @@ class Post extends CI_Controller {
 		$data['chuyenmuc'] = $this->Post_model->getChuyenmuc($mataikhoan);
 		$this->load->view('addpost_view',$data);
 		
-		if($this->input->post(dang_bai)){
+		if($this->input->post(dang_bai) && $this->input->post(editor1)!=""){
 			$title = $this->input->post(title);
 			$content = $this->input->post(editor1);
 			$category = $this->input->post(category);
@@ -64,7 +87,7 @@ class Post extends CI_Controller {
 			$this->Post_model->addNewPost($mataikhoan,$title,$content,$category,$tag);
 		}
 		
-		if($this->input->post(luu_nhap)){
+		if($this->input->post(luu_nhap) && $this->input->post(editor1)!=""){
 			$title = $this->input->post(title);
 			$content = $this->input->post(editor1);
 			$category = $this->input->post(category);
@@ -72,6 +95,7 @@ class Post extends CI_Controller {
 			
 			$this->Post_model->addDraft($mataikhoan,$title,$content,$category,$tag);
 		}
+		
 	}
 	
 	public function deletePost($mabv){
@@ -100,10 +124,10 @@ class Post extends CI_Controller {
 		//$this->load->model('Post_model');
 		//echo $this->Post_model->autoSave($dulieu,$mataikhoan);
 		if($this->input->post('data')){
-			$title = $this->input->post(title);
+			$title = $this->input->post('title');
 			$content = $this->input->post('data');
 			$this->load->model('Post_model');
-			$this->Post_model->autoSave($content,$mataikhoan);
+			$this->Post_model->autoSave($title,$content,$mataikhoan);
 		}
 
 	}
@@ -125,7 +149,7 @@ class Post extends CI_Controller {
 		$this->load->view('addquickpost_view',$data);
 	}
 	
-	public function editPost()
+	public function editPost($bai_sua)
 	{
 		session_start();
 		$this->load->library('util');
@@ -138,6 +162,10 @@ class Post extends CI_Controller {
 		$data['sidemenu'] = $this->load->view('sidemenu_view',null,true);
 		
 		$this->util->connect();
+		$this->load->model('Post_model');
+		$data['chuyenmuc'] = $this->Post_model->getChuyenmuc($mataikhoan);
+		$data['baiviet'] = $this->Post_model->getOnePost($mataikhoan,$bai_sua);
+		$data['tag'] = $this->Post_model->getOnePostByTag($mataikhoan,$bai_sua);
 		$this->load->view('editpost_view',$data);
 	}
 	

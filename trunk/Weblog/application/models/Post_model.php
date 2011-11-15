@@ -21,7 +21,6 @@ class Post_model extends CI_Model {
 				AND bv.mataikhoan = $mataikhoan";
     	return $this->db->query($sql)->result_array();
     }
-	
 	function getPostByTag($mataikhoan){
 		$sql = "SELECT bv.mabaiviet
 				FROM baiviet bv
@@ -42,11 +41,90 @@ class Post_model extends CI_Model {
 		
 		return $chuoi_tag_bv;
 	}
-
-	function autoSave($dulieu,$mataikhoan){
+	
+	function getPost_ajax($mataikhoan,$bai) {
+    	if($bai == "1"){
+			$dk = "and bv.trangthai = 1";
+		}elseif($bai == "2"){
+			$dk = "and bv.trangthai = 2";
+		}else{
+			$dk = "";	
+		}
+		$this->load->database();
+    	$sql = "SELECT bv.mabaiviet, bv.tuade AS tuade, bv.noidung AS noidung, cm.tenchuyenmuc AS chuyenmuc, DATE_FORMAT( bv.ngaydang, '%e/%m/%Y' ) AS ngaydang
+				FROM baiviet bv, chuyenmuc cm
+				WHERE bv.machuyenmuc = cm.machuyenmuc
+				AND bv.mataikhoan = $mataikhoan $dk";
+    	return $this->db->query($sql)->result_array();
+    }
+	
+	function getPostByTag_ajax($mataikhoan,$bai){
+		if($bai == "1"){
+			$dk = "and bv.trangthai = 1";
+		}elseif($bai == "2"){
+			$dk = "and bv.trangthai = 2";
+		}else{
+			$dk = "";	
+		}
+		$sql = "SELECT bv.mabaiviet
+				FROM baiviet bv
+				WHERE bv.mataikhoan = $mataikhoan $dk";
+    	$mabv = $this->db->query($sql)->result_array();
 		
-		$sql = "update bangtam set NOIDUNG_TRANG = ? where  MATAIKHOAN = ?";
-		$this->db->query($sql, array($dulieu,$mataikhoan));
+		foreach($mabv as $mabv):
+			$sql = "select t.tentag from tag t, tag_baiviet tb, baiviet bv where t.matag = tb.matag and bv.mabaiviet = tb.mabaiviet and bv.mabaiviet = $mabv[mabaiviet]";
+			$tag = $this->db->query($sql)->result_array();
+			$chuoi_tag = "";
+			foreach($tag as $the):
+				$chuoi_tag .= ", ".$the['tentag'];
+			endforeach;
+			
+			$chuoi_tag = substr($chuoi_tag,1);
+			$chuoi_tag_bv[$mabv['mabaiviet']] = $chuoi_tag;
+		endforeach;
+		
+		return $chuoi_tag_bv;
+	}
+	
+	function getOnePost($mataikhoan,$bai_sua) {
+    	$this->load->database();
+    	$sql = "SELECT bv.mabaiviet, bv.tuade AS tuade, bv.noidung AS noidung, cm.tenchuyenmuc AS chuyenmuc, DATE_FORMAT( bv.ngaydang, '%e/%m/%Y' ) AS ngaydang
+				FROM baiviet bv, chuyenmuc cm
+				WHERE bv.machuyenmuc = cm.machuyenmuc
+				AND bv.mataikhoan = $mataikhoan
+				AND bv.mabaiviet = $bai_sua";
+    	return $this->db->query($sql)->result_array();
+    }
+	
+	
+	function getOnePostByTag($mataikhoan,$bai_sua){
+		$sql = "SELECT bv.mabaiviet
+				FROM baiviet bv
+				WHERE bv.mataikhoan = $mataikhoan
+				AND bv.mabaiviet = $bai_sua";
+    	$mabv = $this->db->query($sql)->result_array();
+		
+		foreach($mabv as $mabv):
+			$sql = "select t.tentag from tag t, tag_baiviet tb, baiviet bv where t.matag = tb.matag and bv.mabaiviet = tb.mabaiviet and bv.mabaiviet = $mabv[mabaiviet]";
+			$tag = $this->db->query($sql)->result_array();
+			$chuoi_tag = "";
+			foreach($tag as $the):
+				$chuoi_tag .= ", ".$the['tentag'];
+			endforeach;
+			
+			$chuoi_tag = substr($chuoi_tag,1);
+			$chuoi_tag_bv[$mabv['mabaiviet']] = $chuoi_tag;
+		endforeach;
+		
+		return $chuoi_tag_bv;
+	}
+	
+	
+
+	function autoSave($tuade,$dulieu,$mataikhoan){
+		
+		$sql = "update bangtam set TUADE = ?, LUUNHAP = ? where  MATAIKHOAN = ?";
+		$this->db->query($sql, array($tuade,$dulieu,$mataikhoan));
 		
 	}
 	
@@ -72,6 +150,16 @@ class Post_model extends CI_Model {
 				
 				$sql = "insert into tag_baiviet(mabaiviet, matag) values(?,?)";
 				$this->db->query($sql, array($mabv,$matag));
+				
+			}else{
+				$sql = "select matag from tag where tentag = ?";
+				$matag = $this->db->query($sql,array($tag_items[$i]))->row(0)->matag;
+				
+				$sql = "select max(mabaiviet) as mabv from baiviet";
+				$mabv = $this->db->query($sql)->row(0)->mabv;
+				
+				$sql = "insert into tag_baiviet(mabaiviet, matag) values(?,?)";
+				$this->db->query($sql, array($mabv,$matag));	
 			}
 		}
 				
@@ -99,6 +187,15 @@ class Post_model extends CI_Model {
 				
 				$sql = "insert into tag_baiviet(mabaiviet, matag) values(?,?)";
 				$this->db->query($sql, array($mabv,$matag));
+			}else{
+				$sql = "select matag from tag where tentag = ?";
+				$matag = $this->db->query($sql,array($tag_items[$i]))->row(0)->matag;
+				
+				$sql = "select max(mabaiviet) as mabv from baiviet";
+				$mabv = $this->db->query($sql)->row(0)->mabv;
+				
+				$sql = "insert into tag_baiviet(mabaiviet, matag) values(?,?)";
+				$this->db->query($sql, array($mabv,$matag));	
 			}
 		}
 				
