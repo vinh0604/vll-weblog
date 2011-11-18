@@ -76,6 +76,7 @@ class Post extends CI_Controller {
 		$this->util->connect();
 		$this->load->model('Post_model');
 		$data['chuyenmuc'] = $this->Post_model->getChuyenmuc($mataikhoan);
+		$data['bv_tam'] = $this->Post_model->getBaiTam($mataikhoan);
 		$this->load->view('addpost_view',$data);
 		
 		if($this->input->post(dang_bai) && $this->input->post(editor1)!=""){

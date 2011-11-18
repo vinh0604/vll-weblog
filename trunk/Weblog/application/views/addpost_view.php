@@ -26,6 +26,7 @@
     	<h1>Blog Title</h1>
     </div>
     <div id="content-body">
+
 	<form action="<?=base_url()?>index.php/post/addPost" method="post">
     	<table style="width:100%" border="0" cellspacing="10" cellpadding="2">
 			<tr>
@@ -38,9 +39,9 @@
 			</tr>
 			<tr>
 				<td>
-					<input type="text" style="width:100%; height:50px; margin-bottom:10px; font-size:20px; font-family:'Times New Roman', Times, serif; background-color:#CCCCCC; color:#666666" value="Điền tiêu đề bài viết..." name="title" id="title" onFocus="if(this.value=='Điền tiêu đề bài viết...'){this.value=''}; this.style.backgroundColor='#fffda8';" onBlur="this.style.backgroundColor='#CCCCCC';if(this.value==''){this.value='Điền tiêu đề bài viết...'};" >
+					<input type="text" style="width:100%; height:50px; margin-bottom:10px; font-size:20px; font-family:'Times New Roman', Times, serif; background-color:#CCCCCC; color:#666666" value="<?=$bv_tam[0]['tuade']?>" placeholder="Điền tiêu đề bài viết..." name="title" id="title" onFocus="if(this.value=='Điền tiêu đề bài viết...'){this.value=''}; this.style.backgroundColor='#fffda8';" onBlur="this.style.backgroundColor='#CCCCCC';if(this.value==''){this.value='Điền tiêu đề bài viết...'};" >
 				
-					<textarea cols="100" id="editor1" name="editor1" rows="10"></textarea>
+					<textarea cols="100" id="editor1" name="editor1" rows="10"><?=$bv_tam[0]['luunhap']?></textarea>
 					
 					<script type="text/javascript">
 						var flag = true;

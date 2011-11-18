@@ -12,6 +12,11 @@ class Post_model extends CI_Model {
     	$sql = "select machuyenmuc, tenchuyenmuc from chuyenmuc where mataikhoan = $mataikhoan";
     	return $this->db->query($sql)->result_array();
     }
+
+	function getBaiTam($mataikhhoan){
+		$sql = "select tuade, luunhap from bangtam where mataikhoan = $mataikhhoan"	;
+		return $this->db->query($sql)->result_array();
+	}
 	
     function getPost($mataikhoan) {
     	$this->load->database();
@@ -135,6 +140,9 @@ class Post_model extends CI_Model {
 		$sql = "insert into baiviet(mataikhoan, machuyenmuc, tuade, noidung, ngaydang, trangthai, luotlthich, luotxem) values(?, ?, ?, ?, NOW(), 1, 0, 0)";
 		$this->db->query($sql, array($mataikhoan,$category,$title,$content));
 		
+		$sql = "update bangtam set luunhap = '', tuade = '' where mataikhoan = $mataikhoan";
+		$this->db->query($sql);
+		
 		for($i = 0;$i < count($tag_items); $i++){
 			$tag_items[$i] = trim($tag_items[$i]);
 			$sql = "select * from tag where mataikhoan = ? and tentag = ?";
@@ -171,6 +179,8 @@ class Post_model extends CI_Model {
 		$tag_items = explode(",",$tag);
 		$sql = "insert into baiviet(mataikhoan, machuyenmuc, tuade, noidung, ngaydang, trangthai, luotlthich, luotxem) values(?, ?, ?, ?, NOW(), 2, 0, 0)";
 		$this->db->query($sql, array($mataikhoan,$category,$title,$content));
+		$sql = "update bangtam set luunhap = '', tuade = '' where mataikhoan = $mataikhoan";
+		$this->db->query($sql);
 		
 		for($i = 0;$i < count($tag_items); $i++){
 			$tag_items[$i] = trim($tag_items[$i]);

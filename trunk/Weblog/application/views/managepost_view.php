@@ -79,7 +79,7 @@
 		<form name="post_form" action="" method="get">
 			<span style="font-style:italic">Chào mừng blog owner!</span>
 			<hr>
-			<h2><a href="" style="background-color:#CCCCCC; font-size:14px; font-style:normal; text-decoration:none">Viết bài mới</a></h2>
+			<h2><a href="<?=base_url()?>index.php/post/addpost" style="background-color:#CCCCCC; font-size:14px; font-style:normal; text-decoration:none">Viết bài mới</a></h2>
 			Xem theo bài viết:&nbsp;<select name="bai" id="bai">
 				<option value='0'>Tất cả</option>
 				<option value="1">Đã đăng</option>
