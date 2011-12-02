@@ -1,12 +1,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="vi"><head profile="http://gmpg.org/xfn/11">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title> Blog Logo</title>
-<link href="<?=base_url()?>css/themes/<?=$csslink?>" type="text/css" media="screen" rel="stylesheet">
+<title><?=$persona['tieude']?></title>
+<link href="<?=base_url()?>css/themes/theme2/style.css" type="text/css" media="screen" rel="stylesheet">
+<?php if($persona['anhnen']):?>
+<style>
+#header,#footer {
+	background-image: none;
+}
+</style>
+<?php endif;?>
 <!--[if lte IE 8]><script type="text/javascript" src="<?=base_url()?>js/excanvas.js"></script><![endif]-->
 <script src="<?=base_url()?>js/jquery.min.js" type="text/javascript"></script>
 <script src="<?=base_url()?>js/jquery.tagcanvas.min.js" type="text/javascript"></script>
- <script type="text/javascript">
+<script type="text/javascript">
  $(document).ready(function() {
    if( ! $('#myCanvas').tagcanvas({
      textColour : '#000000',
@@ -16,37 +23,38 @@
      depth : 0.75,
 	 weight: true,
 	 weightFrom: 'data-weight',
-	 weightSize : 5
+	 weightSize : 1
    })) {
      $('#myCanvasContainer').hide();
    }
  });
- </script>
+</script>
 </head>
-<body>
+<body <?php if($persona['anhnen']):?>style="background: url('<?=base_url()?>images/background/<?=$persona['anhnen']?>');"<?php endif;?>>
 	<?=$header?><!--end header-->
 	<div class="content-background">
 		<div class="wrapper">
 			<div class="notice"></div><!--end notice-->
-			<div id="content">			
+			<div id="content">	
+			<?php foreach ($posts as $post):?>		
 				<div class="post hentry">
 					<div class="post-header">
-						<div class="date">15/01/2011</div>
-						<h2><a href="#" rel="bookmark" title="Post Title">Post Title</a></h2>
-						<div class="author">bởi Vinh</div>
+						<div class="date"><?=$post['ngaydang']?></div>
+						<h2><a href="<?=base_url()?>index.php/blog/<?=$blogname?>/post/<?=$post['mabaiviet']?>" title="<?=$post['tuade']?>"><?=$post['tuade']?></a></h2>
+						<div class="author">in <a href="<?=base_url()?>index.php/blog/<?=$blogname?>/category/<?=$post['machuyenmuc']?>"><?=$post['tenchuyenmuc']?></a></div>
 					</div><!--end post header-->
 					<div class="entry clear">
-						<p>Content</p>
-						<div class="sharedaddy"></div>			
-						<p><a href="#" title="Chỉnh sửa bài viết">Sửa</a></p>					
+						<p><?=$post['noidung']?></p>
+						<div class="sharedaddy"></div>							
 					</div><!--end entry-->
 					<div class="post-footer">
-						<div class="comments"><a href="#" title="Phản hồi cho Post Title">Để lại phản hồi</a></div>
+						<div class="comments"><a href="<?=base_url()?>index.php/blog/<?=$blogname?>/post/<?=$post['mabaiviet']?>#comment" title="Phản hồi cho <?=$post['tuade']?>">Để lại phản hồi</a></div>
 					</div><!--end post footer-->
 				</div><!--end post-->
+			<?php endforeach;?>
 				<div class="navigation index">
-					<div class="alignleft"><a href="#">«  Bài viết cũ nhất</a></div>
-					<div class="alignright"><a href="#">Bài viết mới »</a></div>
+					<?php if($prevpost):?><div class="alignleft"><a href="<?=base_url()?>index.php/blog/<?=$blogname?>/page/<?=$prevpost?>">«  Bài viết cũ</a></div><?php endif;?>
+					<?php if($nextpost):?><div class="alignright"><a href="<?=base_url()?>index.php/blog/<?=$blogname?>/page/<?=$nextpost?>">Bài viết mới »</a></div><?php endif;?>
 				</div><!--end navigation-->
 			</div><!--end content-->
 			<?=$sidebar?><!--end sidebar--></div><!--end wrapper-->

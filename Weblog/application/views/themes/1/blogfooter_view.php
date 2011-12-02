@@ -4,7 +4,7 @@
 		<div class="widget">			
 			<h4 class="widgettitle">Thống kê</h4>			
 			<ul>
-				<li><?=$luotxem?> lượt</li>
+				<li><?=$luotxem?> lượt xem</li>
 			</ul>
 		</div>				
 	</div>
@@ -12,9 +12,12 @@
 		<div class="widget">
 			<h4 class="widgettitle">Liên kết</h4>
 			<div class="cat_container">
-				<a href="http://www.google.com" title="Google">Google</a> 
-				<a href="http://www.google.com" title="Google">Google</a> 
+				<?php foreach ($links as $link):?>
+				<a href="<?=$link['duongdan']?>"><?=$link['tenlienket']?></a>
+				<?php endforeach;?> 
 			</div>
 		</div>
 	</div>
+</div>
+<div id="footer">
 </div>
