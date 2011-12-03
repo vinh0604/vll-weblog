@@ -86,6 +86,7 @@ class Post extends CI_Controller {
 			$tag = $this->input->post(tag);
 			
 			$this->Post_model->addNewPost($mataikhoan,$title,$content,$category,$tag);
+			redirect(base_url()."index.php/post/addPost");
 		}
 		
 		if($this->input->post(luu_nhap) && $this->input->post(editor1)!=""){
@@ -95,6 +96,7 @@ class Post extends CI_Controller {
 			$tag = $this->input->post(tag);
 			
 			$this->Post_model->addDraft($mataikhoan,$title,$content,$category,$tag);
+			redirect(base_url()."index.php/post");
 		}
 		
 	}
@@ -165,10 +167,44 @@ class Post extends CI_Controller {
 		$this->util->connect();
 		$this->load->model('Post_model');
 		$data['chuyenmuc'] = $this->Post_model->getChuyenmuc($mataikhoan);
+		$data['chuyenmuc_bv'] = $this->Post_model->getOneChuyenmuc($bai_sua);
 		$data['baiviet'] = $this->Post_model->getOnePost($mataikhoan,$bai_sua);
 		$data['tag'] = $this->Post_model->getOnePostByTag($mataikhoan,$bai_sua);
 		$this->load->view('editpost_view',$data);
+		
+		
 	}
 	
-	
+	public function doEdit($bai_sua){
+		session_start();
+		$this->load->library('util');
+		
+		if($this->util->checkLogin()==false) {
+			return;
+		}
+		$mataikhoan = 1;
+		$this->util->connect();
+		$this->load->model('Post_model');
+		
+		if($this->input->post(sua_bai) && $this->input->post(editor1)!=""){
+			
+			$title = $this->input->post(title);
+			$content = $this->input->post(editor1);
+			$category = $this->input->post(category);
+			$tag = $this->input->post(tag);
+			
+			$this->Post_model->editPost($mataikhoan,$bai_sua,$title,$content,$category,$tag);
+			redirect(base_url()."index.php/post");
+		}
+		
+		if($this->input->post(luu_nhap) && $this->input->post(editor1)!=""){
+			$title = $this->input->post(title);
+			$content = $this->input->post(editor1);
+			$category = $this->input->post(category);
+			$tag = $this->input->post(tag);
+			
+			$this->Post_model->toDraft($mataikhoan,$bai_sua,$title,$content,$category,$tag);
+			redirect(base_url()."index.php/post");
+		}
+	}
 }

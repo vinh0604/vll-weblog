@@ -25,6 +25,7 @@
     	<h1>Blog Title</h1>
     </div>
     <div id="content-body">
+    <form action="<?=base_url()?>index.php/post/doEdit/<?=$baiviet[0]['mabaiviet']?>" method="post">
     	<table style="width:100%" border="0" cellspacing="10" cellpadding="2">
 			<tr>
 				<td width="78%">
@@ -67,7 +68,13 @@
 							<select name="category" style="margin-bottom:10px; height:25px; font-size:16px">
 								<?php
 									foreach($chuyenmuc as $cat):
-										echo "<option value='$cat[machuyenmuc]'>".$cat['tenchuyenmuc']."</option>";
+										if($chuyenmuc_bv[0][machuyenmuc] == $cat[machuyenmuc]){
+											$select = "selected";
+										}else{
+											$select = "";
+										}
+										echo "<option value='$cat[machuyenmuc]' $select>".$cat['tenchuyenmuc']."</option>";
+										//echo "<option value='$chuyenmuc_bv[0][machuyenmuc]'>".$chuyenmuc_bv[0]['tenchuyenmuc']."</option>";
 									endforeach;
 								?>
 							</select>						
@@ -87,6 +94,7 @@
 			</tr>
 			
 		</table>
+       </form>
     </div>
 </div>
 </div>

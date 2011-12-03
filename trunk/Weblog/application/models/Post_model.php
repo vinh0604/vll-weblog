@@ -12,7 +12,13 @@ class Post_model extends CI_Model {
     	$sql = "select machuyenmuc, tenchuyenmuc from chuyenmuc where mataikhoan = $mataikhoan";
     	return $this->db->query($sql)->result_array();
     }
-
+	
+	function getOneChuyenmuc($bai_sua) {
+    	//$this->load->database();
+    	$sql = "select cm.machuyenmuc, cm.tenchuyenmuc from chuyenmuc cm, baiviet bv where cm.machuyenmuc = bv.machuyenmuc and bv.mabaiviet = $bai_sua";
+    	return $this->db->query($sql)->result_array();
+    }
+	
 	function getBaiTam($mataikhhoan){
 		$sql = "select tuade, luunhap from bangtam where mataikhoan = $mataikhhoan"	;
 		return $this->db->query($sql)->result_array();
@@ -173,6 +179,41 @@ class Post_model extends CI_Model {
 				
 	}
 	
+	function editPost($mataikhoan,$bai_sua,$title,$content,$category,$tag){
+		$this->load->database();
+		
+		
+		$tag_items = explode(",",$tag);
+		$sql = "update baiviet set machuyenmuc = ?, tuade = ?, noidung = ?, ngaydang= NOW(), trangthai = 1 where mabaiviet = ?";
+		$this->db->query($sql, array($category,$title,$content,$bai_sua));
+		
+		$sql = "delete from tag_baiviet where mabaiviet = ?";
+		$this->db->query($sql, array($bai_sua));
+				
+		for($i = 0;$i < count($tag_items); $i++){
+			$tag_items[$i] = trim($tag_items[$i]);
+			$sql = "select * from tag where mataikhoan = ? and tentag = ?";
+			if($this->db->query($sql, array($mataikhoan,$tag_items[$i]))->num_rows() == 0){
+				$sql = "insert into tag(mataikhoan, tentag) values(?,?)";
+				$this->db->query($sql, array($mataikhoan,$tag_items[$i]));
+				
+				$sql = "select max(matag) as matag from tag";
+				$matag = $this->db->query($sql)->row(0)->matag;
+					
+				$sql = "insert into tag_baiviet(mabaiviet, matag) values(?,?)";
+				$this->db->query($sql, array($bai_sua,$matag));
+				
+			}else{
+				
+				$sql = "select matag from tag where tentag = ?";
+				$matag = $this->db->query($sql,array($tag_items[$i]))->row(0)->matag;
+				
+				$sql = "insert into tag_baiviet(mabaiviet, matag) values(?,?)";
+				$this->db->query($sql, array($bai_sua,$matag));	
+			}
+		}
+	}
+	
 	function addDraft($mataikhoan,$title,$content,$category,$tag){
 		$this->load->database();
 		
@@ -209,6 +250,41 @@ class Post_model extends CI_Model {
 			}
 		}
 				
+	}
+	
+	function toDraft($mataikhoan,$bai_sua,$title,$content,$category,$tag){
+		$this->load->database();
+		
+		
+		$tag_items = explode(",",$tag);
+		$sql = "update baiviet set machuyenmuc = ?, tuade = ?, noidung = ?, ngaydang= NOW(), trangthai = 2 where mabaiviet = ?";
+		$this->db->query($sql, array($category,$title,$content,$bai_sua));
+		
+		$sql = "delete from tag_baiviet where mabaiviet = ?";
+		$this->db->query($sql, array($bai_sua));
+				
+		for($i = 0;$i < count($tag_items); $i++){
+			$tag_items[$i] = trim($tag_items[$i]);
+			$sql = "select * from tag where mataikhoan = ? and tentag = ?";
+			if($this->db->query($sql, array($mataikhoan,$tag_items[$i]))->num_rows() == 0){
+				$sql = "insert into tag(mataikhoan, tentag) values(?,?)";
+				$this->db->query($sql, array($mataikhoan,$tag_items[$i]));
+				
+				$sql = "select max(matag) as matag from tag";
+				$matag = $this->db->query($sql)->row(0)->matag;
+					
+				$sql = "insert into tag_baiviet(mabaiviet, matag) values(?,?)";
+				$this->db->query($sql, array($bai_sua,$matag));
+				
+			}else{
+				
+				$sql = "select matag from tag where tentag = ?";
+				$matag = $this->db->query($sql,array($tag_items[$i]))->row(0)->matag;
+				
+				$sql = "insert into tag_baiviet(mabaiviet, matag) values(?,?)";
+				$this->db->query($sql, array($bai_sua,$matag));	
+			}
+		}	
 	}
 	
 	function deleteBaiviet($mabaiviet)
