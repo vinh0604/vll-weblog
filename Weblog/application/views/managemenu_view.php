@@ -9,17 +9,6 @@
 <link href="<?=base_url()?>css/demo_table.css" rel="stylesheet" type="text/css">
 <link href="<?=base_url()?>css/demo_table_jui.css" rel="stylesheet" type="text/css">
 <link href="<?=base_url()?>css/smoothness/jquery-ui-1.8.16.custom.css" rel="stylesheet" type="text/css">
-<style>
-	.left{margin-right:5px}
-	#wrapper-Them{ padding-left:15px; padding-right:5px; font-size:15px;}
-	#them{ margin-right:5px}
-	h4{ margin-top:20px; margin-bottom:5px;}
-	#link, #name{width:100%; font-size:18px; height:30px; font-family:"Times New Roman", Times, serif}
-	#description{ width:100%; font-family:"Times New Roman", Times, serif}
-	#btnThem{ margin-top:10px;}
-	.margin_right{ margin-right:20px}
-	
-</style>
 <script type="text/javascript" src="<?=base_url()?>js/jquery.min.js"></script>
 <script type="text/javascript" src="<?=base_url()?>js/jquery.dataTables.min.js"></script>
 <script>
@@ -75,8 +64,10 @@
                                 <td class="center"><?=$menu['TENMENU']?></td>
                                 <td class="center"><?=$menu['TRANGTHAI']?></td>
                                 <td class="center">
-                                    <a href="<?=base_url()?>index.php/menu/changemenu" title="Sửa Chuyên Mục"><img class="editBtn" src="<?=base_url()?>images/edit.png" height="32" width="32"></a>
-                                    <input class="delBtn" type="image" src="<?=base_url()?>images/trash.png" height="32" width="32" title="Xóa Chuyên Mục"/>
+                                	<form method="post" action="<?=base_url()?>index.php/menu/deletemenu">
+                                    <a href="<?=base_url()?>index.php/menu/editmenu/<?=$menu['MAMENU']?>" title="Sửa Chuyên Mục"><img class="editBtn" src="<?=base_url()?>images/edit.png" height="32" width="32"></a>
+                                    <input class="delBtn" type="image" name="mamenu" id="mamenu" value="<?=$menu['MAMENU']?>" src="<?=base_url()?>images/trash.png" height="32" width="32" title="Xóa Chuyên Mục"/>
+                                    </form>
                                 </td>
                             </tr>    
                             <? endforeach;?>                
