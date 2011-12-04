@@ -1,6 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="vi">
-<head profile="http://gmpg.org/xfn/11">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="vi"><head profile="http://gmpg.org/xfn/11">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><?=$persona['tieude']?></title>
 <link href="<?=base_url()?>css/themes/theme2/style.css" type="text/css" media="screen" rel="stylesheet">
@@ -12,8 +11,6 @@
 }
 </style>
 <?php endif;?>
-<link href="<?=base_url()?>css/comment.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="<?=base_url()?>js/ckeditor/ckeditor.js"></script>
 <!--[if lte IE 8]><script type="text/javascript" src="<?=base_url()?>js/excanvas.js"></script><![endif]-->
 <script src="<?=base_url()?>js/jquery.min.js" type="text/javascript"></script>
 <script src="<?=base_url()?>js/jquery.tagcanvas.min.js" type="text/javascript"></script>
@@ -31,14 +28,6 @@
    })) {
      $('#myCanvasContainer').hide();
    }
-   $('#like-button').click(function(){
-		$.ajax({type:'post',
-			url:'<?=base_url()?>index.php/blog/<?=$blogname?>/like',
-			data:{mabaiviet:$('#mabaiviet').val()},
-			success: function(data){
-				$('#like_wrap').html(data);
-			}})
-	})
  });
 </script>
 </head>
@@ -47,7 +36,8 @@
 	<div class="content-background">
 		<div class="wrapper">
 			<div class="notice"></div><!--end notice-->
-			<div id="content">		
+			<div id="content">	
+			<?php foreach ($posts as $post):?>		
 				<div class="post hentry">
 					<div class="post-header">
 						<div class="date"><?=$post['ngaydang']?></div>
@@ -55,28 +45,14 @@
 						<div class="author">in <a href="<?=base_url()?>index.php/blog/<?=$blogname?>/category/<?=$post['machuyenmuc']?>"><?=$post['tenchuyenmuc']?></a></div>
 					</div><!--end post header-->
 					<div class="entry clear">
-						<p><?=$post['noidung']?></p>
 						<div class="sharedaddy"></div>							
 					</div><!--end entry-->
 					<div class="post-footer">
-						<div id="like_wrap">
-						<?php if (!$liked):?>
-							<a id="like-button" title="Thích bài viết này!"><img src="<?=base_url()?>images/thumbsup.png" width="35" height="33"></a>
-						<?php else :?>
-							<strong><?=$post['luotlthich']?> người thích bài viết này!</strong>
-						<?php endif;?>
-						</div>
-						<div class="author" style="margin-left: 0px">Thẻ: <?php foreach ($posttags as $posttag):?><a href="<?base_url()?>index.php/blog/<?=$blogname?>/search?tag=<?=$posttag['tentag']?>" title="<?=$posttag['mota']?>"><?=$posttag['tentag']?></a> <?php endforeach;?></div>
+						<div class="comments"><a href="<?=base_url()?>index.php/blog/<?=$blogname?>/post/<?=$post['mabaiviet']?>#comment" title="Phản hồi cho <?=$post['tuade']?>">Để lại phản hồi</a></div>
 					</div><!--end post footer-->
 				</div><!--end post-->
-				<div id="comment">
-				<div class="comment-number">
-					<span><?=count($comments)?> phản hồi</span>
-				</div><!--end comment-number--><?=$comment?>
-				</div>
+			<?php endforeach;?>
 				<div class="navigation index">
-					<?php if($prevpost):?><div class="alignleft"><a href="<?=base_url()?>index.php/blog/<?=$blogname?>/post/<?=$prevpost?>">«  Bài viết trước</a></div><?php endif;?>
-					<?php if($nextpost):?><div class="alignright"><a href="<?=base_url()?>index.php/blog/<?=$blogname?>/post/<?=$nextpost?>">Bài viết sau »</a></div><?php endif;?>
 				</div><!--end navigation-->
 			</div><!--end content-->
 			<?=$sidebar?><!--end sidebar--></div><!--end wrapper-->

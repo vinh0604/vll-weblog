@@ -25,9 +25,9 @@
 		<div id="footer-third" class="footer-column">
 			<ul>
 				<li class="widget widget_categories"><h2 class="widgettitle">Tìm kiếm</h2>
-		 			<form method="get" id="search_form" action="#">
+		 			<form method="get" id="search_form" action="<?=base_url()?>index.php/blog/<?=$blogname?>/search">
 						<div>
-							<input name="s" id="s" class="search" type="text">
+							<input name="keyword" id="s" class="search" type="text">
 							<input id="searchsubmit" value="Tìm kiếm" type="submit">
 						</div>
 					</form>

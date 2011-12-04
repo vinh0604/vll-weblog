@@ -48,13 +48,10 @@
 				<p class="post-data">
 					<span class="postcategory">in <a href="<?=base_url()?>index.php/blog/<?=$blogname?>/category/<?=$post['machuyenmuc']?>" title="Xem các bài viết trong <?=$post['tenchuyenmuc']?>"><?=$post['tenchuyenmuc']?></a></span>		
 				</p>
-				<p><?=$post['noidung']?></p>
 				<div class="sharedaddy"></div>		
 			</div><!--/post -->
 		<?php endforeach;?>
 			<p class="post-nav">
-				<?php if($prevpost):?><span class="previous"><a href="<?=base_url()?>index.php/blog/<?=$blogname?>/page/<?=$prevpost?>"><em>Trước</em> Các bài cũ hơn</a></span><?php endif;?> 
-				<?php if(isset($nextpost)):?><span class="next"><a href="<?=base_url()?>index.php/blog/<?=$blogname?>/page/<?=$nextpost?>"><em>Sau</em> Các bài mới hơn</a></span><?php endif;?>
 			</p>
 		</div><!--/content -->
 		<?=$sidebar?><!--/sidebar -->
