@@ -16,8 +16,8 @@
 			</ul>
 		</div>	
 	</div>
-	<form method="get" id="searchform" action="#">
-		<input value="Search..." name="s" id="s" onblur="if (this.value == '') {this.value = 'Search...';}" onfocus="if (this.value == 'Search...') { this.value = ''; }" type="text">
+	<form method="get" id="searchform" action="<?=base_url()?>index.php/blog/<?=$blogname?>/search">
+		<input value="Search..." name="keyword" id="s" onblur="if (this.value == '') {this.value = 'Search...';}" onfocus="if (this.value == 'Search...') { this.value = ''; }" type="text">
 		<input value="Tìm kiếm" id="searchsubmit" type="submit">
 	</form>
 </div>

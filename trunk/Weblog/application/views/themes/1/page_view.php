@@ -37,28 +37,11 @@
 	<div id="wrapper">
 		<?=$header?><!--/header -->
 		<div id="content">
-		<?php foreach ($posts as $post):?>
-			<div class="post hentry">
-				<h2 class="post-title"><a href="<?=base_url()?>index.php/blog/<?=$blogname?>/post/<?=$post['mabaiviet']?>" title="<?=$post['tuade']?>"><?=$post['tuade']?></a></h2>
-				<p class="post-date">
-				<?php $postdate = getdate(strtotime($post['ngaydang']))?>
-					<span class="day"><?=$postdate['mday']?></span> <span class="month">Tháng <?=$postdate['mon']?></span> <span class="year"><?=$postdate['year']?></span> 
-					<span class="postcomment"><a href="<?=base_url()?>index.php/blog/<?=$blogname?>/post/<?=$post['mabaiviet']?>#comment" title="Phản hồi cho <?=$post['tuade']?>">Để lại phản hồi</a></span>
-				</p>
-				<p class="post-data">
-					<span class="postcategory">in <a href="<?=base_url()?>index.php/blog/<?=$blogname?>/category/<?=$post['machuyenmuc']?>" title="Xem các bài viết trong <?=$post['tenchuyenmuc']?>"><?=$post['tenchuyenmuc']?></a></span>		
-				</p>
-				<p><?=$post['noidung']?></p>
-				<div class="sharedaddy"></div>		
-			</div><!--/post -->
-		<?php endforeach;?>
-			<p class="post-nav">
-				<?php if($prevpost):?><span class="previous"><a href="<?=base_url()?>index.php/blog/<?=$blogname?>/page/<?=$prevpost?>"><em>Trước</em> Các bài cũ hơn</a></span><?php endif;?> 
-				<?php if(isset($nextpost)):?><span class="next"><a href="<?=base_url()?>index.php/blog/<?=$blogname?>/page/<?=$nextpost?>"><em>Sau</em> Các bài mới hơn</a></span><?php endif;?>
-			</p>
+			<h2 class="post-title"><?=$page['tieude']?></h2>
+			<br/>
+			<p><?=$page['noidung']?></p>
 		</div><!--/content -->
 		<?=$sidebar?><!--/sidebar -->
 		<?=$footer?><!--/footer -->
-
 	</div><!--/wrapper -->
 </body></html>

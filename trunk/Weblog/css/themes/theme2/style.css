@@ -406,24 +406,18 @@ table tr td {
 	margin-left:131px;
 }
 
-.comments {
+#comment .comment-author{
 	color:#b79f87;
 	font-size:1.2em;
 }
 
-.comments a {
-	display:block;
-	padding:0 0 0 17px;
-	background:url(images/icon-comments.png) no-repeat 0 .4em;
+.comment .commententry{
+	font-size:1.3em;
 }
 
-.comments a:hover {
-	color:#453729;
-	text-decoration:none;
-}
-
-.comments span {
-	font-style:italic;
+.commentlist {
+	clear:both;
+	margin-bottom: 20px;
 }
 
 .tags {

@@ -520,13 +520,13 @@ a.more-link:hover {
 	background-position:left -215px;
 }
 
-#comments {
+#comment {
 	clear:both;
 	width:545px;
 	margin-left:107px;
 }
 
-#comments h3 {
+#comment h3 {
 	font:bold 1.6em/1em Georgia,  "Times New Roman",  Times,  serif;
 	padding:0;
 	margin:25px 0 15px;
@@ -535,12 +535,12 @@ a.more-link:hover {
 	text-shadow:0 1px 0 #f7e4c8;
 }
 
-#comments h3 em {
+#comment h3 em {
 	font-size:.9em;
 	text-shadow:none;
 }
 
-#comments h3 {
+#comment h3 {
 	border-bottom:4px double #483f32;
 	margin:35px 0 5px;
 	padding-bottom:10px;

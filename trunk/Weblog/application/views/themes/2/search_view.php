@@ -4,16 +4,20 @@
 <title><?=$persona['tieude']?></title>
 <link href="<?=base_url()?>css/themes/theme2/style.css" type="text/css" media="screen" rel="stylesheet">
 <link href="<?=base_url()?>css/poll.css" rel="stylesheet" type="text/css">
-<?php if($persona['anhnen']):?>
 <style>
+<?php if($persona['anhnen']):?>
 #header,#footer {
 	background-image: none;
 }
-</style>
 <?php endif;?>
+.highlight {
+	background-color: yellow;
+}
+</style>
 <!--[if lte IE 8]><script type="text/javascript" src="<?=base_url()?>js/excanvas.js"></script><![endif]-->
 <script src="<?=base_url()?>js/jquery.min.js" type="text/javascript"></script>
 <script src="<?=base_url()?>js/jquery.tagcanvas.min.js" type="text/javascript"></script>
+<script src="<?=base_url()?>js/jquery.highlight-3.yui.js" type="text/javascript"></script>
 <script type="text/javascript">
  $(document).ready(function() {
    if( ! $('#myCanvas').tagcanvas({
@@ -28,6 +32,7 @@
    })) {
      $('#myCanvasContainer').hide();
    }
+   <?php foreach ($keywords as $key):?>$('.post').highlight('<?=$key?>');<?php endforeach;?>
  });
 </script>
 </head>
@@ -35,27 +40,24 @@
 	<?=$header?><!--end header-->
 	<div class="content-background">
 		<div class="wrapper">
-			<div class="notice"></div><!--end notice-->
+			<div class="notice"><strong>Tìm thấy <?=$num_result?> kết quả cho từ khóa "<?=$keyword?>":</strong></div><!--end notice-->
 			<div id="content">	
 			<?php foreach ($posts as $post):?>		
 				<div class="post hentry">
 					<div class="post-header">
-						<div class="date"><?=$post['ngaydang']?></div>
-						<h2><a href="<?=base_url()?>index.php/blog/<?=$blogname?>/post/<?=$post['mabaiviet']?>" title="<?=$post['tuade']?>"><?=$post['tuade']?></a></h2>
-						<div class="author">in <a href="<?=base_url()?>index.php/blog/<?=$blogname?>/category/<?=$post['machuyenmuc']?>"><?=$post['tenchuyenmuc']?></a></div>
+						<h2 style="margin: 0"><a href="<?=base_url()?>index.php/blog/<?=$blogname?>/post/<?=$post['mabaiviet']?>" title="<?=$post['tuade']?>"><?=$post['tuade']?></a></h2>
 					</div><!--end post header-->
-					<div class="entry clear">
+					<div class="entry clear" style="margin: 0">
 						<p><?=$post['noidung']?></p>
 						<div class="sharedaddy"></div>							
 					</div><!--end entry-->
-					<div class="post-footer">
-						<div class="comments"><a href="<?=base_url()?>index.php/blog/<?=$blogname?>/post/<?=$post['mabaiviet']?>#comment" title="Phản hồi cho <?=$post['tuade']?>">Để lại phản hồi</a></div>
+					<div class="post-footer">			
 					</div><!--end post footer-->
 				</div><!--end post-->
 			<?php endforeach;?>
 				<div class="navigation index">
-					<?php if($prevpost):?><div class="alignleft"><a href="<?=base_url()?>index.php/blog/<?=$blogname?>/page/<?=$prevpost?>">«  Bài viết cũ</a></div><?php endif;?>
-					<?php if(isset($nextpost)):?><div class="alignright"><a href="<?=base_url()?>index.php/blog/<?=$blogname?>/page/<?=$nextpost?>">Bài viết mới »</a></div><?php endif;?>
+					<?php if($prevpage):?><div class="alignleft"><a href="<?=base_url()?>index.php/blog/<?=$blogname?>/search?keyword=<?=$keyword?>&page=<?=$prevpage?>">«  Các kết quả cũ hơn</a></div><?php endif;?>
+					<?php if(isset($nextpage)):?><div class="alignright"><a href="<?=base_url()?>index.php/blog/<?=$blogname?>/search?keyword=<?=$keyword?>&page=<?=$nextpage?>">Các kết quả mới hơn »</a></div><?php endif;?>
 				</div><!--end navigation-->
 			</div><!--end content-->
 			<?=$sidebar?><!--end sidebar--></div><!--end wrapper-->
