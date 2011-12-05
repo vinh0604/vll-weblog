@@ -229,7 +229,7 @@ $(document).ready(function(){
             <div class="widget-box" id="w-views">
                 <h3 class="widget-title">Số lượt xem</h3>
                 <div class="widget-body" id="flot-views">
-                	<div style="width: 350px; height: 200px" id="placeholder">
+                	<div style="width: 95%; height: 200px" id="placeholder">
                 	</div>
                 </div>
             </div>
