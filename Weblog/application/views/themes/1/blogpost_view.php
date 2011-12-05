@@ -70,8 +70,8 @@
 				</p>			
 			</div><!--/post -->
 			<p class="post-nav">
-				<?php if($prevpost):?><span class="previous"><a href="<?=base_url()?>index.php/blog/<?=$blogname?>/post/<?=$prevpost?>"><em>Trước</em> Bài viết trước</a></span><?php endif;?> 
-				<?php if($nextpost):?><span class="next"><a href="<?=base_url()?>index.php/blog/<?=$blogname?>/post/<?=$nextpost?>"><em>Sau</em> Bài viết sau</a></span><?php endif;?>
+				<?php if($prevpost):?><span class="previous"><a href="<?=base_url()?>index.php/blog/<?=$blogname?>/post/<?=$prevpost?>"><em>Trước</em> Bài viết trước</a></span><?php endif;?> 
+				<?php if($nextpost):?><span class="next"><a href="<?=base_url()?>index.php/blog/<?=$blogname?>/post/<?=$nextpost?>"><em>Sau</em> Bài viết sau</a></span><?php endif;?>
 			</p>
 			<div id="comment"><h3><?=count($comments)?> phản hồi</h3><?=$comment?></div>
 		</div><!--/content -->
