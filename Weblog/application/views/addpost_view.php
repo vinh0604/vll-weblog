@@ -12,6 +12,15 @@
 <script type="text/javascript" src="<?=base_url()?>js/jquery.min.js"></script>
 <script type="text/javascript" src="<?=base_url()?>js/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="<?=base_url()?>ckfinder/ckfinder.js"></script>
+<script type="text/javascript">
+function presubmit(){
+	$('#prtitle').val($('#title').val());
+	$('#prcontent').val(CKEDITOR.instances.editor1.getData());
+	$('#prcat_name').val($('#category option:checked').text());
+	$('#prcat_id').val($('#category option:checked').val());
+	$('#prtags').val($('#tag').val());
+}
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 <body>
 <?=$bar?>
@@ -23,7 +32,7 @@
 
 <div id="content">
 	<div id="content-head">
-    	<h1>Blog Title</h1>
+    	<h1><?php echo $_SESSION['tieude']; ?></h1>
     </div>
     <div id="content-body">
 
@@ -91,7 +100,7 @@
 						</div>
 						<div class="widget-body">
 							<input type="submit" class="a-button" name="dang_bai" style="background-color:#CCCCCC; font-size:15px" value="Đăng bài">
-							<input type="submit" class="a-button" name="xem_truoc" style="background-color:#CCCCCC; font-size:15px" value="Xem trước">
+							<input type="button" class="a-button" name="xem_truoc" style="background-color:#CCCCCC; font-size:15px" value="Xem trước" onclick="presubmit();document.prform.target='_blank';document.prform.submit()">
 							<input type="submit" class="a-button" name="luu_nhap" style="background-color:#CCCCCC; font-size:15px" value="Lưu nháp">
 						</div>
 					</div>
@@ -101,7 +110,7 @@
 							<h3>Categories</h3>
 						</div>
 						<div class="widget-body">
-							<select name="category" style="margin-bottom:10px; height:25px; font-size:16px">
+							<select id="category" name="category" style="margin-bottom:10px; height:25px; font-size:16px">
 								<?php
 									foreach($chuyenmuc as $cat):
 										echo "<option value='$cat[machuyenmuc]'>".$cat['tenchuyenmuc']."</option>";
@@ -116,7 +125,7 @@
 							<h3>Tags</h3>
 						</div>
 						<div class="widget-body">
-							<input type="text" size="40px" style="height:30px; background:#CCCCCC" name="tag">
+							<input type="text" size="40px" style="height:30px; background:#CCCCCC" id="tag" name="tag">
 							<!--<input type="button" class="a-button" name="them_tag"  value="&nbsp;Thêm&nbsp;" style="margin-top:5px">-->
 						</div>
 					</div>
@@ -125,6 +134,13 @@
 			
 		</table>
 	</form>
+    <form method="post" name="prform" action="<?=base_url()?>index.php/blog/<?=$_SESSION['tendangnhap']?>/previewpost">
+    <input type="hidden" id="prtitle" name="title" value="" />
+    <input type="hidden" id="prcontent" name="content" value="" />
+    <input type="hidden" id="prcat_id" name="cat_id" value="" />
+    <input type="hidden" id="prcat_name" name="cat_name" value="" />
+    <input type="hidden" id="prtags" name="tags" value="" />
+    </form>
     </div>
 </div>
 </div>
