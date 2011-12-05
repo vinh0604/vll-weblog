@@ -32,8 +32,8 @@
 		
 		function deleteLink($mataikhoan, $malienkiet)
 		{
-			$qr = "delete from lienket where MATAIKHOAN = $mataikhoan and MALIENKET = $malienkiet";
-			return $this->db->query($qr);	
+			$qr = "delete from lienket where MATAIKHOAN = ? and MALIENKET = ?";
+			return $this->db->query($qr, array($mataikhoan, $malienkiet));	
 		}
 			
 	}
