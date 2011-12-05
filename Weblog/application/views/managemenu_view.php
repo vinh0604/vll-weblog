@@ -30,6 +30,18 @@
 		}, function(){
 			$(this).attr('src','<?=base_url()?>images/trash.png');
 		});
+		$('td[loai=trangthai]').live('click', function(){
+			var id = $(this).attr('id');
+			$.ajax({
+				url : '<?=base_url()?>index.php/menu/ajaxmenu',
+				type : 'post',
+				data :{mamenu : id},
+				cache : false,
+				success: function(data){
+					$('.right').html(data);	
+				}					
+			});	
+		});
 	})
 </script>
 </head>
@@ -59,10 +71,10 @@
                             </tr>
                         </thead>
                         <tbody>
-    						<? foreach ($listmenu as $menu):?>
+    						<?php foreach ($listmenu as $menu):?>
                             <tr class="gradeU">
                                 <td class="center"><?=$menu['TENMENU']?></td>
-                                <td class="center"><?=$menu['TRANGTHAI']?></td>
+                                <td class="center" loai="trangthai" id="<?=$menu['MAMENU']?>"><?php if($menu['TRANGTHAI'] == 0) echo 'Ẩn'; else echo 'Hiện';?></td>
                                 <td class="center">
                                 	<form method="post" action="<?=base_url()?>index.php/menu/deletemenu">
                                     <a href="<?=base_url()?>index.php/menu/editmenu/<?=$menu['MAMENU']?>" title="Sửa Chuyên Mục"><img class="editBtn" src="<?=base_url()?>images/edit.png" height="32" width="32"></a>
@@ -70,7 +82,7 @@
                                     </form>
                                 </td>
                             </tr>    
-                            <? endforeach;?>                
+                            <?php endforeach;?>                
                            
                         </tbody>
                     </table>
