@@ -61,7 +61,7 @@ $(document).ready(function(){
 </script>
 <div id="content">
 	<div id="content-head">
-    	<h1>Blog Title</h1>
+    	<h1><?=$_SESSION['tieude']?></h1>
     </div>
     <div id="content-body">
     	<h2 class="title">Tùy Chỉnh Header</h2>

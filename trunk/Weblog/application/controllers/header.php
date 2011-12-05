@@ -25,7 +25,7 @@ class Header extends CI_Controller {
 		if($this->util->checkLogin()==false) {
 			return;
 		}
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		$data['bar'] = $this->load->view('bar_view',null,true);
 		$data['sidemenu'] = $this->load->view('sidemenu_view',null,true);
 		
@@ -44,7 +44,7 @@ class Header extends CI_Controller {
 		if($this->util->checkLogin()==false) {
 			return;
 		}
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		
 		$this->util->connect();
 		$this->load->model('Header_model');
@@ -66,10 +66,10 @@ class Header extends CI_Controller {
 		if($this->util->checkLogin()==false) {
 			return;
 		}
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		
 		$config['upload_path'] = './images/temporary';
-		$config['allowed_types'] = 'gif|jpg|png|jpge';
+		$config['allowed_types'] = 'gif|jpg|png|jpeg';
 		$config['max_size']	= '1024';
 		$config['overwrite']  = TRUE;
 		$config['file_name'] = 'nenheader'.$mataikhoan;
@@ -104,7 +104,7 @@ class Header extends CI_Controller {
 		if($this->util->checkLogin()==false) {
 			return;
 		}
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		
 		$persona['tieude'] = $this->input->post('tieude');
 		$persona['mota'] = $this->input->post('mota');
@@ -135,7 +135,7 @@ class Header extends CI_Controller {
 		if($this->util->checkLogin()==false) {
 			return;
 		}
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		
 		$this->util->connect();
 		$this->load->model('Header_model');

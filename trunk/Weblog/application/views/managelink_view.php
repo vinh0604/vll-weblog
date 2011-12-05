@@ -57,6 +57,9 @@
 <?=$bar?>
 <div id="main-content">
 <?=$sidemenu?>
+<script type="text/javascript">
+	$('#sidemenu #link').addClass('current-top');
+</script>
 <div id="content">
 	<div id="content-head">
     	<h1>Blog Title</h1>
@@ -75,7 +78,7 @@
                         <tbody>
 							<?php foreach($links as $link):?>
                             <tr class="gradeU">
-                                <td class="center"><?=$link['TENLINK']?></td>       
+                                <td class="center"><?=$link['TENLIENKET']?></td>       
                                 <td class="center"><?=$link['DUONGDAN']?></td>
                                 <td class="center">
                                 <form action="<?=base_url()?>index.php/link/delete" method="post">

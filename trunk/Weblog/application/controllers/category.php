@@ -11,7 +11,7 @@ class Category extends CI_Controller {
 			return;
 		}
 		
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		$data['bar'] = $this->load->view('bar_view',null,true);
 		$data['sidemenu'] = $this->load->view('sidemenu_view',null,true);
 		
@@ -32,7 +32,7 @@ class Category extends CI_Controller {
 			return;
 		}
 		
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		$this->util->connect();
 		$this->load->model('Category_model');
 		
@@ -53,7 +53,7 @@ class Category extends CI_Controller {
 			return;
 		}
 		
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		$this->util->connect();
 		$this->load->model('Category_model');
 		
@@ -73,7 +73,7 @@ class Category extends CI_Controller {
 			return;
 		}
 		
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		$this->util->connect();
 		$this->load->model('Category_model');
 		
@@ -92,7 +92,7 @@ class Category extends CI_Controller {
 			return;
 		}
 		
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		$this->util->connect();
 		$this->load->model('Category_model');
 		
@@ -113,7 +113,7 @@ class Category extends CI_Controller {
 			return;
 		}
 		
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		$this->util->connect();
 		$this->load->model('Category_model');
 		

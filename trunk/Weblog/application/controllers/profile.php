@@ -11,7 +11,7 @@ class Profile extends CI_Controller {
 			return;
 		}
 		
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		
 		$this->util->connect();
 		$this->load->model('Profile_model');
@@ -35,7 +35,7 @@ class Profile extends CI_Controller {
 			return;
 		}
 		
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		
 		$this->util->connect();
 		$this->load->model('Profile_model');

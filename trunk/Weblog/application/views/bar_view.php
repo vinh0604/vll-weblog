@@ -3,11 +3,11 @@
 		<ul>
 			<li id="wp-admin-bar-blog" class="menupop">
 				<a href="/">
-				<span>Blog Title</span>
+				<span><?=$_SESSION['tieude']?></span>
 				</a>
 				<ul>
 					<li class="">
-						<a href="#">Visit my blog</a>
+						<a href="<?=base_url()?>index.php/blog/<?=$_SESSION['tendangnhap']?>">Visit my blog</a>
 					</li>
 					<li class="menu-item-random-post blog-member">
 						<a href="<?=base_url()?>index.php/logout">Log out</a>

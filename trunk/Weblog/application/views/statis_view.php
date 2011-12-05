@@ -24,9 +24,6 @@
 <script>
 $(document).ready(function(){
 	//flot
-	var data = [[0, 3], [4, 8], [8, 5], [9, 13]];
-	var option = {series : { bars : { show : true, barWidth: 5, align: "center"}} };
-	$.plot($("#flot-views"), data, option);
 	//ckeditor
 	var editor = CKEDITOR.replace( 'noidung', { enterMode: 2, shiftEnterMode: 2,extraPlugins : 'uicolor',
 								uiColor: '#CCCCCC',
@@ -101,9 +98,12 @@ $(document).ready(function(){
 <?=$bar?>
 <div id="main-content">
 <?=$sidemenu?>
+<script type="text/javascript">
+	$('#sidemenu #home').addClass('current-top');
+</script>
 <div id="content">
 	<div id="content-head">
-    	<h1>Blog Title</h1>
+    	<h1><?=$_SESSION['tieude']?></h1>
     </div>
     <div id="content-body">
     	<h2 class="title">Thống Kê</h2>
@@ -119,12 +119,12 @@ $(document).ready(function(){
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><span><?=$post?></span>&nbsp;<a href="<?=base_url()?>index.php/">Bài Viết</a><br/></td>
-                                    <td><span><?=$comment?></span>&nbsp;<a href="<?=base_url()?>index.php/">Phản hồi</a><br/></td>
+                                    <td><span><?=$post?></span>&nbsp;<a href="<?=base_url()?>index.php/post">Bài Viết</a><br/></td>
+                                    <td><span><?=$comment?></span>&nbsp;<a href="<?=base_url()?>index.php/comment">Phản hồi</a><br/></td>
                                 </tr>
                                 <tr>
                                     <td> <span><?=$page?></span>&nbsp;<a href="<?=base_url()?>index.php/page">Trang</a><br/></td>
-                                    <td><span><?=$draft?></span>&nbsp;<a href="<?=base_url()?>index.php/">Bản Nháp</a><br/></td>
+                                    <td><span><?=$draft?></span>&nbsp;<a href="<?=base_url()?>index.php/post">Bản Nháp</a><br/></td>
                                 </tr>
                                 <tr>
                                     <td> <span><?=$category?></span>&nbsp;<a href="<?=base_url()?>index.php/category">Chuyên Mục</a><br/></td>
@@ -162,7 +162,7 @@ $(document).ready(function(){
                     	<ul>
                         	<?php foreach($phanhois as $phanhoi):?>
                         	<li style="margin-left:10px;">
-                            	<h4>Bởi <?=$phanhoi['hoten']?> trong bài viết <a href="<?=base_url?>index.php/comment"><?=$phanhoi['tuade']?></a> vào ngày <?=$phanhoi['ngay']?> tháng <?=$phanhoi['thang']?> năm <?=$phanhoi['nam']?></h4>
+                            	<h4>Bởi <?=$phanhoi['hoten']?> trong bài viết <a href="<?=base_url()?>index.php/blog/<?=$_SESSION['tendangnhap']?>/post/<?=$phanhoi['mabaiviet']?>#comment"><?=$phanhoi['tuade']?></a> vào ngày <?=$phanhoi['ngay']?> tháng <?=$phanhoi['thang']?> năm <?=$phanhoi['nam']?></h4>
                                 <p><?=$phanhoi['noidung']?></p>
                             </li>
                             <?php endforeach;?>

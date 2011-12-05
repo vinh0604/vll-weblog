@@ -37,9 +37,13 @@
 <?=$bar?>
 <div id="main-content">
 <?=$sidemenu?>
+<script type="text/javascript">
+	$('#sidemenu #setting').addClass('current-top');
+	$('#setting-info').addClass('current');
+</script>
 <div id="content">
 	<div id="content-head">
-    	<h1>Blog Title</h1>
+    	<h1><?=$_SESSION['tieude']?></h1>
     </div>
     <div id="content-body">
 	<h2 class="title">Thông Tin Cá Nhân <input name="insert" type="button" id="insert" class="a-button" value="Thay Đổi"></h2>
