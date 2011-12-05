@@ -66,7 +66,7 @@
 							<strong><?=$post['luotlthich']?> người thích bài viết này!</strong>
 						<?php endif;?>
 						</div>
-						<div class="author" style="margin-left: 0px">Thẻ: <?php foreach ($posttags as $posttag):?><a href="<?base_url()?>index.php/blog/<?=$blogname?>/search?tag=<?=$posttag['tentag']?>" title="<?=$posttag['mota']?>"><?=$posttag['tentag']?></a> <?php endforeach;?></div>
+						<div class="author" style="margin-left: 0px">Thẻ: <?php foreach ($posttags as $posttag):?><a href="<?=base_url()?>index.php/blog/<?=$blogname?>/search?tag=<?=$posttag['tentag']?>" title="<?=$posttag['mota']?>"><?=$posttag['tentag']?></a> <?php endforeach;?></div>
 					</div><!--end post footer-->
 				</div><!--end post-->
 				<div id="comment">

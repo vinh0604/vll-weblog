@@ -316,13 +316,19 @@ class Blog extends CI_Controller {
 		$data['footer'] = $this->load->view($giaodien.'/blogfooter_view',$data,true);
 		$data['sidebar'] = $this->load->view($giaodien.'/blogsidebar_view',$data,true);
 		$todate = getdate();
-		$post['ngaydang'] = $todate['year'].'-'.$todate['mon'].'-'.$todate['day'];
+		$post['ngaydang'] = $todate['year'].'-'.$todate['mon'].'-'.$todate['mday'];
 		$post['tuade'] = $this->input->post('title');
 		$post['noidung'] = $this->input->post('content');
 		$post['machuyenmuc'] = $this->input->post('cat_id');
 		$post['tenchuyenmuc'] = $this->input->post('cat_name');		
 		$data['post'] = $post;
-		$data['posttags'] = $this->input->post('tags');
+		$strTag = preg_replace('/ +/', '', $this->input->post('tags'));
+		$posttags = preg_split('/,/', $strTag);
+		foreach ($posttags as $tag)
+		{
+			$posttag['tentag'] = $tag;
+			$data['posttags'][] = $posttag;
+		} 
 		$data['comment'] = $this->load->view('themes/postcomment_view',$data,true);
 		$this->load->view($giaodien.'/blogpost_view',$data);
 	}
