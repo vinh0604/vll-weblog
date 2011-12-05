@@ -9,7 +9,7 @@
 	<div id="nav">
 		<div class="menu-helo-container">
 			<ul class="menu">
-				<li class="menu-item"><a href="<?=base_url()?>index.php/blog/<?=$blogname?>">Trang chủ</a></li>
+				<li class="menu-item"><a href="<?=base_url()?>index.php/blog/<?=$blogname?>">Trang chủ</a></li>
 				<?php foreach ($menu as $item):?>
 				<li class="menu-item"><a href="<?=$item['lienket']?>"><?=$item['tenitem']?></a></li>
 				<?php endforeach;?>

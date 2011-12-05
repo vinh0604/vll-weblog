@@ -84,6 +84,9 @@ class Blog extends CI_Controller {
 			case 'category':
 				$this->category($mataikhoan,$params[1]);
 				break;
+			case 'preview':
+				$this->preview($mataikhoan,$params[1]);
+				break;
 			default:
 				show_404();
 		}
@@ -281,6 +284,44 @@ class Blog extends CI_Controller {
 			$luotthich = $this->Blog_model->getLuotthich($mabaiviet);
 			echo "<strong>$luotthich người thích bài viết này!</strong>";
 		}
+	}
+	public function preview($mataikhoan, $magiaodien)
+	{
+		$data = $this->loadcomponent($mataikhoan);
+		$persona = $data['persona'];
+		$giaodien = 'themes/'.$magiaodien;
+		$data['header'] = $this->load->view($giaodien.'/blogheader_view',$data,true);
+		$data['footer'] = $this->load->view($giaodien.'/blogfooter_view',$data,true);
+		$data['sidebar'] = $this->load->view($giaodien.'/blogsidebar_view',$data,true);
+		$sodong = intval($persona['sodong']);
+		$sobai = intval($persona['sobai']);	
+		$tongsobai = $this->Blog_model->getTongsobai($mataikhoan);
+		if($sobai<$tongsobai)
+		{
+			$data['prevpost'] = 1;
+		}
+		$data['posts'] = $this->Blog_model->getBaiviets($mataikhoan,0,$sobai);
+		$this->load->view($giaodien.'/blog_view',$data);
+	}
+	public function previewpost($mataikhoan)
+	{
+		$data = $this->loadcomponent($mataikhoan);
+		$persona = $data['persona'];
+		$magiaodien = $persona['magiaodien'];
+		$giaodien = 'themes/'.$magiaodien;
+		$data['header'] = $this->load->view($giaodien.'/blogheader_view',$data,true);
+		$data['footer'] = $this->load->view($giaodien.'/blogfooter_view',$data,true);
+		$data['sidebar'] = $this->load->view($giaodien.'/blogsidebar_view',$data,true);
+		$todate = getdate();
+		$post['ngaydang'] = $todate['year'].'-'.$todate['mon'].'-'.$todate['day'];
+		$post['tuade'] = $this->input->post('title');
+		$post['noidung'] = $this->input->post('content');
+		$post['machuyenmuc'] = $this->input->post('cat_id');
+		$post['tenchuyenmuc'] = $this->input->post('cat_name');		
+		$data['post'] = $post;
+		$data['posttags'] = $this->input->post('tags');
+		$data['comment'] = $this->load->view('themes/postcomment_view',$data,true);
+		$this->load->view($giaodien.'/blogpost_view',$data);
 	}
 	private function loadcomponent($mataikhoan)
 	{

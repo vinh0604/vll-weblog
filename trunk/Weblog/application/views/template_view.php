@@ -51,7 +51,7 @@
 						<img class="tpl-image" src="<?=base_url()?>images/themes/<?=$giaodien['THUMBNAIL']?>" width="250" height="100%"/>
                 	</div>
                     <div class="footer-left">
-                        <input type="button" class="widget-button" value="Xem Thử" onclick="window.location = '<?=base_url()?>index.php/template';"/>
+                        <input type="button" class="widget-button" value="Xem Thử" onclick="window.location = '<?=base_url()?>index.php/blog/<?=$_SESSION['tendangnhap']?>/preview/<?=$giaodien['MAGIAODIEN']?>';"/>
                     </div>
                     <div class="footer-right">
                     <form action="<?=base_url()?>index.php/template/activate" method="post">
