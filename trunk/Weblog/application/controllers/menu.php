@@ -149,4 +149,24 @@ class Menu extends CI_Controller {
 		redirect(base_url().'index.php/menu');
 	}
 	
+	public function ajaxmenu()
+	{
+		session_start();
+		$this->load->library('util');
+		
+		if($this->util->checkLogin()==false) {
+			return;
+		}
+		$mataikhoan = 1;
+		$this->util->connect();		
+		$this->load->model('Menu_model');
+		
+		$mamenu = $this->input->post('mamenu');
+		$this->Menu_model->updateStatusMenus($mataikhoan);
+		$this->Menu_model->updateStatus($mataikhoan, $mamenu);
+		
+		$data['listmenu'] = $this->Menu_model->getListMenu($mataikhoan);
+		$this->load->view('ajax/ajax.managermenu.php', $data);
+	}
+	
 }
