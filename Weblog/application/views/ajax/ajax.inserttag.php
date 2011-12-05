@@ -1,8 +1,9 @@
 <h3 class="widget-title">Thêm Thẻ</h3>
 <div id="wrapper-Them">
     <h4 class="title">Tên Thẻ:</h4>
-    <div align="right" >
+    <div>
             <input type="text" id="TagName" name="TagName" placeholder="Nhập Tên Thẻ..."/>
+            <span class="thongbao"></span>
     </div>
     <h4 class="title">Mô Tả:</h4>
     <div align="right">

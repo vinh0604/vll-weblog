@@ -2,8 +2,9 @@
 <div id="wrapper-Them">
     <h4 class="title">Tên Thẻ:</h4>
     <?php foreach($tags as $tag):?>
-    <div align="right" >
+    <div >
             <input type="text" id="TagName" matag=<?=$tag['MATAG']?> name="TagName" placeholder="Nhập Tên Thẻ..." value="<?=$tag['TENTAG']?>"/>
+            <span class="thongbao"></span>
     </div>
     <h4 class="title">Mô Tả:</h4>
     <div align="right">
