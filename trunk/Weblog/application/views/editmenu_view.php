@@ -21,6 +21,7 @@
 <script type="text/javascript" src="<?=base_url()?>js/jquery.min.js"></script>
 <script type="text/javascript">
 //////////////////////Them item vào mảng và hiển thị item vào danh sách///////////////////////////////////////
+	var item_ar = [<?=$mang?>];
 	var item_arr = [];
 	var item_del = [];
 	
@@ -29,6 +30,10 @@
 		var kt = true;
 		$.each(item_arr, function(index, value){
 					if(item_arr[index]['tenitem'] == r_item['tenitem'] && item_arr[index]['loai'] == r_item['loai'] && String(item_arr[index]['thongtin']) == String(r_item['thongtin']) )	
+						kt = false;
+		});	
+		$.each(item_ar, function(index, value){
+					if(item_ar[index]['tenitem'] == r_item['tenitem'] && item_ar[index]['loai'] == r_item['loai'] && String(item_ar[index]['thongtin']) == String(r_item['thongtin']) )	
 						kt = false;
 		});	
 		return kt;
@@ -86,13 +91,13 @@
 	
 	function addPage(e){
 		$('.thongbao').text("");
-		if( $('#trang').val() != '-1')
+		if($('#trang').val() != '-1')
 		{
-			var item = {'tenitem':$('#trang: selected').text(), 'loai': 'trang', 'thongtin_ma':$('#trang').val(), 'thongtin': null };
+			var item = {'tenitem':$('#trang :selected').text(), 'loai': 'trang', 'thongtin_ma':$('#trang').val(), 'thongtin': null };
 			if(checkItem(item)==false)
 				$('#trang').next().text("Đã có Item này trong danh sách");
 			else
-			{
+			{	
 				item_arr.push(item);
 				$('#listitem').append("<div class=\"widget-box\" style=\"height:25px\" loai=\"trang\" tenitem=\""+ $('#trang :selected').text()+"\" thongtin_ma = \""+$('#trang').val()+"\" thongtin=\""+null+"\"> <span>" + $('#trang :selected').text()+ "</span><img src=\"<?=base_url()?>images/delete.png\" loai=\"trang\" tenitem=\""+ $('#trang :selected').text()+"\" thongtin_ma = \""+$('#trang').val()+"\" thongtin=\""+null+"\" align=\"right\" class = \"xoa\" /></div>");
 				$('#trang').val('-1');
@@ -100,7 +105,7 @@
 		}
 		else
 		{
-			$('#trang').next().text("Chưa chọn trang");
+			$('#trang').next().text("Chưa chọn page");
 		}
 		$('.thongbao').show();
 		$('.thongbao').fadeOut(2000);
@@ -150,7 +155,6 @@
 			$("div[tenitem=\""+tenitem+"\"][loai=\""+loai+"\"][thongtin_ma=\""+thongtin_ma+"\"][thongtin=\""+thongtin+"\"]").remove();
 		});
 		
-		$('.')
 	});
 ////////////////////////////////////////////////////////////////////////////////
 
