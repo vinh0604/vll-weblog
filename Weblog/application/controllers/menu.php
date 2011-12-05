@@ -96,7 +96,15 @@ class Menu extends CI_Controller {
 		$data['catagorys'] = $this->Menu_model->getCategorys($mataikhoan);
 		$data['pages'] = $this->Menu_model->getPages($mataikhoan);
 		$data['imenu'] = $this->Menu_model->getMenu($mataikhoan, $mamenu);
-		$data['items'] = $this->Menu_model->getItems($mamenu);		
+		$data['items'] = $this->Menu_model->getItems($mamenu);
+		$items = $this->Menu_model->getItems($mamenu);
+		$mang = '';
+		foreach($items as $item):
+			if($item['THONGTIN_LK'] == '')
+				$value = 'null';
+			$mang .= "{'tenitem':'".$item['TENITEM']."', 'loai':'".$item['LOAIITEM']."','thongtin_ma':'".$item['MAITEM']."','thongtin':'".$value."'},";
+		endforeach;
+		$data['mang']=$mang;
 		
 		$this->load->view('editmenu_view', $data);
 	}
