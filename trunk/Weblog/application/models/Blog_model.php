@@ -82,13 +82,13 @@ class Blog_model extends CI_Model {
     
 	function getTongsobai($mataikhoan)
     {
-    	$sql = "select count(*) as tongso from baiviet where mataikhoan=? and trangthai!=0";
+    	$sql = "select count(*) as tongso from baiviet where mataikhoan=? and trangthai!=2";
     	return $this->db->query($sql,array($mataikhoan))->row(0)->tongso;
     }
     
 	function getBaiviets($mataikhoan,$offset,$limit)
     {
-    	$sql = "select mabaiviet,tuade,noidung,DATE_FORMAT(ngaydang,'%Y-%m-%e') as ngaydang,b.machuyenmuc,tenchuyenmuc from baiviet b,chuyenmuc c where b.mataikhoan=? and b.machuyenmuc=c.machuyenmuc and trangthai!=0 order by b.ngaydang desc limit ?,?";
+    	$sql = "select mabaiviet,tuade,noidung,DATE_FORMAT(ngaydang,'%Y-%m-%e') as ngaydang,b.machuyenmuc,tenchuyenmuc from baiviet b,chuyenmuc c where b.mataikhoan=? and b.machuyenmuc=c.machuyenmuc and trangthai!=2 order by b.ngaydang desc limit ?,?";
     	return $this->db->query($sql,array($mataikhoan,$offset,$limit))->result_array();
     }
 	
@@ -122,21 +122,21 @@ class Blog_model extends CI_Model {
     
     function getBaiviet($mataikhoan,$mabaiviet)
     {
-    	$sql = "select mabaiviet,tuade,noidung,DATE_FORMAT(ngaydang,'%Y-%m-%e') as ngaydang,luotlthich,b.machuyenmuc,tenchuyenmuc from baiviet b,chuyenmuc c where b.mataikhoan=? and b.machuyenmuc=c.machuyenmuc and mabaiviet=? and trangthai!=0";
+    	$sql = "select mabaiviet,tuade,noidung,DATE_FORMAT(ngaydang,'%Y-%m-%e') as ngaydang,luotlthich,b.machuyenmuc,tenchuyenmuc from baiviet b,chuyenmuc c where b.mataikhoan=? and b.machuyenmuc=c.machuyenmuc and mabaiviet=? and trangthai!=2";
     	$query = $this->db->query($sql,array($mataikhoan,$mabaiviet));
     	return $query->num_rows()==0 ? null : $query->row_array(0);
     }
     
     function getBaitruoc($mataikhoan,$date)
     {
-    	$sql = "select mabaiviet from baiviet where mataikhoan=? and ngaydang<? limit 1";
+    	$sql = "select mabaiviet from baiviet where mataikhoan=? and ngaydang<? and trangthai!=2 limit 1";
     	$query = $this->db->query($sql,array($mataikhoan,$date));
     	return $query->num_rows()==0 ? null : $query->row(0)->mabaiviet;
     }
     
 	function getBaisau($mataikhoan,$date)
     {
-    	$sql = "select mabaiviet from baiviet where mataikhoan=? and ngaydang>? limit 1";
+    	$sql = "select mabaiviet from baiviet where mataikhoan=? and ngaydang>? and trangthai!=2 limit 1";
     	$query = $this->db->query($sql,array($mataikhoan,$date));
     	return $query->num_rows()==0 ? null : $query->row(0)->mabaiviet;
     }
@@ -234,19 +234,19 @@ class Blog_model extends CI_Model {
     
     function getBaivietsByTag($mataikhoan,$tag)
     {
-    	$sql = "select b.mabaiviet,tuade,DATE_FORMAT(ngaydang,'%Y-%m-%e') as ngaydang,b.machuyenmuc,tenchuyenmuc from baiviet b,chuyenmuc c,tag t,tag_baiviet tb where b.mataikhoan=? and b.machuyenmuc=c.machuyenmuc and t.matag=tb.matag and tb.mabaiviet=b.mabaiviet and tentag=? and trangthai!=0 order by b.ngaydang desc";
+    	$sql = "select b.mabaiviet,tuade,DATE_FORMAT(ngaydang,'%Y-%m-%e') as ngaydang,b.machuyenmuc,tenchuyenmuc from baiviet b,chuyenmuc c,tag t,tag_baiviet tb where b.mataikhoan=? and b.machuyenmuc=c.machuyenmuc and t.matag=tb.matag and tb.mabaiviet=b.mabaiviet and tentag=? and trangthai!=2 order by b.ngaydang desc";
     	return $this->db->query($sql,array($mataikhoan,$tag))->result_array();
     }
     
 	function getBaivietsByCat($mataikhoan,$machuyenmuc)
     {
-    	$sql = "select mabaiviet,tuade,DATE_FORMAT(ngaydang,'%Y-%m-%e') as ngaydang,b.machuyenmuc,tenchuyenmuc from baiviet b,chuyenmuc c where b.mataikhoan=? and b.machuyenmuc=c.machuyenmuc and c.machuyenmuc=? and trangthai!=0 order by b.ngaydang desc";
+    	$sql = "select mabaiviet,tuade,DATE_FORMAT(ngaydang,'%Y-%m-%e') as ngaydang,b.machuyenmuc,tenchuyenmuc from baiviet b,chuyenmuc c where b.mataikhoan=? and b.machuyenmuc=c.machuyenmuc and c.machuyenmuc=? and trangthai!=2 order by b.ngaydang desc";
     	return $this->db->query($sql,array($mataikhoan,$machuyenmuc))->result_array();
     }
     
     function getBaivietsByDate($mataikhoan,$year,$month,$day)
     {
-    	$sql = "select mabaiviet,tuade,DATE_FORMAT(ngaydang,'%Y-%m-%e') as ngaydang,b.machuyenmuc,tenchuyenmuc from baiviet b,chuyenmuc c where b.mataikhoan=? and b.machuyenmuc=c.machuyenmuc and YEAR(ngaydang)=? and MONTH(ngaydang)=? and DAY(ngaydang)=? and trangthai!=0 order by b.ngaydang desc";
+    	$sql = "select mabaiviet,tuade,DATE_FORMAT(ngaydang,'%Y-%m-%e') as ngaydang,b.machuyenmuc,tenchuyenmuc from baiviet b,chuyenmuc c where b.mataikhoan=? and b.machuyenmuc=c.machuyenmuc and YEAR(ngaydang)=? and MONTH(ngaydang)=? and DAY(ngaydang)=? and trangthai!=2 order by b.ngaydang desc";
     	return $this->db->query($sql,array($mataikhoan,$year,$month,$day))->result_array();
     }
     
