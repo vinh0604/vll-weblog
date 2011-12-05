@@ -11,7 +11,7 @@ class Poll_model extends CI_Model {
     	//$this->load->database();
     	$sql = "select bc.mabinhchon, cauhoi, DATE_FORMAT(ngaytao,'%e/%m/%Y') as ngaytao, trangthai, sum(soluotchon) as luottraloi ".
     		   "from binhchon bc left join dapan da ".
-    		   "on bc.mabinhchon=da.mabinhchon and mataikhoan=$mataikhoan ".
+    		   "on bc.mabinhchon=da.mabinhchon where mataikhoan=$mataikhoan ".
     		   "group by bc.mabinhchon, cauhoi, ngaytao, trangthai";
     	return $this->db->query($sql)->result_array();
     }

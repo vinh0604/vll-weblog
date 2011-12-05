@@ -13,12 +13,12 @@ class Comment_model extends CI_Model {
     	return $this->db->query($sql)->result_array();
     }
 	
-    function getBinhluan() {
+    function getBinhluan($mataikhoan) {
     	//$this->load->database();
     	$sql = "select bl.mabinhluan as mabl, bl.noidung as noidung, bl.hoten as hoten, bv.tuade as tuade, DATE_FORMAT(bl.ngaydang,'%Y-%m-%d') as ngaydang ".
     		   "from binhluan bl, baiviet bv ".
-    		   "where bl.mabaiviet=bv.mabaiviet ";
-    	return $this->db->query($sql)->result_array();
+    		   "where bl.mabaiviet=bv.mabaiviet and bv.mataikhoan=?";
+    	return $this->db->query($sql,array($mataikhoan))->result_array();
     }
 	
 	function get1Binhluan($mabl) {

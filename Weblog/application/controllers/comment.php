@@ -33,7 +33,7 @@ class Comment extends CI_Controller {
 		$this->load->model('Comment_model');
 		//$data['chuyenmucs'] = $this->Comment_model->getChuyenmuc($mataikhoan);
 		
-		$data['binhluan'] = $this->Comment_model->getBinhluan();
+		$data['binhluan'] = $this->Comment_model->getBinhluan($mataikhoan);
 		$this->load->view('comment_view',$data);
 		
 	}
