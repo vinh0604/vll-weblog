@@ -80,4 +80,16 @@
 			return $this->db->query($qr, array($mamenu));	
 		}
 		
+		function updateStatus($mataikhoan, $mamenu)
+		{
+			$qr = "update menu set trangthai = 1 where MATAIKHOAN = ? and MAMENU = ?";
+			return $this->db->query($qr, array($mataikhoan, $mamenu));
+		}
+		
+		function updateStatusMenus($mataikhoan)
+		{
+			$qr = "update menu set trangthai = 0 where MATAIKHOAN = ?";
+			return $this->db->query($qr, array($mataikhoan));	
+		}
+		
 	}
