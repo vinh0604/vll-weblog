@@ -20,7 +20,7 @@
 		</script>
 	</div>
 	<div class="widget">
-		<h4 class="widgettitle">Chuyên mục</h4>
+		<h4 class="widgettitle">Chuyên mục</h4>
 		<div class="cat_container">
 		<?php foreach ($categories as $category):?>
 			<a href="<?=base_url()?>index.php/blog/<?=$blogname?>/category/<?=$category['machuyenmuc']?>" title="<?=$category['mota']?>"><?=$category['tenchuyenmuc']?></a>
