@@ -17,6 +17,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#example').dataTable( {
+			"aaSorting":[[4,'desc']],
 			"bJQueryUI": true,
 			"sPaginationType": "full_numbers",
 			"aoColumns": [{"bSearchable": false, "bSortable": false},
@@ -74,11 +75,11 @@
 </script>
 <div id="content">
 	<div id="content-head">
-    	<h1>Blog Title</h1>
+    	<h1><?php echo $_SESSION['tieude']; ?></h1>
     </div>
     <div id="content-body">
     		<form action="" method="get" name="my_form">
-				<div class="widget-title"><span style="font-style:italic">Chào mừng blog owner!</span></div>
+				<div class="widget-title"><span style="font-style:italic">Chào mừng <b style="color:red"><?php echo $_SESSION['tendangnhap']; ?></b></span></div>
 				<hr>
 				<b><h2>Quản lý bình luận</h2></b>
 				<hr>

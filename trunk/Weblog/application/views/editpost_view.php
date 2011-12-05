@@ -9,9 +9,18 @@
 <link rel="stylesheet" type="text/css" href="<?=base_url()?>css/demo_page.css" />
 <link rel="stylesheet" type="text/css" href="<?=base_url()?>css/demo_table_jui.css" />
 <link rel="stylesheet" type="text/css" href="<?=base_url()?>css/smoothness/jquery-ui-1.8.16.custom.css" />
+<script type="text/javascript" src="<?=base_url()?>js/jquery.min.js"></script>
 <script type="text/javascript" src="<?=base_url()?>js/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="<?=base_url()?>ckfinder/ckfinder.js"></script>
-
+<script type="text/javascript">
+function presubmit(){
+	$('#prtitle').val($('#title').val());
+	$('#prcontent').val(CKEDITOR.instances.editor1.getData());
+	$('#prcat_name').val($('#category option:checked').text());
+	$('#prcat_id').val($('#category option:checked').val());
+	$('#prtags').val($('#tag').val());
+}
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 <body>
 <?=$bar?>
@@ -22,7 +31,7 @@
 </script>
 <div id="content">
 	<div id="content-head">
-    	<h1>Blog Title</h1>
+    	<h1><?php echo $_SESSION['tieude']; ?></h1>
     </div>
     <div id="content-body">
     <form action="<?=base_url()?>index.php/post/doEdit/<?=$baiviet[0]['mabaiviet']?>" method="post">
@@ -37,7 +46,7 @@
 			  </tr>
 			  <tr>
 				<td>
-					<input type="text" style="width:100%; height:50px; margin-bottom:10px; font-size:20px; font-family:'Times New Roman', Times, serif; background-color:#CCCCCC; color:#666666" value="<?=$baiviet[0]['tuade']?>" name="title" onFocus="if(this.value=='Điền tiêu đề bài viết...'){this.value=''}; this.style.backgroundColor='#fffda8';" onBlur="this.style.backgroundColor='#CCCCCC';if(this.value==''){this.value='Điền tiêu đề bài viết...'};" >
+					<input type="text" style="width:100%; height:50px; margin-bottom:10px; font-size:20px; font-family:'Times New Roman', Times, serif; background-color:#CCCCCC; color:#666666" value="<?=$baiviet[0]['tuade']?>" id="title" name="title" onFocus="if(this.value=='Điền tiêu đề bài viết...'){this.value=''}; this.style.backgroundColor='#fffda8';" onBlur="this.style.backgroundColor='#CCCCCC';if(this.value==''){this.value='Điền tiêu đề bài viết...'};" >
 	
 					<textarea cols="100" id="editor1" name="editor1" rows="10"><?=$baiviet[0]['noidung']?></textarea>
 					<script type="text/javascript">
@@ -55,7 +64,7 @@
 						</div>
 						<div class="widget-body">
 							<input type="submit" class="a-button" name="sua_bai" style="background-color:#CCCCCC; font-size:15px" value="&nbsp;Sửa bài&nbsp;">
-							<input type="submit" class="a-button" name="xem_truoc" style="background-color:#CCCCCC; font-size:15px" value="Xem trước">
+							<input type="button" class="a-button" name="xem_truoc" style="background-color:#CCCCCC; font-size:15px" value="Xem trước" onclick="presubmit();document.prform.target='_blank';document.prform.submit()">
 							<input type="submit" class="a-button" name="luu_nhap" style="background-color:#CCCCCC; font-size:15px" value="Lưu nháp">
 						</div>
 					</div>
@@ -65,7 +74,7 @@
 							<h3>Categories</h3>
 						</div>
 						<div class="widget-body">
-							<select name="category" style="margin-bottom:10px; height:25px; font-size:16px">
+							<select id="category" name="category" style="margin-bottom:10px; height:25px; font-size:16px">
 								<?php
 									foreach($chuyenmuc as $cat):
 										if($chuyenmuc_bv[0][machuyenmuc] == $cat[machuyenmuc]){
@@ -86,7 +95,7 @@
 							<h3>Tags</h3>
 						</div>
 						<div class="widget-body">
-							<input type="text" size="40px" style="height:30px; background:#CCCCCC; font-family:'Times New Roman', Times, serif; font-size:16px " name="tag" value="<?=$tag[$baiviet[0]['mabaiviet']]?>">
+							<input type="text" size="40px" style="height:30px; background:#CCCCCC; font-family:'Times New Roman', Times, serif; font-size:16px " id="tag" name="tag" value="<?=$tag[$baiviet[0]['mabaiviet']]?>">
 							<!--<input type="button" class="a-button" name="sua_tag"  value="&nbsp;&nbsp;Sửa&nbsp;&nbsp;" style="margin-top:5px">-->
 						</div>
 					</div>
@@ -95,6 +104,13 @@
 			
 		</table>
        </form>
+       <form method="post" name="prform" action="<?=base_url()?>index.php/blog/<?=$_SESSION['tendangnhap']?>/previewpost">
+        <input type="hidden" id="prtitle" name="title" value="" />
+        <input type="hidden" id="prcontent" name="content" value="" />
+        <input type="hidden" id="prcat_id" name="cat_id" value="" />
+        <input type="hidden" id="prcat_name" name="cat_name" value="" />
+        <input type="hidden" id="prtags" name="tags" value="" />
+        </form>
     </div>
 </div>
 </div>

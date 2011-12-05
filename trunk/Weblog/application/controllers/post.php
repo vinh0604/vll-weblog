@@ -86,7 +86,7 @@ class Post extends CI_Controller {
 			$tag = $this->input->post(tag);
 			
 			$this->Post_model->addNewPost($mataikhoan,$title,$content,$category,$tag);
-			redirect(base_url()."index.php/post/addPost");
+			redirect(base_url()."index.php/post");
 		}
 		
 		if($this->input->post(luu_nhap) && $this->input->post(editor1)!=""){
