@@ -61,6 +61,9 @@ class Blog extends CI_Controller {
 				case 'like':
 					$this->like($mataikhoan);
 					break;	
+				case 'previewpost':
+					$this->previewpost($mataikhoan);
+					break;	
 				default:
 					show_404();
 			}
