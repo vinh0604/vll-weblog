@@ -24,5 +24,28 @@
 						MATAIKHOAN = ?";
 			$this->db->query($qr, array($hoten, $diachi, $email, $sodienthoai, $mataikhoan));
 		}
+		
+		function updatePassword($mk_cu, $mk_moi, $mk_moi_re, $mataikhoan)
+		{
+			$sql = "select * from taikhoan where mataikhoan = ? and matkhau = ?";
+			if($this->db->query($sql, array($mataikhoan,sha1($mk_cu)))->num_rows() == 0){
+				$_SESSION['thongbao'] = "Mật khẩu cũ không đúng!";
+			}else{
+				if($mk_moi == $mk_moi_re){
+					$qr = "	update taikhoan 
+							set
+							MATKHAU = ?
+							where 
+							MATAIKHOAN = ?";
+					$this->db->query($qr, array(sha1($mk_moi), $mataikhoan));
+					//unset($_SESSION['thongbao']);
+					$_SESSION['thongbao'] = "Đổi  mật khẩu thành công!";
+				}else{
+					$_SESSION['thongbao'] = "Mật khẩu mới không trùng lắp!";
+				}
+			}
+			
+			
+		}
 	}
 		

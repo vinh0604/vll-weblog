@@ -118,7 +118,7 @@ function presubmit(){
 									endforeach;
 								?>
 							</select>						
-							<ul type="disc"><a href="" style="color:#0000FF">Thêm category</a></ul>
+							<ul type="disc"><a href="<?=base_url()?>index.php/category" style="color:#0000FF">Thêm category</a></ul>
 						</div>
 					</div>
 					<div class="widget-box">
