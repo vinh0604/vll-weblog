@@ -11,11 +11,39 @@
 	#wrapper-Them{ padding-left:15px; padding-right:5px; font-size:15px;}
 	#them{ margin-right:15px}
 	h4{ margin-top:20px; margin-bottom:5px;}
-	#link, #name{width:100%; font-size:18px; height:30px; font-family:"Times New Roman", Times, serif}
+	#linkurl, #name{width:100%; font-size:18px; height:30px; font-family:"Times New Roman", Times, serif}
 	#description{ width:100%; font-family:"Times New Roman", Times, serif}
 	#btnThem{ margin-top:10px; margin-bottom:20px;}
+	.thongbao{color:red; font-size:16px; font-weight:bold}
 </style>
 <script type="text/javascript" src="<?=base_url()?>js/jquery.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$('#btnThem').click(function(){
+			$('#name').next().text('');
+			$('#linkurl').next().text('');
+			if($('#name').val() == '' || $('#linkurl').val() == '')
+			{
+				if($('#name').val() == '' )
+				{
+					$('#name').next().text('Chưa nhập tên link');
+				}
+				if($('#linkurl').val() == '')
+				{
+					$('#linkurl').next().text('Chưa nhập link');
+				}
+				$('.thongbao').show();
+				$('.thongbao').fadeOut(2000);
+				return false;
+				
+			}
+			else
+			{
+				return true;	
+			}
+		});	
+	});
+</script>
 </head>
 <body>
 <?=$bar?>
@@ -33,12 +61,14 @@
         <div id="wrapper-Them">
         	<h4 class="title">Tên Link:</h4>
             <?php foreach($links as $link):?>
-            <div align="right" >
+            <div>
                     <input type="text"  name="name" id="name" placeholder="Nhập Tên Link..." value="<?=$link['TENLINK']?>"/>
+                    <span class="thongbao"></span>
             </div>
             <h4 class="title">Link:</h4>
-            <div align="right" >
-                    <input type="text" name="link" id="link" placeholder="Nhập Link..." value="<?=$link['DUONGDAN']?>"/>
+            <div>
+                    <input type="text" name="link" id="linkurl" placeholder="Nhập Link..." value="<?=$link['DUONGDAN']?>"/>
+                    <span class="thongbao"></span>
             </div>
             <? endforeach;?>
             <div align="center">

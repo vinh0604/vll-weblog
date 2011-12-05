@@ -189,7 +189,7 @@
             	<input id="linkname" type="text" class="cataName" placeholder="Tên Item..."/>
                 <input id="linkurl" type="text" class="cataName" value="http://"/>
                 <span class="thongbao"></span></br>
-                <input type="button" class="content-submit" value="Cập nhật" onclick="addLink(event)"/>
+                <input type="button" class="content-submit" style="margin-left:43%" value="Cập nhật" onclick="addLink(event)"/>
 			</div>
 		</div>
             
@@ -203,7 +203,7 @@
                 <?php endforeach;?>
 				</select>
                 <span class="thongbao"></span></br>
-				<input type="button" class="content-submit" value="Cập nhật" onclick="addCategory(event)"/>  
+				<input type="button" class="content-submit" style="margin-left:43%" value="Cập nhật" onclick="addCategory(event)"/>  
             </div>  
 		</div>
         
@@ -217,7 +217,7 @@
                 <?php endforeach;?>
 				</select>
                 <span class="thongbao"></span></br>
-				<input type="button" class="content-submit" value="Cập nhật" onclick="addPage(event)"/>  
+				<input type="button" class="content-submit" style="margin-left:43%" value="Cập nhật" onclick="addPage(event)"/>  
             </div>       
 		</div>
         
