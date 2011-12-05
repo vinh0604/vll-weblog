@@ -26,7 +26,7 @@
 		
 		function updateLink($mataikhoan, $malienket, $tenlink, $duongdan)
 		{
-			$qr = "update lienket set TENLINK = ?, DUONGDAN = ? where MATAIKHOAN = ? and MALIENKET = ?";
+			$qr = "update lienket set TENLIENKET = ?, DUONGDAN = ? where MATAIKHOAN = ? and MALIENKET = ?";
 			return $this->db->query($qr, array($tenlink, $duongdan, $mataikhoan, $malienket));
 		}
 		
