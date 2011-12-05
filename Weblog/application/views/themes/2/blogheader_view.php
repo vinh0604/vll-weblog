@@ -4,7 +4,7 @@
 		<div id="description"><?=$persona['mota']?></div><!--end description-->
 		<?php if($persona['nenheader']):?>
 		<div id="custom-header-img" style="margin-bottom: 20px">
-			<a href="http://vinhteo.wordpress.com/"><img src="<?=base_url()?>images/header/<?=$persona['nenheader']?>" alt="" height="200" width="980"></a>
+			<a href="<?=base_url()?>index.php/blog/<?=$blogname?>"><img src="<?=base_url()?>images/header/<?=$persona['nenheader']?>" alt="" height="200" width="980"></a>
 		</div>
 		<?php endif;?>
  	</div><!--end wrapper-->

@@ -193,8 +193,8 @@ class Post_model extends CI_Model {
 		$sql = "update baiviet set machuyenmuc = ?, tuade = ?, noidung = ?, ngaydang= NOW(), trangthai = 1 where mabaiviet = ?";
 		$this->db->query($sql, array($category,$title,$content,$bai_sua));
 		
-		$sql = "update baiviet_fulltext set tuade = ?, noidung = ? where mabaiviet = ?";
-		$this->db->query($sql, array($title,$content,$bai_sua));
+		$sql = "insert into baiviet_fulltext values(?,?,?) on duplicate key update tuade = ?, noidung = ?";
+		$this->db->query($sql, array($bai_sua,$title,$content,$title,$content));
 		
 		$sql = "delete from tag_baiviet where mabaiviet = ?";
 		$this->db->query($sql, array($bai_sua));
@@ -271,6 +271,9 @@ class Post_model extends CI_Model {
 		$this->db->query($sql, array($category,$title,$content,$bai_sua));
 		
 		$sql = "delete from tag_baiviet where mabaiviet = ?";
+		$this->db->query($sql, array($bai_sua));
+		
+		$sql = "delete from baiviet_fulltext where mabaiviet = ?";
 		$this->db->query($sql, array($bai_sua));
 				
 		for($i = 0;$i < count($tag_items); $i++){
