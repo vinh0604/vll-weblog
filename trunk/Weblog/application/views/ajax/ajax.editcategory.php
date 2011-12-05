@@ -2,8 +2,9 @@
 <div id="wrapper-Them">
 	<?php foreach($chuyenmucs as $chuyenmuc):?>
     <h4 class="title">Tên Chuyên Mục:</h4>
-    <div align="right" >
+    <div >
             <input type="text" id="cataName" placeholder="Nhập Tên Chuyên Mục..." value="<?=$chuyenmuc['TENCHUYENMUC']?>"/>
+            <span class="thongbao"></span>
             <input type="hidden" id="machuyenmuc" value="<?=$chuyenmuc['MACHUYENMUC']?>" />
     </div>
     <h4 class="title">Mô Tả:</h4>

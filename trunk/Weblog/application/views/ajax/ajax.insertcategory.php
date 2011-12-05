@@ -1,8 +1,9 @@
 <h3 class="widget-title">Thêm Chuyên Mục</h3>
 <div id="wrapper-Them">
     <h4 class="title">Tên Chuyên Mục:</h4>
-    <div align="right" >
+    <div>
             <input type="text" id="cataName" placeholder="Nhập Tên Chuyên Mục..."/>
+            <span class="thongbao"></span>
     </div>
     <h4 class="title">Mô Tả:</h4>
     <div align="right">
