@@ -22,10 +22,10 @@ class Signup extends CI_Controller {
 		session_start();
 		$this->load->library('util');
 		
-		if($this->util->checkLogin()==false) {
+		if(isset($_SESSION['mataikhoan'])) {
+			redirect(base_url('index.php'));
 			return;
 		}
-		$mataikhoan = 1;
 		
 		//$this->output->enable_profiler(TRUE);
 		$this->util->connect();
@@ -54,10 +54,6 @@ class Signup extends CI_Controller {
 	public function checkUser(){
 		session_start();
 		$this->load->library('util');
-		
-		if($this->util->checkLogin()==false) {
-			return;
-		}
 		$acc = $_POST['name'];
 		if($acc != ""){
 			$this->load->model("Signup_model");
