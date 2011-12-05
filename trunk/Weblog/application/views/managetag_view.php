@@ -17,6 +17,7 @@
 	#TagName{width:100%; font-size:18px; height:30px; font-family:"Times New Roman", Times, serif}
 	#description{ width:100%; font-family:"Times New Roman", Times, serif; font-size:15px}
 	#btnThem, #btnSua{ margin-top:10px; margin-bottom:14px}
+	.thongbao{color:red; font-size:16px; font-weight:bold}
 </style>
 <script type="text/javascript" src="<?=base_url()?>js/jquery.min.js"></script>
 <script type="text/javascript" src="<?=base_url()?>js/jquery.dataTables.min.js"></script>
@@ -44,19 +45,27 @@
 		
 		//ajax insert tag
 		$('#btnThem').live('click', function(){
-			var tentag = $('#TagName').val();
-			var mota =  $('#description').val();
-			$.ajax({
-				url : '<?=base_url()?>index.php/tag/submitinsert',
-				type : 'POST',
-				data : {tentag : tentag, mota : mota},
-				cache : false,
-				success: function(data){
-					$('.right').html(data);	
-				}	
-			});
-			$('#TagName').val('');
-			$('#description').val('');
+			if($('#TagName').val() == '')
+			{
+				$('#TagName').next().text('Chưa nhập tên tag');
+				$('.thongbao').show().fadeOut(2000);
+			}
+			else
+			{
+				var tentag = $('#TagName').val();
+				var mota =  $('#description').val();
+				$.ajax({
+					url : '<?=base_url()?>index.php/tag/submitinsert',
+					type : 'POST',
+					data : {tentag : tentag, mota : mota},
+					cache : false,
+					success: function(data){
+						$('.right').html(data);	
+					}	
+				});
+				$('#TagName').val('');
+				$('#description').val('');
+			}
 		});
 		
 		//ajax edit tag
@@ -75,25 +84,34 @@
 		
 		//ajax submit edit tag
 		$('#btnSua').live('click', function(){
-			var matag = $('#TagName').attr('matag');
-			var tentag = $('#TagName').val();
-			var mota = $('#description').val();
-			$.ajax({
-				url : '<?=base_url()?>index.php/tag/submitedit',
-				type : 'POST',
-				data : {matag : matag, tentag : tentag, mota : mota},
-				cache : false,
-				success : function(data){
-					$('.right').html(data);	
-				}	
-			});	
-			$.ajax({
-				url : '<?=base_url()?>index.php/tag/insert',
-				cache: false,
-				success: function(data){
-					$('#them').html(data);
-				}	
-			});
+			$('.thongbao').text('');
+			if($('#TagName').val() =='')
+			{
+				$('#TagName').next().text('Chưa nhập tên tag');
+				$('.thongbao').show().fadeOut(2000);
+			}
+			else
+			{
+				var matag = $('#TagName').attr('matag');
+				var tentag = $('#TagName').val();
+				var mota = $('#description').val();
+				$.ajax({
+					url : '<?=base_url()?>index.php/tag/submitedit',
+					type : 'POST',
+					data : {matag : matag, tentag : tentag, mota : mota},
+					cache : false,
+					success : function(data){
+						$('.right').html(data);	
+					}	
+				});	
+				$.ajax({
+					url : '<?=base_url()?>index.php/tag/insert',
+					cache: false,
+					success: function(data){
+						$('#them').html(data);
+					}	
+				});
+			}
 		});
 		
 		//ajax delete tag
@@ -126,8 +144,9 @@
     	<h3 class="widget-title">Thêm Thẻ</h3>
         <div id="wrapper-Them">
         	<h4 class="title">Tên Thẻ:</h4>
-            <div align="right" >
+            <div>
                     <input type="text" id="TagName" name="TagName" placeholder="Nhập Tên Thẻ..."/>
+                    <span class="thongbao"></span>
             </div>
             <h4 class="title">Mô Tả:</h4>
             <div align="right">

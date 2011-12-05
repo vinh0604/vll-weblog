@@ -18,6 +18,7 @@
 	#description{ width:100%; font-family:"Times New Roman", Times, serif; font-size:15px}
 	#btnThem{ margin-top:10px; margin-bottom:14px}
 	#btnSua{ margin-top:10px; margin-bottom:14px}
+	.thongbao{color:red; font-size:16px; font-weight:bold}
 </style>
 <script type="text/javascript" src="<?=base_url()?>js/jquery.min.js"></script>
 <script type="text/javascript" src="<?=base_url()?>js/jquery.dataTables.min.js"></script>
@@ -45,17 +46,28 @@
 		
 		//ajax submit insert category
 		$('#btnThem').live('click', function(){
-			var tenchuyenmuc = $('#cataName').val();
-			var mota = $('#description').val();
-			$.ajax({
-				url: '<?=base_url()?>/index.php/category/submitinsert',
-				cache: false,
-				data : {tenchuyenmuc : tenchuyenmuc, mota : mota},
-				type : 'POST',
-				success: function(data){
-					$('#table').html(data);
-				}
-			});
+			$('.thongbao').text('');
+			if($('#cataName').val() == '')
+			{
+				$('#cataName').next().text('Chưa nhập tên chuyên mục');
+				$('.thongbao').show().fadeOut(2000);
+			}
+			else
+			{
+				var tenchuyenmuc = $('#cataName').val();
+				var mota = $('#description').val();
+				$.ajax({
+					url: '<?=base_url()?>/index.php/category/submitinsert',
+					cache: false,
+					data : {tenchuyenmuc : tenchuyenmuc, mota : mota},
+					type : 'POST',
+					success: function(data){
+						$('#table').html(data);
+					}
+				});
+				$('#cataName').val('');
+				$('#description').val('');
+			}
 		});
 		
 		//ajax delete category
@@ -88,26 +100,35 @@
 		
 		//ajax update category
 		$('#btnSua').live('click', function(){
-			var machuyenmuc = $('#machuyenmuc').val();
-			var tenchuyenmuc = $('#cataName').val();
-			var mota = $('#description').val();	
-			$.ajax({
-				url : '<?=base_url()?>/index.php/category/submitedit',
-				cache: false,
-				data: {machuyenmuc : machuyenmuc, tenchuyenmuc : tenchuyenmuc, mota : mota},
-				type :'POST',
-				success : function(data){
-					$('#them').html(data);
-				}
-			});
-
-			$.ajax({
-				url: '<?=base_url()?>/index.php/category/manage',
-				cache: false,
-				success: function(data){
-					$('#table').html(data);
-				}	
-			});	
+			$('.thongbao').text('');
+			if($('#cataName').val() == '')
+			{
+				$('#cataName').next().text('Chưa nhập tên chuyên mục');
+				$('.thongbao').show().fadeOut(2000);
+			}
+			else
+			{
+				var machuyenmuc = $('#machuyenmuc').val();
+				var tenchuyenmuc = $('#cataName').val();
+				var mota = $('#description').val();	
+				$.ajax({
+					url : '<?=base_url()?>/index.php/category/submitedit',
+					cache: false,
+					data: {machuyenmuc : machuyenmuc, tenchuyenmuc : tenchuyenmuc, mota : mota},
+					type :'POST',
+					success : function(data){
+						$('#them').html(data);
+					}
+				});
+	
+				$.ajax({
+					url: '<?=base_url()?>/index.php/category/manage',
+					cache: false,
+					success: function(data){
+						$('#table').html(data);
+					}	
+				});	
+			}
 		});
 	})
 </script>
@@ -126,8 +147,9 @@
     	<h3 class="widget-title">Thêm Chuyên Mục</h3>
         <div id="wrapper-Them">
         	<h4 class="title">Tên Chuyên Mục:</h4>
-            <div align="right" >
+            <div >
                     <input type="text" id="cataName" placeholder="Nhập Tên Chuyên Mục..."/>
+                    <span class="thongbao"></span>
             </div>
             <h4 class="title">Mô Tả:</h4>
             <div align="right">
