@@ -47,5 +47,19 @@
 			
 			
 		}
+		
+		function getSobai($mataikhoan)
+		{
+			$sql = "select sobai from canhanhoa where mataikhoan=? limit 1";
+			$query = $this->db->query($sql,array($mataikhoan));
+    		return $query->num_rows()==0 ? 0 : $query->row(0)->sobai;
+		}
+		
+		function updateSobai($mataikhoan,$sobai)
+		{
+			$sql = "update canhanhoa set sobai=? where mataikhoan=?";
+			$this->db->query($sql,array($sobai,$mataikhoan));
+    		return $this->db->affected_rows();
+		}
 	}
 		

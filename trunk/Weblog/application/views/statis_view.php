@@ -17,13 +17,44 @@
 	#chuyenmuc{ width:98%; margin:5px; font-size:16px; height:30px;}
 	.thongbao{color:red; font-size:16px; font-weight:bold}
 </style>
+<!--[if lte IE 8]><script type="text/javascript" src="<?=base_url()?>js/excanvas.min.js"></script><![endif]-->
 <script type="text/javascript" src="<?=base_url()?>js/jquery.min.js"></script>
-<script type="text/javascript" src="<?=base_url()?>js/jquery.flot.js"></script>
+<script type="text/javascript" src="<?=base_url()?>js/jquery.flot.min.js"></script>
 <script type="text/javascript" src="<?=base_url()?>js/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="<?=base_url()?>ckfinder/ckfinder.js"></script>
 <script>
+function showTooltip(x, y, contents) {
+    $('<div class="tooltip">' + contents + '</div>').css( {
+        position: 'absolute',
+        display: 'none',
+        top: y + 5,
+        left: x + 5,
+        border: '1px solid #fdd',
+        padding: '2px',
+        'background-color': '#fee',
+        opacity: 0.80
+    }).appendTo("body").fadeIn(200);
+}
 $(document).ready(function(){
 	//flot
+	var series = {color: 'gray',  
+				data: <?=$plotdata?>, 
+				bars: {show :true, 
+						fill: true, 
+						barWidth: 0.9, 
+						align: 'center'}};
+	var settings = {grid: {hoverable: true},
+					xaxis: {ticks : <?=$plotlabel?>}};
+	$.plot($("#placeholder"), [series], settings);
+	$("#placeholder").bind("plothover", function(event, pos, item) {
+    	if (item) {
+			var y = item.datapoint[1];
+			showTooltip(item.pageX, item.pageY, y + "lượt xem");
+		}							
+		else {
+			$(".tooltip").remove();
+		}
+	});	
 	//ckeditor
 	var editor = CKEDITOR.replace( 'noidung', { enterMode: 2, shiftEnterMode: 2,extraPlugins : 'uicolor',
 								uiColor: '#CCCCCC',
@@ -198,7 +229,8 @@ $(document).ready(function(){
             <div class="widget-box" id="w-views">
                 <h3 class="widget-title">Số lượt xem</h3>
                 <div class="widget-body" id="flot-views">
-                
+                	<div style="width: 350px; height: 200px" id="placeholder">
+                	</div>
                 </div>
             </div>
        

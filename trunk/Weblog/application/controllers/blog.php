@@ -322,8 +322,7 @@ class Blog extends CI_Controller {
 		$post['machuyenmuc'] = $this->input->post('cat_id');
 		$post['tenchuyenmuc'] = $this->input->post('cat_name');		
 		$data['post'] = $post;
-		$strTag = preg_replace('/ +/', '', $this->input->post('tags'));
-		$posttags = preg_split('/,/', $strTag);
+		$posttags = preg_split('/ *, */', $this->input->post('tags'));
 		foreach ($posttags as $tag)
 		{
 			$posttag['tentag'] = $tag;
