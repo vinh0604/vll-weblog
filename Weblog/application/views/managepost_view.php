@@ -70,7 +70,8 @@
 <div id="main-content">
 <?=$sidemenu?>
 <script type="text/javascript">
-	$('#sidemenu #poll').addClass('current-top');
+	$('#sidemenu #post').addClass('current-top');
+	$('#post-post').addClass('current');
 </script>
 <div id="content">
 	<div id="content-head">

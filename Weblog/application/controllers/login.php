@@ -30,7 +30,7 @@ class Login extends CI_Controller {
 				$this->load->model('Login_model');
 				$this->Login_model->verifyUser($u,$pw);
 				if(isset($_SESSION['mataikhoan'])){
-					redirect(base_url().'index.php/sample');
+					redirect(base_url().'index.php/statis');
 				}else{
 					$data['error'] = $_SESSION['error'];
 					$data['username'] = $u;

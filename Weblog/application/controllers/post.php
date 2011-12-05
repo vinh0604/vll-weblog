@@ -25,7 +25,7 @@ class Post extends CI_Controller {
 		if($this->util->checkLogin()==false) {
 			return;
 		}
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		$data['bar'] = $this->load->view('bar_view',null,true);
 		$data['sidemenu'] = $this->load->view('sidemenu_view',null,true);
 				
@@ -47,7 +47,7 @@ class Post extends CI_Controller {
 		if($this->util->checkLogin()==false) {
 			return;
 		}
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		$data['bar'] = $this->load->view('bar_view',null,true);
 		$data['sidemenu'] = $this->load->view('sidemenu_view',null,true);
 
@@ -69,7 +69,7 @@ class Post extends CI_Controller {
 		if($this->util->checkLogin()==false) {
 			return;
 		}
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		$data['bar'] = $this->load->view('bar_view',null,true);
 		$data['sidemenu'] = $this->load->view('sidemenu_view',null,true);
 		
@@ -119,7 +119,7 @@ class Post extends CI_Controller {
 		if($this->util->checkLogin()==false) {
 			return;
 		}
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 
 		$this->util->connect();
 		//$dulieu = $_POST['dulieu'];
@@ -144,7 +144,7 @@ class Post extends CI_Controller {
 		if($this->util->checkLogin()==false) {
 			return;
 		}
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		$data['bar'] = $this->load->view('bar_view',null,true);
 		$data['sidemenu'] = $this->load->view('sidemenu_view',null,true);
 		
@@ -160,7 +160,7 @@ class Post extends CI_Controller {
 		if($this->util->checkLogin()==false) {
 			return;
 		}
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		$data['bar'] = $this->load->view('bar_view',null,true);
 		$data['sidemenu'] = $this->load->view('sidemenu_view',null,true);
 		
@@ -182,7 +182,7 @@ class Post extends CI_Controller {
 		if($this->util->checkLogin()==false) {
 			return;
 		}
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		$this->util->connect();
 		$this->load->model('Post_model');
 		

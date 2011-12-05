@@ -25,7 +25,7 @@ class Avatar extends CI_Controller {
 		if($this->util->checkLogin()==false) {
 			return;
 		}
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		$data['bar'] = $this->load->view('bar_view',null,true);
 		$data['sidemenu'] = $this->load->view('sidemenu_view',null,true);
 		$data['ispreview']=$flag;
@@ -51,7 +51,7 @@ class Avatar extends CI_Controller {
 		if($this->util->checkLogin()==false) {
 			return;
 		}
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		
 		$this->util->connect();
 		$this->load->model('Avatar_model');
@@ -71,10 +71,10 @@ class Avatar extends CI_Controller {
 		if($this->util->checkLogin()==false) {
 			return;
 		}
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		
 		$config['upload_path'] = './images/temporary';
-		$config['allowed_types'] = 'gif|jpg|png|jpge';
+		$config['allowed_types'] = 'gif|jpg|png|jpeg';
 		$config['max_size']	= '1024';
 		$config['overwrite']  = TRUE;
 		$config['file_name'] = 'avatar'.$mataikhoan;
@@ -106,7 +106,7 @@ class Avatar extends CI_Controller {
 		if($this->util->checkLogin()==false) {
 			return;
 		}
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		
 		$this->util->connect();
 		$this->load->model('Avatar_model');

@@ -161,9 +161,16 @@
 <?=$bar?>
 <div id="main-content">
 <?=$sidemenu?>
+<script type="text/javascript">
+	$('#sidemenu #menu').addClass('current-top');
+</script>
+<script type="text/javascript">
+	$('#sidemenu #persona').addClass('current-top');
+	$('#persona-menu').addClass('current');
+</script>
 <div id="content">
 	<div id="content-head">
-    	<h1>Blog Title</h1>
+    	<h1><?=$_SESSION['tieude']?></h1>
     </div>
     <div id="content-body">
     <h2 class="title">Quản Lý Menu</h2>

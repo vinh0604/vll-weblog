@@ -53,7 +53,7 @@ class Blog_model extends CI_Model {
     		$sql = "select tendangnhap from taikhoan where mataikhoan=?";
     		$username = $this->db->query($sql,array($mataikhoan))->row(0)->tendangnhap;
     		$mamenu = $query->row(0)->mamenu;
-    		$sql = "select tenitem,loaiitem,thongtin_ma,thongtin_lk from menu where mamenu=? and trangthai!=0";
+    		$sql = "select tenitem,loaiitem,thongtin_ma,thongtin_lk from menu_item where mamenu=?";
     		$items = $this->db->query($sql,array($mamenu))->result_array();
     		$array = array();
     		foreach ($items as $item)
@@ -62,9 +62,9 @@ class Blog_model extends CI_Model {
     			$value['tenitem'] = $item['tenitem'];
     			switch ($item['loaiitem'])
     			{
-    				case 'link': $value['lienket'] = $item['thongtin_lk']; break;
+    				case 'lienket': $value['lienket'] = $item['thongtin_lk']; break;
     				case 'trang': $value['lienket'] = base_url().'index.php/blog/'.$username.'/view/'.$item['thongtin_ma']; break;
-    				case 'chuyenmuc': $value['lienket'] = base_url().'index.php/blog/'.$username.'/category/'.$item['thongtin_lk']; break;
+    				case 'chuyenmuc': $value['lienket'] = base_url().'index.php/blog/'.$username.'/category/'.$item['thongtin_ma']; break;
     			}
     			$array[] = $value;
     		}

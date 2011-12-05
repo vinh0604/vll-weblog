@@ -71,7 +71,7 @@
 <div id="main-content">
 <?=$sidemenu?>
 <script type="text/javascript">
-	$('#sidemenu #poll').addClass('current-top');
+	$('#sidemenu #comment').addClass('current-top');
 </script>
 <div id="content">
 	<div id="content-head">

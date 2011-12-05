@@ -11,7 +11,7 @@ class Menu extends CI_Controller {
 			return;
 		}
 		
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		$data['bar'] = $this->load->view('bar_view',null,true);
 		$data['sidemenu'] = $this->load->view('sidemenu_view',null,true);
 		
@@ -32,7 +32,7 @@ class Menu extends CI_Controller {
 			return;
 		}
 		
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		$data['bar'] = $this->load->view('bar_view',null,true);
 		$data['sidemenu'] = $this->load->view('sidemenu_view',null,true);
 		
@@ -53,7 +53,7 @@ class Menu extends CI_Controller {
 			return;
 		}
 		
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		$data['bar'] = $this->load->view('bar_view',null,true);
 		$data['sidemenu'] = $this->load->view('sidemenu_view',null,true);
 		
@@ -86,7 +86,7 @@ class Menu extends CI_Controller {
 			return;
 		}
 		
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		$data['bar'] = $this->load->view('bar_view',null,true);
 		$data['sidemenu'] = $this->load->view('sidemenu_view',null,true);		
 		
@@ -110,7 +110,7 @@ class Menu extends CI_Controller {
 			return;
 		}
 		
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		$data['bar'] = $this->load->view('bar_view',null,true);
 		$data['sidemenu'] = $this->load->view('sidemenu_view',null,true);		
 		
@@ -140,7 +140,7 @@ class Menu extends CI_Controller {
 			return;
 		}
 		
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		$mamenu = $this->input->post('mamenu');
 		$this->util->connect();		
 		$this->load->model('Menu_model');

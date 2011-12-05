@@ -12,11 +12,11 @@
 <div id="main-content">
 <?=$sidemenu?>
 <script type="text/javascript">
-	$('#sidemenu #poll').addClass('current-top');
+	$('#sidemenu #comment').addClass('current-top');
 </script>
 <div id="content"  class="widget-box">
 	<div id="content-head"  class="widget-title">
-    	<h1>Blog Title</h1>
+    	<h1><?=$_SESSION['tieude']?></h1>
     </div>
     <div id="content-body">
     		<?php

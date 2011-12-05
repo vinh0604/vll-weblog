@@ -25,7 +25,7 @@ class Poll extends CI_Controller {
 		if($this->util->checkLogin()==false) {
 			return;
 		}
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		$data['bar'] = $this->load->view('bar_view',null,true);
 		$data['sidemenu'] = $this->load->view('sidemenu_view',null,true);
 		
@@ -60,7 +60,7 @@ class Poll extends CI_Controller {
 		if($this->util->checkLogin()==false) {
 			return;
 		}
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		
 		$this->form_validation->set_rules('cauhoi','Câu hỏi','required');
 		$this->form_validation->set_rules('dapan[]','Các đáp án','required');
@@ -103,7 +103,7 @@ class Poll extends CI_Controller {
 		if($this->util->checkLogin()==false) {
 			return;
 		}
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		
 		$mabinhchon = 0;
 		if(isset($_POST['mabinhchon'])) {
@@ -129,7 +129,7 @@ class Poll extends CI_Controller {
 		if($this->util->checkLogin()==false) {
 			return;
 		}
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		
 		$mabinhchon = intval($mabinhchon);
 		$this->util->connect();
@@ -157,7 +157,7 @@ class Poll extends CI_Controller {
 		if($this->util->checkLogin()==false) {
 			return;
 		}
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		
 		$this->form_validation->set_rules('mabinhchon','Mã bình chọn','required');
 		$this->form_validation->set_rules('cauhoi','Câu hỏi','required');

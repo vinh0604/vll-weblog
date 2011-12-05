@@ -18,12 +18,9 @@
 <?=$bar?>
 <div id="main-content">
 <?=$sidemenu?>
-<script type="text/javascript">
-	$('#sidemenu #poll').addClass('current-top');
-</script>
 <div id="content">
 	<div id="content-head">
-    	<h1>Blog Title</h1>
+    	<h1><?=$_SESSION['tieude']?></h1>
     </div>
     <div id="content-body">
 		<div class="widget-box" style="width:50%" align="left">
