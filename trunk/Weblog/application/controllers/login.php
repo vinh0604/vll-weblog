@@ -38,7 +38,7 @@ class Login extends CI_Controller {
 			}
 			$this->load->view('login_view', $data);	
 		}else{
-			redirect(base_url().'index.php/sample');		
+			redirect(base_url().'index.php/statis');		
 		}
 	}
 	

@@ -85,7 +85,7 @@
             <div class="submenu">
             	<ul>
                 	<li id="setting-info"><a href="<?=base_url()?>index.php/profile">Thông tin cá nhân</a></li>
-                    <li id="setting-pass"><a href="#">Đổi mật khẩu</a></li>
+                    <li id="setting-pass"><a href="<?=base_url()?>index.php/profile/password">Đổi mật khẩu</a></li>
                     <li id="setting-disp"><a href="#">Hiển thị</a></li>
                 </ul>
             </div>
