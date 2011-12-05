@@ -66,7 +66,7 @@
 				<?php endif;?>
 				</p>
 				<p class="post-data">
-					<span class="postcategory">Thẻ: <?php foreach ($posttags as $posttag):?><a href="<?base_url()?>index.php/blog/<?=$blogname?>/search?tag=<?=$posttag['tentag']?>" title="<?=$posttag['mota']?>"><?=$posttag['tentag']?></a> <?php endforeach;?></span>
+					<span class="postcategory">Thẻ: <?php foreach ($posttags as $posttag):?><a href="<?=base_url()?>index.php/blog/<?=$blogname?>/search?tag=<?=$posttag['tentag']?>" title="<?=$posttag['mota']?>"><?=$posttag['tentag']?></a> <?php endforeach;?></span>
 				</p>			
 			</div><!--/post -->
 			<p class="post-nav">
