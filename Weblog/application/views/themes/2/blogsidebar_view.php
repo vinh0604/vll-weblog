@@ -61,24 +61,26 @@
 					})})
 				</script>
 			<?php else :?>
-				<div id="poll-results" style="width:200px">
-					<dl class="graph">
-					<?php foreach ($answers as $answer):?>
-						<dt class="bar-title"><?=$answer['dapan']?></dt>
-						<dd class="bar-container">
-							<div></div>
-							<strong><?=$answer['percentage']?>%</strong>
-						</dd>
-					<?php endforeach;?>
-					</dl>
-				</div>
-				<script type="text/javascript">
-				$("#poll-results div").each(function(){  
-				      var percentage = $(this).next().text();  
-				      $(this).css({width: "0%"}).animate({  
-				                width: percentage}, 'slow');  
-				  });  
-				</script>
+			<div id="poll-results" style="width:200px">
+			<table class="graph" cellpadding="1" cellspacing="1" border="0">
+			<?php foreach ($answers as $answer):?>
+			<tr>
+				<td class="bar-title"><?=$answer['dapan']?></td>
+				<td class="bar-container">
+					<div <?php if ($chosen==$answer['madapan']):?>style="background-color:#06C"<?php endif;?>></div>
+				</td>
+				<td class="bar-percentage"><strong><?=$answer['percentage']?>%</strong></td>
+			</tr>
+			<?php endforeach;?>
+			</table>
+			</div>
+			<script type="text/javascript">
+			$("#poll-results div").each(function(){  
+			      var percentage = $(this).parent().next().text();  
+			      $(this).css({width: "0%"}).animate({  
+			                width: percentage}, 'slow');  
+			  });  
+			</script>
 			<?php endif;?>
 			</div>
 		</li>

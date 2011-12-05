@@ -27,6 +27,29 @@
 			$data['comment'] =  $this->Statis_model->getCountComment($mataikhoan);
 			$data['draft'] = $this->Statis_model->getCountDraft($mataikhoan);
 			$data['chuyenmucs'] =$this->Statis_model->getListCategory($mataikhoan);
+			$history = $this->Statis_model->getHistory($mataikhoan);
+			$date = date("Y-m-d");
+			$plotdata = array();
+			$plotlabel = array();
+			for ($i=0;$i<7;++$i)
+			{
+				$index=7-$i;
+				$value[0] = $label[0] = $index; 
+				$value[1]=0;
+				$label[1]=$date;
+				foreach ($history as $item) {
+					if ($item['ngay']==$date)
+					{
+						$value[1]=intval($item['luotxem']);
+						break;	
+					}
+				}
+				$plotdata[] = $value;
+				$plotlabel[] = $label;
+				$date = date("Y-m-d",strtotime(date("Y-m-d", strtotime($date)) . " -1 day"));
+			}
+			$data['plotdata']=json_encode($plotdata);
+			$data['plotlabel']=json_encode($plotlabel);
 			
 			$data['nhaps'] = $this->Statis_model->getListPostDraft($mataikhoan);
 			$data['phanhois'] = $this->Statis_model->getListComment($mataikhoan);

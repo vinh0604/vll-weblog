@@ -1,34 +1,30 @@
 .graph {
-  width: 250px;
-  position: relative;
+  width: 275px;
   right: 30px;
 }
+
 .bar-title {
   position: relative;
-  float: left;
   width: 104px;
-  line-height: 20px;
-  margin-right: 17px;
+  line-height: 25px;
   font-weight: bold;
   text-align: right;
 }
 .bar-container {
   position: relative;
-  float: left;
-  width: 110px;
+  width: 150px;
   height: 10px;
-  margin: 0px 0px 15px;
 }
 
 .bar-container div {
   background-color:#cc4400;
   height: 20px;
 }
-.bar-container strong {
-  position: absolute;
-  right: -32px;
+.bar-percentage strong {
+  position: relative;
   top: 0px;
   overflow: hidden;
+  text-align: left;
 }
 #poll-results p {
   text-align: center;

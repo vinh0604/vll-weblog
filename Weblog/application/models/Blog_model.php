@@ -16,7 +16,7 @@ class Blog_model extends CI_Model {
     
     function updateLuotxem($mataikhoan)
     {
-    	$sql = "update taikhoan set luotxem = luotxem + 1 where mataikhoan=?";
+    	$sql = "insert into lichsu values (?,sysdate(),1) on duplicate key update luotxem = luotxem + 1";
     	return $this->db->query($sql,array($mataikhoan));
     }
     
@@ -75,7 +75,7 @@ class Blog_model extends CI_Model {
     
 	function getLuotxem($mataikhoan)
     {
-    	$sql = "select luotxem from taikhoan where mataikhoan=?";
+    	$sql = "select sum(luotxem) as luotxem from lichsu where mataikhoan=?";
     	$query = $this->db->query($sql,array($mataikhoan));
     	return $query->num_rows()==0 ? 0 : $query->row(0)->luotxem;
     }

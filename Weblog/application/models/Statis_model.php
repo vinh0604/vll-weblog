@@ -111,4 +111,10 @@
 					LIMIT 0 , 10";	
 			return $this->db->query($qr, array($mataikhoan))->result_array();
 		}
+		
+		function getHistory($mataikhoan)
+		{
+			$sql = "select ngay,luotxem from lichsu where mataikhoan=? and datediff(sysdate(),ngay)<7";
+			return $this->db->query($sql, array($mataikhoan))->result_array();
+		}
 	}
