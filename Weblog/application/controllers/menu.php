@@ -165,7 +165,7 @@ class Menu extends CI_Controller {
 		if($this->util->checkLogin()==false) {
 			return;
 		}
-		$mataikhoan = 1;
+		$mataikhoan = $_SESSION['mataikhoan'];
 		$this->util->connect();		
 		$this->load->model('Menu_model');
 		
