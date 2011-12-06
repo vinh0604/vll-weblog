@@ -84,9 +84,10 @@
             <div align="center">
 					<input type="submit" class="content-submit" id="btnThem" value="Sửa Trang"/>
             </div>
-        <? endforeach;?>
-        </div>
-        </form>
+         </div>
+         </form>
+        <?php endforeach;?>
+       
     </div>
     </div>
 </div>

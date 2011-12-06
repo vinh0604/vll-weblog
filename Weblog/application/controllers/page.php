@@ -68,17 +68,17 @@ class Page extends CI_Controller {
 		if($this->util->checkLogin()==false) {
 			return;
 		}
+		$mataikhoan = $_SESSION['mataikhoan'];
 		$data['bar'] = $this->load->view('bar_view',null,true);
 		$data['sidemenu'] = $this->load->view('sidemenu_view',null,true);
-		$mataikhoan = $_SESSION['mataikhoan'];
 		
 		$this->util->connect();
 		$this->load->Model('Page_model');
 		
 		$matrang = $this->uri->segment(3,0);
 		$data['trangs'] = $this->Page_model->getPage($mataikhoan, $matrang);
-		$this->load->view('editpage_view', $data);
-		
+		$result = $this->load->view('editpage_view', $data, true);
+		echo $result;
 	}
 	
 	public function submitedit()
