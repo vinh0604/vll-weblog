@@ -12,7 +12,7 @@
 <?php endforeach;?>
 </ol>
 <div class="js" id="respond">
-<form action="<?=base_url()?>index.php/blog/<?=$blogname?>/comment" method="post">
+<form action="<?=base_url()?>index.php/blog/<?=$blogname?>/comment" method="post" id="frm-comment">
 	<input type="hidden" value="<?=$post['mabaiviet']?>" id="mabaiviet" name="mabaiviet">
 	<h3>Gửi phản hồi</h3>
 	<textarea cols="100" id="editor1" name="editor1" rows="10"></textarea>
@@ -43,7 +43,7 @@
 							<span class="nopublish" style="float: none;position: absolute;right: 15px;">(Not published)</span>
 						</label>
 						<div class="comment-form-input">
-							<input id="email" type="text" value="" name="email">
+							<input id="email" type="text" value="" name="email" class="validate[required,custom[email]]">
 						</div>
 					</div>
 					<div class="comment-form-field">
@@ -52,7 +52,7 @@
 							<span class="required">(yêu cầu)</span>
 						</label>
 						<div class="comment-form-input">
-							<input id="author" type="text" value="" name="author">
+							<input id="author" type="text" value="" name="author" class="validate[required]">
 						</div>
 					</div>
 					<div class="comment-form-field">
@@ -60,7 +60,7 @@
 							Website
 						</label>
 						<div class="comment-form-input">
-							<input id="website" type="text" value="" name="website">
+							<input id="website" type="text" value="" name="website" class="validate[optional,custom[url]]">
 						</div>
 					</div>
 				</div>
