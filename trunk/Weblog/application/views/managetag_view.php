@@ -117,6 +117,8 @@
 		//ajax delete tag
 		$('.delBtn').live('click', function(){
 			var matag = $(this).attr('matag');
+			if(confirm('Bạn có chắc muốn xóa tag này?'))
+			{
 			$.ajax({
 				url : '<?=base_url()?>index.php/tag/delete',
 				type: 'POST',
@@ -125,7 +127,8 @@
 				success: function(data){
 					$('.right').html(data);	
 				}	
-			});	
+			});
+			}	
 		});
 	})
 </script>
