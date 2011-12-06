@@ -5,6 +5,7 @@
 <title><?=$persona['tieude']?></title>
 <link href="<?=base_url()?>css/themes/theme2/style.css" type="text/css" media="screen" rel="stylesheet">
 <link href="<?=base_url()?>css/poll.css" rel="stylesheet" type="text/css">
+<link href="<?=base_url()?>css/validationEngine.jquery.css" type="text/css" rel="stylesheet" />
 <?php if($persona['anhnen']):?>
 <style>
 #header,#footer {
@@ -17,6 +18,8 @@
 <!--[if lte IE 8]><script type="text/javascript" src="<?=base_url()?>js/excanvas.js"></script><![endif]-->
 <script src="<?=base_url()?>js/jquery.min.js" type="text/javascript"></script>
 <script src="<?=base_url()?>js/jquery.tagcanvas.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="<?=base_url()?>js/jquery.validationEngine.js"></script>
+<script type="text/javascript" src="<?=base_url()?>js/jquery.validationEngine-vi.js"></script>
 <script type="text/javascript">
  $(document).ready(function() {
    if( ! $('#myCanvas').tagcanvas({
@@ -39,6 +42,7 @@
 				$('#like_wrap').html(data);
 			}})
 	})
+	$("#frm-comment").validationEngine();
  });
 </script>
 </head>
