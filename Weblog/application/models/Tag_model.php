@@ -45,6 +45,8 @@
 		
 		function deleteTag($mataikhoan, $matag)
 		{
+			$qr = "delete from tag_baiviet where matag=?";
+			$this->db->query($qr, array($matag));
 			$qr = "delete from tag where MATAIKHOAN = ? and MATAG = ?";
 			return $this->db->query($qr, array($mataikhoan, $matag));	
 		}

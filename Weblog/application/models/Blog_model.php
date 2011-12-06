@@ -34,7 +34,7 @@ class Blog_model extends CI_Model {
     
 	function getThe($mataikhoan)
     {
-    	$sql = "select t.matag,tentag,mota,(select count(*) from tag_baiviet where matag=t.matag) as soluong from tag t where mataikhoan=? order by soluong desc limit 10";
+    	$sql = "select t.matag,tentag,mota,(select count(*) from tag_baiviet tb, baiviet b where b.mabaiviet=tb.mabaiviet and b.trangthai!=2 and tb.matag=t.matag) as soluong from tag t where mataikhoan=? order by soluong desc limit 10";
     	return $this->db->query($sql,array($mataikhoan))->result_array();
     }
     
