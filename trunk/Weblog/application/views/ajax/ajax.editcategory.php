@@ -14,5 +14,5 @@
     <div align="center">
             <input type="button" class="a-button" id="btnSua"value="Sửa Chuyên Mục"/>
     </div>
-    <? endforeach;?>
+    <?php endforeach;?>
 </div>

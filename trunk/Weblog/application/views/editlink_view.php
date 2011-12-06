@@ -65,7 +65,7 @@
         	<h4 class="title">Tên Link:</h4>
             <?php foreach($links as $link):?>
             <div>
-                    <input type="text"  name="name" id="name" placeholder="Nhập Tên Link..." value="<?=$link['TENLINK']?>"/>
+                    <input type="text"  name="name" id="name" placeholder="Nhập Tên Link..." value="<?=$link['TENLIENKET']?>"/>
                     <span class="thongbao"></span>
             </div>
             <h4 class="title">Link:</h4>
@@ -73,7 +73,7 @@
                     <input type="text" name="link" id="linkurl" placeholder="Nhập Link..." value="<?=$link['DUONGDAN']?>"/>
                     <span class="thongbao"></span>
             </div>
-            <? endforeach;?>
+            <?php endforeach;?>
             <div align="center">
 					<input type="submit" class="content-submit" id="btnThem" value="Sửa Link"/>
             </div>
