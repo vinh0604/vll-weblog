@@ -34,9 +34,15 @@ class Blog extends CI_Controller {
 		$this->user = $user;
 		if($this->session->userdata('visit')==false)
 		{
-			$this->Blog_model->updateLuotxem($mataikhoan);
-			$data = array('visit'=>true,'postread'=>array(),'postlike'=>array());
+			$data = array('visit'=>true,'postread'=>array(),'postlike'=>array(),'blogview'=>array());
 			$this->session->set_userdata($data);
+		}
+		$blogview = $this->session->userdata('blogview');
+		if(!in_array($mataikhoan, $blogview))
+		{
+			$this->Blog_model->updateLuotxem($mataikhoan);
+			$blogview[] = $mataikhoan;
+			$this->session->set_userdata('blogview',$blogview);
 		}
 		if(count($params)==0)
 		{

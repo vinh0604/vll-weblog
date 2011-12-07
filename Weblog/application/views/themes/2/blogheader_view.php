@@ -1,7 +1,7 @@
 <div id="header" class="clear">
 	<div class="wrapper">
-		<h1 id="title"><a href="<?=base_url()?>index.php/blog/<?=$blogname?>"><?=$persona['tieude']?></a></h1>		
-		<div id="description"><?=$persona['mota']?></div><!--end description-->
+		<h1 id="title"><a href="<?=base_url()?>index.php/blog/<?=$blogname?>" style="color: #<?=$persona['mauchu']?>"><?=$persona['tieude']?></a></h1>		
+		<div id="description" style="color: #<?=$persona['mauchu']?>"><?=$persona['mota']?></div><!--end description-->
 		<?php if($persona['nenheader']):?>
 		<div id="custom-header-img" style="margin-bottom: 20px">
 			<a href="<?=base_url()?>index.php/blog/<?=$blogname?>"><img src="<?=base_url()?>images/header/<?=$persona['nenheader']?>" alt="" height="200" width="980"></a>

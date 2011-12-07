@@ -129,14 +129,14 @@ class Blog_model extends CI_Model {
     
     function getBaitruoc($mataikhoan,$date)
     {
-    	$sql = "select mabaiviet from baiviet where mataikhoan=? and ngaydang<? and trangthai!=2 limit 1";
+    	$sql = "select mabaiviet from baiviet where mataikhoan=? and ngaydang<? and trangthai!=2 order by ngaydang desc limit 1";
     	$query = $this->db->query($sql,array($mataikhoan,$date));
     	return $query->num_rows()==0 ? null : $query->row(0)->mabaiviet;
     }
     
 	function getBaisau($mataikhoan,$date)
     {
-    	$sql = "select mabaiviet from baiviet where mataikhoan=? and ngaydang>? and trangthai!=2 limit 1";
+    	$sql = "select mabaiviet from baiviet where mataikhoan=? and ngaydang>? and trangthai!=2 order by ngaydang asc limit 1";
     	$query = $this->db->query($sql,array($mataikhoan,$date));
     	return $query->num_rows()==0 ? null : $query->row(0)->mabaiviet;
     }
