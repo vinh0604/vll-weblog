@@ -29,6 +29,7 @@
 			$data['chuyenmucs'] =$this->Statis_model->getListCategory($mataikhoan);
 			$history = $this->Statis_model->getHistory($mataikhoan);
 			$date = date("Y-m-d");
+			$data['nextdate'] = date("Y-m-d",strtotime(date("Y-m-d", strtotime($date)) . " +7 day"));
 			$plotdata = array();
 			$plotlabel = array();
 			for ($i=0;$i<7;++$i)
@@ -48,6 +49,7 @@
 				$plotlabel[] = $label;
 				$date = date("Y-m-d",strtotime(date("Y-m-d", strtotime($date)) . " -1 day"));
 			}
+			$data['prevdate'] = $date;
 			$data['plotdata']=json_encode($plotdata);
 			$data['plotlabel']=json_encode($plotlabel);
 			
@@ -98,4 +100,43 @@
 			$this->load->view('ajax/ajax.draft.php', $data);
 		}
 		
+		function navplot()
+		{
+			session_start();
+			$this->load->library('util');
+			
+			if($this->util->checkLogin()==false) {
+				return;
+			}
+			$mataikhoan = $_SESSION['mataikhoan'];
+			
+			$date = $this->input->post('date');
+			$this->util->connect();
+			$this->load->Model('Statis_model');
+			$history = $this->Statis_model->getHistoryByDate($mataikhoan,$date);
+			$chartdata['nextdate'] = date("Y-m-d",strtotime(date("Y-m-d", strtotime($date)) . " +7 day"));
+			$plotdata = array();
+			$plotlabel = array();
+			for ($i=0;$i<7;++$i)
+			{
+				$index=7-$i;
+				$value[0] = $label[0] = $index; 
+				$value[1]=0;
+				$label[1]=$date;
+				foreach ($history as $item) {
+					if ($item['ngay']==$date)
+					{
+						$value[1]=intval($item['luotxem']);
+						break;	
+					}
+				}
+				$plotdata[] = $value;
+				$plotlabel[] = $label;
+				$date = date("Y-m-d",strtotime(date("Y-m-d", strtotime($date)) . " -1 day"));
+			}
+			$chartdata['prevdate'] = $date;
+			$chartdata['value']=$plotdata;
+			$chartdata['label']=$plotlabel;
+			echo json_encode($chartdata);
+		}
 	}

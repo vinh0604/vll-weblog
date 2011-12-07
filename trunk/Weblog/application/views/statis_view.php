@@ -25,7 +25,7 @@
 <script type="text/javascript" src="<?=base_url()?>js/jquery.flot.min.js"></script>
 <script type="text/javascript" src="<?=base_url()?>js/ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="<?=base_url()?>ckfinder/ckfinder.js"></script>
-<script>
+<script type="text/javascript">
 function showTooltip(x, y, contents) {
     $('<div class="tooltip">' + contents + '</div>').css( {
         position: 'absolute',
@@ -232,8 +232,54 @@ $(document).ready(function(){
             <div class="widget-box" id="w-views">
                 <h3 class="widget-title">Số lượt xem</h3>
                 <div class="widget-body" id="flot-views">
+                	<div id="left-nav" style="width:18px;padding:91px 0;position:absolute;left:-18px"><img src="<?=base_url()?>images/back.png" width="16" height="16" style="display: none; cursor: pointer;" date-value="<?=$prevdate?>"/></div>
                 	<div style="width: 95%; height: 200px" id="placeholder">
                 	</div>
+                	<div id="right-nav" style="width:18px;padding: 91px 0;position:absolute;top:0;right:0"><img src="<?=base_url()?>images/next.png" width="16" height="16" style="display: none; cursor: pointer;" date-value="<?=$nextdate?>"/></div>
+                	<script>
+                	$("#left-nav,#right-nav").hover(
+                        	function(){
+                            	$(this).children().css("display","block");
+                            },
+                            function(){
+                                $(this).children().css("display","none");
+                            });
+                	$("#left-nav img").hover(
+                        	function(){
+                            	$(this).attr("src","<?=base_url()?>images/back_hover.png");
+                            },
+                            function(){
+                            	$(this).attr("src","<?=base_url()?>images/back.png");
+                            });
+                	$("#right-nav img").hover(
+                        	function(){
+                            	$(this).attr("src","<?=base_url()?>images/next_hover.png");
+                            },
+                            function(){
+                            	$(this).attr("src","<?=base_url()?>images/next.png");
+                            });
+                	$("#right-nav img,#left-nav img").click(
+                        	function(){
+                        		$.ajax({type:'post',
+									url:'<?=base_url()?>index.php/statis/navplot',
+									data:{'date':$(this).attr('date-value')},
+									dataType: 'json',
+									success: function(data){
+										series = {color: 'gray',  
+												data: data.value, 
+												bars: {show :true, 
+														fill: true, 
+														barWidth: 0.9, 
+														align: 'center'}};
+										settings = {grid: {hoverable: true},
+													xaxis: {ticks : data.label}};
+										$.plot($("#placeholder"), [series], settings);
+										$("#left-nav img").attr('date-value',data.prevdate);
+										$("#right-nav img").attr('date-value',data.nextdate);
+									}
+                            	});
+                            });
+                	</script>
                 </div>
             </div>
        
