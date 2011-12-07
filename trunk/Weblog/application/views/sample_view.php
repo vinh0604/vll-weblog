@@ -3,6 +3,7 @@
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
+<title>Trang quản lý - <?=$_SESSION['tieude']?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="<?=base_url()?>css/admin-bar.css" type="text/css" rel="stylesheet" />
 <link href="<?=base_url()?>css/admin-menu.css" type="text/css" rel="stylesheet" />

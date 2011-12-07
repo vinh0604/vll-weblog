@@ -1,6 +1,6 @@
 <div id="header" class="clear">
-	<h1 id="logo"><a href="<?=base_url()?>index.php/blog/<?=$blogname?>"><?=$persona['tieude']?></a></h1>
-	<p id="description"><?=$persona['mota']?></p>
+	<h1 id="logo"><a href="<?=base_url()?>index.php/blog/<?=$blogname?>" style="color: #<?=$persona['mauchu']?>"><?=$persona['tieude']?></a></h1>
+	<p id="description" style="color: #<?=$persona['mauchu']?>"><?=$persona['mota']?></p>
 	<?php if($persona['nenheader']):?>
 	<div id="custom-header-img" style="margin-bottom: 20px">
 		<a href="<?=base_url()?>index.php/blog/<?=$blogname?>"><img src="<?=base_url()?>images/header/<?=$persona['nenheader']?>" alt="" height="200" width="980"></a>
