@@ -157,29 +157,32 @@ class Post_model extends CI_Model {
 		
 		for($i = 0;$i < count($tag_items); $i++){
 			$tag_items[$i] = trim($tag_items[$i]);
-			$sql = "select * from tag where mataikhoan = ? and tentag = ?";
-			if($this->db->query($sql, array($mataikhoan,$tag_items[$i]))->num_rows() == 0){
-				$sql = "insert into tag(mataikhoan, tentag) values(?,?)";
-				$this->db->query($sql, array($mataikhoan,$tag_items[$i]));
-				
-				$sql = "select max(matag) as matag from tag  where mataikhoan = ?";
-				$matag = $this->db->query($sql, array($mataikhoan))->row(0)->matag;
-				
-				$sql = "select max(mabaiviet) as mabv from baiviet  where mataikhoan = ?";
-				$mabv = $this->db->query($sql, array($mataikhoan))->row(0)->mabv;
-				
-				$sql = "insert into tag_baiviet(mabaiviet, matag) values(?,?)";
-				$this->db->query($sql, array($mabv,$matag));
-				
-			}else{
-				$sql = "select matag from tag where tentag = ? and mataikhoan = ?";
-				$matag = $this->db->query($sql,array($tag_items[$i],$mataikhoan))->row(0)->matag;
-				
-				$sql = "select max(mabaiviet) as mabv from baiviet  where mataikhoan = ?";
-				$mabv = $this->db->query($sql, array($mataikhoan))->row(0)->mabv;
-				
-				$sql = "insert into tag_baiviet(mabaiviet, matag) values(?,?)";
-				$this->db->query($sql, array($mabv,$matag));	
+			if ($tag_items[$i])
+			{
+				$sql = "select * from tag where mataikhoan = ? and tentag = ?";
+				if($this->db->query($sql, array($mataikhoan,$tag_items[$i]))->num_rows() == 0){
+					$sql = "insert into tag(mataikhoan, tentag) values(?,?)";
+					$this->db->query($sql, array($mataikhoan,$tag_items[$i]));
+					
+					$sql = "select max(matag) as matag from tag  where mataikhoan = ?";
+					$matag = $this->db->query($sql, array($mataikhoan))->row(0)->matag;
+					
+					$sql = "select max(mabaiviet) as mabv from baiviet  where mataikhoan = ?";
+					$mabv = $this->db->query($sql, array($mataikhoan))->row(0)->mabv;
+					
+					$sql = "insert into tag_baiviet(mabaiviet, matag) values(?,?)";
+					$this->db->query($sql, array($mabv,$matag));
+					
+				}else{
+					$sql = "select matag from tag where tentag = ? and mataikhoan = ?";
+					$matag = $this->db->query($sql,array($tag_items[$i],$mataikhoan))->row(0)->matag;
+					
+					$sql = "select max(mabaiviet) as mabv from baiviet  where mataikhoan = ?";
+					$mabv = $this->db->query($sql, array($mataikhoan))->row(0)->mabv;
+					
+					$sql = "insert into tag_baiviet(mabaiviet, matag) values(?,?)";
+					$this->db->query($sql, array($mabv,$matag));	
+				}
 			}
 		}
 				
@@ -201,24 +204,27 @@ class Post_model extends CI_Model {
 				
 		for($i = 0;$i < count($tag_items); $i++){
 			$tag_items[$i] = trim($tag_items[$i]);
-			$sql = "select * from tag where mataikhoan = ? and tentag = ?";
-			if($this->db->query($sql, array($mataikhoan,$tag_items[$i]))->num_rows() == 0){
-				$sql = "insert into tag(mataikhoan, tentag) values(?,?)";
-				$this->db->query($sql, array($mataikhoan,$tag_items[$i]));
-				
-				$sql = "select max(matag) as matag from tag where mataikhoan = ?";
-				$matag = $this->db->query($sql, array($mataikhoan))->row(0)->matag;
+			if ($tag_items[$i])
+			{
+				$sql = "select * from tag where mataikhoan = ? and tentag = ?";
+				if($this->db->query($sql, array($mataikhoan,$tag_items[$i]))->num_rows() == 0){
+					$sql = "insert into tag(mataikhoan, tentag) values(?,?)";
+					$this->db->query($sql, array($mataikhoan,$tag_items[$i]));
 					
-				$sql = "insert into tag_baiviet(mabaiviet, matag) values(?,?)";
-				$this->db->query($sql, array($bai_sua,$matag));
-				
-			}else{
-				
-				$sql = "select matag from tag where tentag = ? and mataikhoan = ?";
-				$matag = $this->db->query($sql,array($tag_items[$i], $mataikhoan))->row(0)->matag;
-				
-				$sql = "insert into tag_baiviet(mabaiviet, matag) values(?,?)";
-				$this->db->query($sql, array($bai_sua,$matag));	
+					$sql = "select max(matag) as matag from tag where mataikhoan = ?";
+					$matag = $this->db->query($sql, array($mataikhoan))->row(0)->matag;
+						
+					$sql = "insert into tag_baiviet(mabaiviet, matag) values(?,?)";
+					$this->db->query($sql, array($bai_sua,$matag));
+					
+				}else{
+					
+					$sql = "select matag from tag where tentag = ? and mataikhoan = ?";
+					$matag = $this->db->query($sql,array($tag_items[$i], $mataikhoan))->row(0)->matag;
+					
+					$sql = "insert into tag_baiviet(mabaiviet, matag) values(?,?)";
+					$this->db->query($sql, array($bai_sua,$matag));	
+				}
 			}
 		}
 	}
@@ -235,28 +241,31 @@ class Post_model extends CI_Model {
 		
 		for($i = 0;$i < count($tag_items); $i++){
 			$tag_items[$i] = trim($tag_items[$i]);
-			$sql = "select * from tag where mataikhoan = ? and tentag = ?";
-			if($this->db->query($sql, array($mataikhoan,$tag_items[$i]))->num_rows() == 0){
-				$sql = "insert into tag(mataikhoan, tentag) values(?,?)";
-				$this->db->query($sql, array($mataikhoan,$tag_items[$i]));
-				
-				$sql = "select max(matag) as matag from tag where mataikhoan = ?";
-				$matag = $this->db->query($sql, array($mataikhoan))->row(0)->matag;
-				
-				$sql = "select max(mabaiviet) as mabv from baiviet where mataikhoan = ?";
-				$mabv = $this->db->query($sql, array($mataikhoan))->row(0)->mabv;
-				
-				$sql = "insert into tag_baiviet(mabaiviet, matag) values(?,?)";
-				$this->db->query($sql, array($mabv,$matag));
-			}else{
-				$sql = "select matag from tag where tentag = ? and mataikhoan = ?";
-				$matag = $this->db->query($sql,array($tag_items[$i], $mataikhoan))->row(0)->matag;
-				
-				$sql = "select max(mabaiviet) as mabv from baiviet where mataikhoan = ?";
-				$mabv = $this->db->query($sql, array($mataikhoan))->row(0)->mabv;
-				
-				$sql = "insert into tag_baiviet(mabaiviet, matag) values(?,?)";
-				$this->db->query($sql, array($mabv,$matag));	
+			if ($tag_items[$i])
+			{
+				$sql = "select * from tag where mataikhoan = ? and tentag = ?";
+				if($this->db->query($sql, array($mataikhoan,$tag_items[$i]))->num_rows() == 0){
+					$sql = "insert into tag(mataikhoan, tentag) values(?,?)";
+					$this->db->query($sql, array($mataikhoan,$tag_items[$i]));
+					
+					$sql = "select max(matag) as matag from tag where mataikhoan = ?";
+					$matag = $this->db->query($sql, array($mataikhoan))->row(0)->matag;
+					
+					$sql = "select max(mabaiviet) as mabv from baiviet where mataikhoan = ?";
+					$mabv = $this->db->query($sql, array($mataikhoan))->row(0)->mabv;
+					
+					$sql = "insert into tag_baiviet(mabaiviet, matag) values(?,?)";
+					$this->db->query($sql, array($mabv,$matag));
+				}else{
+					$sql = "select matag from tag where tentag = ? and mataikhoan = ?";
+					$matag = $this->db->query($sql,array($tag_items[$i], $mataikhoan))->row(0)->matag;
+					
+					$sql = "select max(mabaiviet) as mabv from baiviet where mataikhoan = ?";
+					$mabv = $this->db->query($sql, array($mataikhoan))->row(0)->mabv;
+					
+					$sql = "insert into tag_baiviet(mabaiviet, matag) values(?,?)";
+					$this->db->query($sql, array($mabv,$matag));	
+				}
 			}
 		}
 				
@@ -278,24 +287,27 @@ class Post_model extends CI_Model {
 				
 		for($i = 0;$i < count($tag_items); $i++){
 			$tag_items[$i] = trim($tag_items[$i]);
-			$sql = "select * from tag where mataikhoan = ? and tentag = ?";
-			if($this->db->query($sql, array($mataikhoan,$tag_items[$i]))->num_rows() == 0){
-				$sql = "insert into tag(mataikhoan, tentag) values(?,?)";
-				$this->db->query($sql, array($mataikhoan,$tag_items[$i]));
-				
-				$sql = "select max(matag) as matag from tag where mataikhoan = ?";
-				$matag = $this->db->query($sql, array($mataikhoan))->row(0)->matag;
+			if ($tag_items[$i])
+			{
+				$sql = "select * from tag where mataikhoan = ? and tentag = ?";
+				if($this->db->query($sql, array($mataikhoan,$tag_items[$i]))->num_rows() == 0){
+					$sql = "insert into tag(mataikhoan, tentag) values(?,?)";
+					$this->db->query($sql, array($mataikhoan,$tag_items[$i]));
 					
-				$sql = "insert into tag_baiviet(mabaiviet, matag) values(?,?)";
-				$this->db->query($sql, array($bai_sua,$matag));
-				
-			}else{
-				
-				$sql = "select matag from tag where tentag = ? and mataikhoan = ?";
-				$matag = $this->db->query($sql,array($tag_items[$i], $mataikhoan))->row(0)->matag;
-				
-				$sql = "insert into tag_baiviet(mabaiviet, matag) values(?,?)";
-				$this->db->query($sql, array($bai_sua,$matag));	
+					$sql = "select max(matag) as matag from tag where mataikhoan = ?";
+					$matag = $this->db->query($sql, array($mataikhoan))->row(0)->matag;
+						
+					$sql = "insert into tag_baiviet(mabaiviet, matag) values(?,?)";
+					$this->db->query($sql, array($bai_sua,$matag));
+					
+				}else{
+					
+					$sql = "select matag from tag where tentag = ? and mataikhoan = ?";
+					$matag = $this->db->query($sql,array($tag_items[$i], $mataikhoan))->row(0)->matag;
+					
+					$sql = "insert into tag_baiviet(mabaiviet, matag) values(?,?)";
+					$this->db->query($sql, array($bai_sua,$matag));	
+				}
 			}
 		}	
 	}
