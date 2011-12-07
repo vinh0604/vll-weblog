@@ -117,4 +117,10 @@
 			$sql = "select ngay,luotxem from lichsu where mataikhoan=? and datediff(sysdate(),ngay)<7";
 			return $this->db->query($sql, array($mataikhoan))->result_array();
 		}
+		
+		function getHistoryByDate($mataikhoan,$date)
+		{
+			$sql = "select ngay,luotxem from lichsu where mataikhoan=? and datediff(?,ngay)<7";
+			return $this->db->query($sql, array($mataikhoan,$date))->result_array();
+		}
 	}
