@@ -199,7 +199,7 @@ class Post_model extends CI_Model {
 		$sql = "insert into baiviet_fulltext values(?,?,?) on duplicate key update tuade = ?, noidung = ?";
 		$this->db->query($sql, array($bai_sua,$title,$content,$title,$content));
 		
-		/*$sql = "select * from tag_baiviet where mabaiviet = ?";
+		$sql = "select * from tag_baiviet where mabaiviet = ?";
 		$result = $this->db->query($sql, array($bai_sua))->result_array();
 		
 		foreach($result as $result):
@@ -214,7 +214,7 @@ class Post_model extends CI_Model {
 				$sql = "delete from tag_baiviet where mabaiviet = ?";
 				$this->db->query($sql, array($bai_sua));	
 			}
-		endforeach;*/
+		endforeach;
 		
 		
 				
