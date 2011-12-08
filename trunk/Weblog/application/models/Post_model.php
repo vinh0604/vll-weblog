@@ -199,25 +199,20 @@ class Post_model extends CI_Model {
 		$sql = "insert into baiviet_fulltext values(?,?,?) on duplicate key update tuade = ?, noidung = ?";
 		$this->db->query($sql, array($bai_sua,$title,$content,$title,$content));
 		
-		$sql = "select * from tag_baiviet where mabaiviet = ?";
+		$sql = "delete from tag_baiviet where mabaiviet = ?";
+		$this->db->query($sql, array($bai_sua));
+		
+		/*$sql = "select * from tag_baiviet where mabaiviet = ?";
 		$result = $this->db->query($sql, array($bai_sua))->result_array();
 		
 		foreach($result as $result):
 			$sql = "select * from tag_baiviet where matag = ? and mabaiviet <> ?";
 			if($this->db->query($sql, array($result['matag'],$bai_sua))->num_rows() == 0){
-				$sql = "delete from tag_baiviet where mabaiviet = ?";
-				$this->db->query($sql, array($bai_sua));
-				
 				$sql = "delete from tag where matag = ?";
 				$this->db->query($sql, array($result['matag']));	
-			}else{
-				$sql = "delete from tag_baiviet where mabaiviet = ?";
-				$this->db->query($sql, array($bai_sua));	
 			}
-		endforeach;
-		
-		
-				
+		endforeach;*/
+			
 		for($i = 0;$i < count($tag_items); $i++){
 			$tag_items[$i] = trim($tag_items[$i]);
 			if ($tag_items[$i])
