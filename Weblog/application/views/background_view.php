@@ -10,7 +10,7 @@
 <style>
 #background-image {
 	border: 1px solid #DFDFDF;
-    min-height: 100px;
+    min-height: 200px;
 }
 </style>
 <script type="text/javascript" src="<?=base_url()?>js/jquery.min.js"></script>
@@ -36,7 +36,7 @@
                 <td>
                 	<div id="background-image" style="background-image: <?php if($anhnen!=null):?>url('<?=base_url()?>images/<?php if($ispreview) {echo 'temporary';} else {echo 'background';}?>/<?=$anhnen?>');<?php endif;?>
     background-position: left top;
-    background-repeat: repeat;background-size: 50% auto;">
+    background-repeat: repeat;background-size: 50% 50%;">
                     </div>
                 </td>
             </tr>
