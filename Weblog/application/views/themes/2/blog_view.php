@@ -19,7 +19,7 @@
    if( ! $('#myCanvas').tagcanvas({
      textColour : '#000000',
      outlineThickness : 1,
-	 maxSpeed : 0.03,
+	 maxSpeed : 0.02,
 	 outlineColour : '#C0C0C0',
      depth : 0.75,
 	 weight: true,

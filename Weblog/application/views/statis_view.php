@@ -47,7 +47,8 @@ $(document).ready(function(){
 						barWidth: 0.9, 
 						align: 'center'}};
 	var settings = {grid: {hoverable: true},
-					xaxis: {ticks : <?=$plotlabel?>}};
+					xaxis: {ticks : <?=$plotlabel?>},
+					yaxis: {min : 0}};
 	$.plot($("#placeholder"), [series], settings);
 	$("#placeholder").bind("plothover", function(event, pos, item) {
     	if (item) {
@@ -272,7 +273,8 @@ $(document).ready(function(){
 														barWidth: 0.9, 
 														align: 'center'}};
 										settings = {grid: {hoverable: true},
-													xaxis: {ticks : data.label}};
+													xaxis: {ticks : data.label},
+													yaxis: {min : 0}};
 										$.plot($("#placeholder"), [series], settings);
 										$("#left-nav img").attr('date-value',data.prevdate);
 										$("#right-nav img").attr('date-value',data.nextdate);
