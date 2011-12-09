@@ -15,7 +15,7 @@ class Comment_model extends CI_Model {
 	
     function getBinhluan($mataikhoan) {
     	//$this->load->database();
-    	$sql = "select bl.mabinhluan as mabl, bl.noidung as noidung, bl.hoten as hoten, bv.tuade as tuade, DATE_FORMAT(bl.ngaydang,'%Y-%m-%d') as ngaydang ".
+    	$sql = "select bl.mabinhluan as mabl, ExtractValue(bl.noidung, '//div[1]|//text()[1]|//p[1]') AS noidung, bl.hoten as hoten, bv.tuade as tuade, DATE_FORMAT(bl.ngaydang,'%Y-%m-%d') as ngaydang ".
     		   "from binhluan bl, baiviet bv ".
     		   "where bl.mabaiviet=bv.mabaiviet and bv.mataikhoan=?";
     	return $this->db->query($sql,array($mataikhoan))->result_array();
