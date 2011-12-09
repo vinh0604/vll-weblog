@@ -2,7 +2,7 @@
 	<div class="quicklinks">
 		<ul>
 			<li id="wp-admin-bar-blog" class="menupop">
-				<a href="/">
+				<a href="<?=base_url()?>index.php">
 				<span><?=$_SESSION['tieude']?></span>
 				</a>
 				<ul>
