@@ -36,7 +36,7 @@
                 <td>
                 	<div id="background-image" style="background-image: <?php if($anhnen!=null):?>url('<?=base_url()?>images/<?php if($ispreview) {echo 'temporary';} else {echo 'background';}?>/<?=$anhnen?>');<?php endif;?>
     background-position: left top;
-    background-repeat: repeat;background-size: 50% 50%;">
+    background-repeat: repeat;background-size: 50% auto;">
                     </div>
                 </td>
             </tr>
