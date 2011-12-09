@@ -62,7 +62,7 @@ class Post_model extends CI_Model {
 			$dk = "";	
 		}
 		$this->load->database();
-    	$sql = "SELECT bv.mabaiviet, bv.tuade AS tuade, bv.noidung AS noidung, cm.tenchuyenmuc AS chuyenmuc, DATE_FORMAT( bv.ngaydang, '%e/%m/%Y' ) AS ngaydang
+    	$sql = "SELECT bv.mabaiviet, bv.tuade AS tuade, ExtractValue(bv.noidung, '//div[1]|//text()[1]|//p[1]') AS noidung, cm.tenchuyenmuc AS chuyenmuc, DATE_FORMAT( bv.ngaydang, '%e/%m/%Y' ) AS ngaydang
 				FROM baiviet bv, chuyenmuc cm
 				WHERE bv.machuyenmuc = cm.machuyenmuc
 				AND bv.mataikhoan = $mataikhoan $dk";
