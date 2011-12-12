@@ -23,10 +23,10 @@
 <script type="text/javascript">
  $(document).ready(function() {
    if( ! $('#myCanvas').tagcanvas({
-     textColour : '#000000',
+     textColour : '#644C33',
      outlineThickness : 1,
 	 maxSpeed : 0.02,
-	 outlineColour : '#C0C0C0',
+	 outlineColour : '#E50000',
      depth : 0.75,
 	 weight: true,
 	 weightFrom: 'data-weight',
